@@ -196,14 +196,15 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo4"><i class="fa fa-fw fa-group"></i> Manage Employees <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo4" class="collapse">
                             <li>
-                                <a href="javascript:;" data-toggle="collapse" data-target="#demo6"><i class="fa fa-fw fa-file"></i> Attendance<i class="fa fa-fw fa-caret-down"></i></a>
+                                <a href="javascript:;" data-toggle="collapse" data-target="#demo6"><i class="fa fa-fw fa-check-square-o"></i> Attendance<i class="fa fa-fw fa-caret-down"></i></a>
                                 <ul id="demo6" class="collapse">
                                     <li>
-								        <a href="emp_attendance.aspx"><i class="fa fa-fw fa-table"></i> View Attendance</a>
+								        <a href="emp_add_attendance.aspx"><i class="fa fa-fw fa-square-o"></i> Mark Attendance</a>
 							        </li>
                                     <li>
-								        <a href="emp_add_attendance.aspx"><i class="fa fa-fw fa-table"></i> Mark Attendance</a>
+								        <a href="emp_attendance.aspx"><i class="fa fa-fw fa-table"></i> Manage Attendance</a>
 							        </li>
+                                    
                                 </ul>
                             </li>
 							
@@ -212,7 +213,7 @@
 							</li>
 							
 							<li>
-								<a href="emp_list.aspx"><i class="fa fa-fw fa-file"></i> Edit Profiles</a>
+								<a href="emp_list.aspx"><i class="fa fa-fw fa-file-text-o"></i> Edit Profiles</a>
 							</li>
                         </ul>
                     </li>
@@ -231,7 +232,7 @@
                     </li>
 
                     <li>
-                        <a href="reports.aspx"><i class="fa fa-fw fa-file"></i> Reports</a>
+                        <a href="reports.aspx"><i class="fa fa-fw fa-files-o"></i> Reports</a>
                     </li>
 
                 </ul>
