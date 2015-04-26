@@ -1,0 +1,48 @@
+html,
+body {
+	margin:0;
+	padding:0;
+	height:100%;
+}
+#wrapper {
+	min-height:100%;
+	position:relative;
+}
+#header {
+
+}
+#content {
+	//padding:10px;
+	padding-bottom:80px;   /* Height of the footer element */
+}
+#footer {
+	position:absolute;
+	bottom:0;
+	//height: 20px;
+}
+
+#sideBar{
+	background-color: #E6E6E6;
+	position:relative;
+	width: 220px;
+	height: 600px;
+	margin-top: -10px;
+	margin-bottom: -10px;
+}
+
+#tPanel{
+
+	float: right;
+	margin-top: 0px;
+	color: white;
+	margin-top: -45px
+}
+
+#tPanel li{
+		display: inline-block;
+		margin-right: 10px;
+}
+
+.sideButton{
+	padding: 12px;
+}

@@ -1,0 +1,165 @@
+#headBar{
+	background-color: #2E8AE6;
+}
+
+#logo{
+	 margin-top: 10px;
+	 margin-bottom: 10px;
+}
+
+#title{
+	padding: 10px;
+	margin-top: 0px;
+	color: white;
+}
+
+body{
+	//background-color: yellow;
+	background: #ffffff url("../images/bag.png") no-repeat center center fixed;
+	background-size: cover;
+}
+
+.sideButton{
+	width: 100%;
+	border-radius: 0px;
+	margin-bottom: -1px;
+	text-align: left;
+}
+
+.sideButtons{
+}
+
+.nav-btns{
+	margin-top: 0px;
+}
+
+.nline{
+	padding-bottom: 1px;
+	background-color: #2E8AE6 
+}
+
+.active{
+	//border-bottom: 1px solid #2E8AE6;
+	background-color: #EEEEEE;
+}
+
+.opaque{
+	background-color: rgba(255,255,255,0.75); 
+	//opacity: 0.7;
+}
+
+.headTop{
+	display: inline;
+}
+
+.signIn{
+	float: right;
+	margin-top: 40px;
+	color: white;
+}
+
+.boxDesign .boxAlign, .boxDesign button{
+	margin: 8px;
+}
+
+.boxDesign{
+	//border: 1px solid black;
+}
+
+.h2, .h3{
+	background-color: #2E8AE6;
+	box-shadow: 2px 2px 7px #5C5C5C;
+	color: white;
+	padding: 8px;
+}
+
+.flatBox{
+	padding-left: 15px;
+	background-color: #5C5C5C;
+	color: white;
+	padding-bottom: 8px;
+	box-shadow: 2px 2px 7px #5C5C5C;
+}
+
+.cntBox{
+	padding-bottom: 17px;
+}
+
+.flatBox h3{
+	padding-top: 8px;
+}
+
+.flat{
+	padding: 8px;
+}
+
+.img .update{
+	width: 134;
+	height: 134;
+}
+
+.category{
+	font-size:16px;
+	padding-bottom:5px;
+	//list-style-type: none;
+	margin-left: -15px;
+}
+
+.category .catAlign{
+	margin: 10px;
+	
+}
+
+.uSpace{
+	margin-left: 145px;
+	margin-top: -135px;
+	margin-bottom: 40px;
+}
+
+.uS2{
+		margin-top: -140px;
+}
+
+#socialList{
+	margin-left: -40px;
+}
+
+#socialList li{
+	display: inline-block;
+	color: white;
+	list-style-type: none;
+	margin-right: 10px;
+}
+
+.mySearchBar{
+	margin-right: -58px;
+	margin-top: 63px;
+}
+
+.btnAlign{
+	margin-top: -20px;
+}
+
+.pdBtn{
+	width: 44.95%;
+}
+
+.pdDtBtn{
+	
+}
+
+.pBox{
+	box-shadow: 2px 2px 7px #5C5C5C;
+	//border: 1px solid silver;
+}
+
+#footer{
+	text-align: center;
+	background-color: #5C5C5C;
+	color: white;
+	width:100%;
+	padding-top: 11px;
+	padding-bottom: 1px;
+	//position: fixed;
+    //bottom: 0;
+}
