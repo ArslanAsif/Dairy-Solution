@@ -17,7 +17,7 @@
 			<div id="headBar">
 				<div class="container">
 					<img id="logo" width= "170px" src="images\logo.png"></img>
-					<a class="signIn" href="signIn.aspx">Sign In</a>
+					<a class="signIn" href="site_signIn.aspx">Sign In</a>
 					<div class="col-xs-3 col-sm-3 col-md-3 pull-right">
 						<form role="search">
 							<div class="input-group mySearchBar">
@@ -34,10 +34,10 @@
 			<div class="container" style="background-color: white">
 				<ul class="nav nav-justified" >
 					<li class=""><a href="index.aspx">Home</a></li>
-					<li><a href="about.aspx">About</a></li>
-					<li><a href="products.aspx">Products</a></li>
-					<li><a href="updates.aspx">News & Updates</a></li>
-					<li><a href="contactUs.aspx">Contact Us</a></li>
+					<li><a href="site_about.aspx">About</a></li>
+					<li><a href="site_products.aspx">Products</a></li>
+					<li><a href="site_updates.aspx">News & Updates</a></li>
+					<li><a href="site_contactUs.aspx">Contact Us</a></li>
 				</ul>
                 <div class="nline"></div>
 			</div>

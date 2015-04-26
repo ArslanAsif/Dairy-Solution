@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using System.Configuration;
 
 public partial class _Default : System.Web.UI.Page
 {
@@ -15,7 +16,7 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void cust_signUp_Click(object sender, EventArgs e)
     {
-        string constring = @"Data Source=ACER;Initial Catalog=Dairy_Solution;Integrated Security=True";
+        string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString; 
         SqlConnection con = new SqlConnection(constring);
 
         String query = "insert into customer_info (customer_id, customer_name,customer_phone_number, customer_email_id, customer_password,secret_question,customer_picture,secret_answer) values (@customer_id, @customer_name, @customer_phone_number, @customer_email_id, @customer_password,@secret_question,@customer_picture,@secret_answer);";

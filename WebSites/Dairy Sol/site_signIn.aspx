@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" EnableEventValidation="false" AutoEventWireup="true" CodeFile="signIn.aspx.cs" Inherits="_Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" EnableEventValidation="false" AutoEventWireup="true" CodeFile="site_signIn.aspx.cs" Inherits="_Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
@@ -15,7 +15,7 @@
 								<br/>
                                 <asp:TextBox ID="inputPass" runat="server" type="password" style="width: 98%" class="form-control" placeholder="Enter Password"></asp:TextBox>
                                 <br/>
-                                <asp:Label ID="forgot_pass" runat="server" class ="pull-right"><a href='forgot_pass.aspx'>Forgot Password</a></asp:Label>
+                                <asp:Label ID="forgot_pass" runat="server" class ="pull-right"><a href='site_forgot_pass.aspx'>Forgot Password</a></asp:Label>
                                 <br/>
 								
                                 <asp:RadioButtonList ID="radioOptions1" runat="server" RepeatLayout="Flow" class ="radio-inline">
@@ -29,7 +29,7 @@
 
 							</form>
 							<br/>
-                            <a href="customer_signup.aspx" class = "btn btn-success" style = "width: 98%; margin-left: 2px;">Not a member? Sign Up here</a>
+                            <a href="site_cust_signup.aspx" class = "btn btn-success" style = "width: 98%; margin-left: 2px;">Not a member? Sign Up here</a>
 						</div>
 					</div>
 					

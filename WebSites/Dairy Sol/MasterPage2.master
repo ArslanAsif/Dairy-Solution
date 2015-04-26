@@ -151,10 +151,10 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-edit"></i> Orders <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo1" class="collapse">
                             <li>
-                                <a href="order_add.aspx"><i class="fa fa-fw fa-plus-square-o"></i> Add Customer Order</a>
+                                <a href="order_cust_add.aspx"><i class="fa fa-fw fa-plus-square-o"></i> Add Customer Order</a>
                             </li>
                             <li>
-                                <a href="order_odsupp.aspx"><i class="fa fa-fw fa-suitcase"></i> Order Supplier</a>
+                                <a href="order_order_supp.aspx"><i class="fa fa-fw fa-suitcase"></i> Order Supplier</a>
                             </li>
                             <li>
                                 <a href="order_cust.aspx"><i class="fa fa-fw fa-table"></i> Customer Orders</a>
@@ -170,10 +170,10 @@
                            <a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="fa fa-fw fa-cubes"></i> Inventory <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo2" class="collapse">
                             <li>
-								<a href="add_inventory.aspx"><i class="fa fa-fw fa-plus-square-o"></i> Add Inventory</a>
+								<a href="inv_add.aspx"><i class="fa fa-fw fa-plus-square-o"></i> Add Inventory</a>
 							</li>
                             <li>
-								<a href="view_inventory.aspx"><i class="fa fa-fw fa-table"></i> Manage Inventory</a>
+								<a href="inv_manage.aspx"><i class="fa fa-fw fa-table"></i> Manage Inventory</a>
 							</li>
 
                         </ul>    
@@ -183,10 +183,10 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo3"><i class="fa fa-fw fa-diamond"></i> Products <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo3" class="collapse">
                             <li>
-								<a href="add_products.aspx"><i class="fa fa-fw fa-plus-square-o"></i> Add Products</a>
+								<a href="prod_add.aspx"><i class="fa fa-fw fa-plus-square-o"></i> Add Products</a>
 							</li>
                             <li>
-								<a href="product_view.aspx"><i class="fa fa-fw fa-table"></i> Manage Products</a>
+								<a href="prod_manage.aspx"><i class="fa fa-fw fa-table"></i> Manage Products</a>
 							</li>
 
                         </ul>    
@@ -202,7 +202,7 @@
 								        <a href="emp_attendance.aspx"><i class="fa fa-fw fa-table"></i> View Attendance</a>
 							        </li>
                                     <li>
-								        <a href="attendance.aspx"><i class="fa fa-fw fa-table"></i> Mark Attendance</a>
+								        <a href="emp_add_attendance.aspx"><i class="fa fa-fw fa-table"></i> Mark Attendance</a>
 							        </li>
                                 </ul>
                             </li>
@@ -212,7 +212,7 @@
 							</li>
 							
 							<li>
-								<a href="profile_list.aspx"><i class="fa fa-fw fa-file"></i> Edit Profiles</a>
+								<a href="emp_list.aspx"><i class="fa fa-fw fa-file"></i> Edit Profiles</a>
 							</li>
                         </ul>
                     </li>
@@ -224,7 +224,7 @@
 								<a href="post_add.aspx"><i class="fa fa-fw fa-plus-square-o"></i> Add post</a>
 							</li>
                             <li>
-								<a href="post_edit.aspx"><i class="fa fa-fw fa-table"></i> Manage Posts</a>
+								<a href="post_manage.aspx"><i class="fa fa-fw fa-table"></i> Manage Posts</a>
 							</li>
 							
                         </ul>    

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" EnableEventValidation="false" AutoEventWireup="true" CodeFile="products.aspx.cs" Inherits="_Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" EnableEventValidation="false" AutoEventWireup="true" CodeFile="site_products.aspx.cs" Inherits="_Default" %>
 
 <%@ Register Assembly="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
 
@@ -28,8 +28,8 @@
                             <br/><br/><p id="change_text" runat="server" class="boxAlign" style = "margin-top: 5px; text-align: center" ><%# Eval("description") %></p>
 							<br/>
                             <div class="btnAlign">
-								<button class = "btn btn-success pdBtn" formaction="prd_detail.aspx?id=<%# Eval("product_id") %>"><span class = "glyphicon glyphicon-list"></span>&nbsp;View Details</button>
-								<button class = "btn btn-primary pdBtn" formaction="signIn.aspx"><span class = "glyphicon glyphicon-shopping-cart"></span>&nbsp;Order now</button>
+								<button class = "btn btn-success pdBtn" formaction="site_prod_detail.aspx?id=<%# Eval("product_id") %>"><span class = "glyphicon glyphicon-list"></span>&nbsp;View Details</button>
+								<button class = "btn btn-primary pdBtn" formaction="#"><span class = "glyphicon glyphicon-shopping-cart"></span>&nbsp;Order now</button>
 							</div>
 						</div>
 			</div>
@@ -46,8 +46,8 @@
 							<br><br><p class="boxAlign" style = "margin-top: 5px; text-align: center"><%# Eval("description") %></p>
 							<br>
 							<div class="btnAlign">
-								<button class = "btn btn-success pdBtn" formaction="prd_detail.aspx?id=<%# Eval("product_id") %>"><span class = "glyphicon glyphicon-list"></span>&nbsp;View Details</button>
-								<button class = "btn btn-primary pdBtn" formaction="signIn.aspx"><span class = "glyphicon glyphicon-shopping-cart"></span>&nbsp;Order now</button>
+								<button class = "btn btn-success pdBtn" formaction="site_prod_detail.aspx?id=<%# Eval("product_id") %>"><span class = "glyphicon glyphicon-list"></span>&nbsp;View Details</button>
+								<button class = "btn btn-primary pdBtn" formaction="#"><span class = "glyphicon glyphicon-shopping-cart"></span>&nbsp;Order now</button>
 							</div>
 						</div>
 					</div>
