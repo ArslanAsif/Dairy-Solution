@@ -134,7 +134,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="signin.aspx"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="site_signIn.aspx"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
