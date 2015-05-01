@@ -115,29 +115,20 @@
                             </div>
                             <div class="panel-body" >
                                 <div class="list-group" style="height: 225px">
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">March 27, 2014 at 1pm</span>
-                                        <i class="fa fa-fw fa-calendar"></i> Meeting with employees
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">March 25, 2014</span>
-                                        <i class="fa fa-fw fa-comment"></i> Solve complaint 9120
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">March 24, 2014</span>
-                                        <i class="fa fa-fw fa-truck"></i> Ship order 392
-                                    </a>
+                                    <asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlDataSource2">       
+                                        <HeaderTemplate></HeaderTemplate>
+
+                                        <ItemTemplate>
+                                            <a href="#" class="list-group-item">
+                                                <span class="badge"><%# Eval("tast_time") %></span>
+                                                <i class="fa fa-fw fa-calendar"></i> <%# Eval("task_desc") %>
+                                            </a>
+                                        </ItemTemplate>
+											
+                                        <FooterTemplate></FooterTemplate>
+                                    </asp:Repeater>
                                     
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">March 23, 2014</span>
-                                        <i class="fa fa-fw fa-user"></i> Add new user
-                                    </a>
-                                    
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">March 23, 2014</span>
-                                        <i class="fa fa-fw fa-globe"></i> Save the world
-                                    </a>
-                                    
+                                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT TOP 5 * FROM tasks ORDER BY tast_time DESC;"></asp:SqlDataSource>
                                 </div>
                                 <div class="text-right">
                                     <a href="#">View All Activity <i class="fa fa-arrow-circle-right"></i></a>
@@ -145,6 +136,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -161,39 +153,28 @@
                                                 <th>Amount (USD)</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>3326</td>
-                                                <td>10/21/2013</td>
-                                                <td>3:29 PM</td>
-                                                <td>$321.33</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3325</td>
-                                                <td>10/21/2013</td>
-                                                <td>3:20 PM</td>
-                                                <td>$234.34</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3324</td>
-                                                <td>10/21/2013</td>
-                                                <td>3:03 PM</td>
-                                                <td>$724.17</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3323</td>
-                                                <td>10/21/2013</td>
-                                                <td>3:00 PM</td>
-                                                <td>$23.71</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3322</td>
-                                                <td>10/21/2013</td>
-                                                <td>2:49 PM</td>
-                                                <td>$8345.23</td>
-                                            </tr>
+
+                                        <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1">       
+                                            <HeaderTemplate>
+                                                <tbody>
+                                            </HeaderTemplate>
+
+                                            <ItemTemplate>
+                                                <tr>
+                                                    <td><%# Eval("order_id") %></td>
+                                                    <td><%# Eval("order_date") %></td>
+                                                    <td><%# Eval("order_status") %></td>
+                                                    <td><%# Eval("product_id") %></td>
+                                                </tr>
+                                            </ItemTemplate>
 											
-                                        </tbody>
+                                            <FooterTemplate>
+                                                </tbody>
+                                            </FooterTemplate>
+                                        </asp:Repeater>
+
+                                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT TOP 5 * FROM orders ORDER BY order_date DESC;"></asp:SqlDataSource>
+                                        
                                     </table>
                                 </div>
                                 <div class="text-right">
