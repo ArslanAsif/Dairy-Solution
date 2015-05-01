@@ -13,6 +13,8 @@
                         <h1 class="page-header">
                             Dashboard <small>(Management)</small>
                         </h1>
+                    </div>
+                </div>
                     
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
@@ -28,7 +30,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="messages.aspx">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -120,7 +122,7 @@
 
                                         <ItemTemplate>
                                             <a href="#" class="list-group-item">
-                                                <span class="badge"><%# Eval("tast_time") %></span>
+                                                <span class="badge"><%# Eval("task_date") %></span>
                                                 <i class="fa fa-fw fa-calendar"></i> <%# Eval("task_desc") %>
                                             </a>
                                         </ItemTemplate>
@@ -128,7 +130,7 @@
                                         <FooterTemplate></FooterTemplate>
                                     </asp:Repeater>
                                     
-                                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT TOP 5 * FROM tasks ORDER BY tast_time DESC;"></asp:SqlDataSource>
+                                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT TOP 5 * FROM tasks ORDER BY task_date DESC;"></asp:SqlDataSource>
                                 </div>
                                 <div class="text-right">
                                     <a href="#">View All Activity <i class="fa fa-arrow-circle-right"></i></a>
