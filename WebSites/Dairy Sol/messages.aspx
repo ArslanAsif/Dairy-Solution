@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <h1 class="page-header">
-                        Messages <small></small>
+                        Messages <small></small><button class="btn btn-default"><i class="fa fa-pencil"></i>&nbsp;<i>&nbsp;</i>Create Message</button>
                     </h1>
                 </div>
                     
