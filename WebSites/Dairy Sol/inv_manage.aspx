@@ -59,10 +59,19 @@
     WHERE inventory_products.batch_id = @batch_id" SelectCommand="SELECT products.product_id, products.product_name, inventory_products.quantity, inventory_products.discount, inventory_products.entry_date, inventory_products.expiry_date, inventory_products.price, inventory_products.batch_id
     FROM products
     INNER JOIN inventory_products
-    ON products.product_id = inventory_products.product_id;">
+    ON products.product_id = inventory_products.product_id;" UpdateCommand="UPDATE inventory_products SET price = @price, quantity = @quantity, discount = @discount, entry_date = @entry_date, expiry_date = @expiry_date
+WHERE (product_id = @product_id)">
                             <DeleteParameters>
                                 <asp:Parameter Name="batch_id" />
                             </DeleteParameters>
+                            <UpdateParameters>
+                                <asp:Parameter Name="price" />
+                                <asp:Parameter Name="quantity" />
+                                <asp:Parameter Name="discount" />
+                                <asp:Parameter Name="entry_date" />
+                                <asp:Parameter Name="expiry_date" />
+                                <asp:Parameter Name="product_id" />
+                            </UpdateParameters>
                         </asp:SqlDataSource>
                     </div>
 				</div>

@@ -14,11 +14,8 @@ public partial class _Default : System.Web.UI.Page
     {
         if (IsPostBack == false)
         {
-
             Session.Clear();
-
         }
-        
     }
     protected void SignIn_Click(object sender, EventArgs e)
     {    
@@ -37,7 +34,7 @@ public partial class _Default : System.Web.UI.Page
                 cmd.CommandText = emp_query;
                 redirect = "mng_dashboard.aspx";
                 user = "employee_id";
-                   username  = "Employee_name";
+                username  = "Employee_name";
             }
             else
             {

@@ -6,7 +6,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 
 public partial class _Default : System.Web.UI.Page
 {
@@ -14,7 +13,7 @@ public partial class _Default : System.Web.UI.Page
     {
         string prod_id = Request.QueryString["id"];
         string query = "SELECT inventory_products.price, inventory_products.quantity, products.picture, products.specs, products.description FROM products INNER JOIN inventory_products ON products.product_id = inventory_products.product_id WHERE products.product_id = '" +prod_id+ "'";
-        string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
+        string constring = @"Data Source=ACER;Initial Catalog=Dairy_Solution;Integrated Security=True";
         SqlConnection con = new SqlConnection(constring);
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = con;

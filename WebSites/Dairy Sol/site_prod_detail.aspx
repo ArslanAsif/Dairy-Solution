@@ -4,11 +4,12 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 
-		<div class="container">
+		<div class="container opaque">
+		<div class = 'center'>
 			<div class = 'row'>
 				<div class = "col-md-5">
 					<div style = "margin: 20px" id = "prd_img">
-                        <asp:Image ID="prod_image" runat="server" width="400px" Height="400px"/>
+                        <asp:Image ID="prod_image" CssClass="pBox" runat="server" width="400px" Height="400px"/>
 						</div>
 				</div>
 				
@@ -24,8 +25,8 @@
 						</div>
 						
 						<div class = "" style="margin-left:27%">
-							<button class = "btn btn-success btn pdDtBtn" href="#"><span class = "glyphicon glyphicon-shopping-cart"></span><br>Add to Cart</button>
-							<button class = "btn btn-default btn pdDtBtn" href="#"><span class = "glyphicon glyphicon-pencil"></span><br>Send a Query</button>
+							<button class = "btn btn-success btn pdDtBtn"><span class = "glyphicon glyphicon-shopping-cart"></span><br>Add to Cart</button>
+							<button class = "btn btn-default btn pdDtBtn"><span class = "glyphicon glyphicon-pencil"></span><br>Send a Query</button>
 						</div>
 						
 					</div>
@@ -46,7 +47,8 @@
 					<p id="description_para" runat="server"></p>
 					
 				</div>
-			</div> 
+			</div>
+		</div> 
 		</div>
 	    <br>
 </asp:Content>

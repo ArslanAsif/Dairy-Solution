@@ -16,9 +16,9 @@
 		<div id = 'header'>
 			<div id="headBar">
 				<div class="container">
-					<img id="logo" width= "170px" src="images\logo.png"></img>
-					<a class="signIn" href="site_signIn.aspx">Sign In</a>
-					<div class="col-xs-3 col-sm-3 col-md-3 pull-right">
+					<img id="logo" width= "170px" src="images\logo.png"/>
+                    <a id="login_status" href="#" runat="server" class="signIn">Sign In</a>
+                        <div class="col-xs-3 col-sm-3 col-md-3 pull-right">
 						<form role="search">
 							<div class="input-group mySearchBar">
 								<input type="text" class="form-control control-height" placeholder="Search" name="srch-term" id="srch-term">

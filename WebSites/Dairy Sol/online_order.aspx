@@ -4,14 +4,14 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 
-<div class="container">
+    <div class="container">
     <br/>
     <br/>
     <div class="col-md-8 col-md-offset-1">
     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="877px">
         <Columns>
             <asp:ImageField DataImageUrlField="product_picture" HeaderText="Product Picture" ReadOnly="True" ControlStyle-Width="150" ControlStyle-Height = "150">
-<ControlStyle Height="150px" Width="150px"></ControlStyle>
+            <ControlStyle Height="150px" Width="150px"></ControlStyle>
                 <ItemStyle Wrap="True" />
             </asp:ImageField>
             <asp:BoundField DataField="product_picture" HeaderText="product_picture" SortExpression="product_picture" Visible="False"/>
@@ -25,7 +25,7 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Sub Total">
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                    <asp:Label ID="Label1" runat="server" Text=""><%# Eval("product_price")%></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:CommandField ShowDeleteButton="True" HeaderText="Remove Item" />
@@ -34,6 +34,16 @@
     </asp:GridView>
     
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT product_picture, product_name, product_price, quantity FROM order_page_info"></asp:SqlDataSource>
+    <br/>
+            <div class="row">
+                <div class="col-md-3">
+                    <asp:Button ID="continue_shop" runat="server" cssClass="btn btn-primary" formAction="products.aspx" Text="Continue Shopping" />
+                </div>
+                <div class="col-md-6 col-md-offset-3">
+                    <asp:Button ID="clear_cart" runat="server" cssClass="btn btn-primary" Text="Clear Shopping Cart" OnClick="clear_cart_Click" />
+                    <asp:Button ID="update_cart" runat="server" cssClass="btn btn-primary" Text="Update Shopping Cart" OnClick="update_cart_Click" />
+                </div>
+            </div>
     <br/>
     <br/>
     </div>
