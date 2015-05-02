@@ -15,7 +15,7 @@
 					</div>
 					<div class="col-md-4 boxDesign">
 						<h3 class = "h3">Telephone</h3>
-						<p><a href="#"><span class="glyphicon glyphicon-phone-alt" style="margin-left:10px; color: black"></span></a><strong> +92-42-35169450-51</strong></p>
+						<p><a href="#"><span class="fa fa-phone" style="margin-left:10px; color: black"></span></a><strong> +92-42-35169450-51</strong></p>
                         <span class="glyphicons glyphicons-fax"></span>
 					</div>
 				</div>

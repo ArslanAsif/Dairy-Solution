@@ -3,84 +3,69 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    		<div class="container opaque">
-		<div class = 'center'>
-			<h2>News & Updates</h2>
-			<div style = "margin-top: -15px">
-				<div class = 'row'>
-					<div class="col-md-9 boxDesign">
+    <div class="container">
+	    <h2>News & Updates</h2>
+	    <div style = "margin-top: -15px">
+		    <div class = 'row'>
+			    <div class="col-md-9 boxDesign">
 				
-                        <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1">       
-                     
+                    <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1">
                         <HeaderTemplate>
                             <table>
                         </HeaderTemplate>
-
-                      <ItemTemplate>
-                      <tr>
-                         <div class="col-md-12 boxDesign">
-				            <h3 class = "h3"><%# Eval("heading") %></h3><br>
-                            <div class="col-md-4 boxDesign">
-				                <img src="<%# Eval("picture") %>" width="150px" height="150px">
+                        
+                        <ItemTemplate>
+                            <tr>
+                            <div class="col-md-12 boxDesign">
+				                <h3 class = "h3"><%# Eval("heading") %></h3><br>
+                                <div class="col-md-4 boxDesign">
+				                    <img src="<%# Eval("picture") %>" width="100%">
+			                    </div>
+                                <div class="col-md-8 boxDesign">
+				                    <p runat="server" id="parag"><%# Eval("detail") %></p>
+                                </div>
 			                </div>
-                            <div class="col-md-8 boxDesign">
-				                <p runat="server" id="parag"><%# Eval("detail") %></p>
-                            </div>
-			             </div>
-                      </tr>
-                      </ItemTemplate>
+                            </tr>
+                        </ItemTemplate>
+                        <FooterTemplate>
+                            </table>
+                        </FooterTemplate>
+                    </asp:Repeater>
+                        
+                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT * FROM [posts]"></asp:SqlDataSource>
 
-                    <AlternatingItemTemplate>
-                    <tr>
-                        <div class="col-md-12 boxDesign">
-				            <h3 class = "h3"><%# Eval("heading") %></h3><br>
-                            <div class="col-md-4 boxDesign">
-				                <img src="<%# Eval("picture") %>" width="150px" height="150px">
-			                </div>
-                            <div class="col-md-8 boxDesign">
-				                <p runat="server" id="parag"><%# Eval("detail") %></p>
-                            </div>
-			             </div>
-                    </tr>
-                   </AlternatingItemTemplate>
+                    <nav  style = "float: right">
+					    <ul class="pagination">
+					    <li class="disabled"><a href="#" aria-label="Previous">&laquo;</span></a></li>
+					    <li class="active"><a href="#">1 </a></li>
+					    <li class=""><a href="#">2</a></li>
+					    <li class=""><a href="#" aria-label="Next">&raquo;</span></a></li>
+					    </ul>
+				    </nav>
+			    </div>
 
-                  <FooterTemplate>
-                      </table>
-                  </FooterTemplate>
-              </asp:Repeater>
+			    <div class="col-md-3 boxDesign">
+				    <h3 class = "flatBox flat">Archive</h3>
+                        
+                    <asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlDataSource1">
+                        <HeaderTemplate>
+                            <ul class="category" style="list-style-type: square">
+                        </HeaderTemplate>
 
-                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT * FROM [posts]"></asp:SqlDataSource>
-    
-				</div>
-					<div class="col-md-3 boxDesign">
-						<h3 class = "flatBox flat">Archive</h3>
-						<ul class="category">
-							<li class="catAlign"><a href="#">Update 10</a></li>
-							<li class="catAlign"><a href="#">Update 9</a></li>
-							<li class="catAlign"><a href="#">Update 8</a></li>
-							<li class="catAlign"><a href="#">Update 7</a></li>
-							<li class="catAlign"><a href="#">Update 6</a></li>
-							<li class="catAlign"><a href="#">Update 5</a></li>
-							<li class="catAlign"><a href="#">Update 4</a></li>
-							<li class="catAlign"><a href="#">Update 3</a></li>
-							<li class="catAlign"><a href="#">Update 2</a></li>
-							<li class="catAlign"><a href="#">Update 1</a></li>
-						</ul>
-					</div>	
-				</div>
-				<!--end of row-->	
+                        <ItemTemplate>
+                            <li class="catAlign"><a href="#"><%# Eval("heading") %></a></li>
+                        </ItemTemplate>
+                  
+                        <FooterTemplate>
+                            </ul>
+                        </FooterTemplate>
+                    </asp:Repeater>
 
-                <nav  style = "float: right">
-					<ul class="pagination">
-					<li class="disabled"><a href="#" aria-label="Previous">&laquo;</span></a></li>
-					<li class="active"><a href="#">1 </a></li>
-					<li class=""><a href="#">2</a></li>
-					<li class=""><a href="#" aria-label="Next">&raquo;</span></a></li>
-					</ul>
-				</nav>
-				</div>
-			</div>
-		</div>  
+                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT heading FROM [posts] ORDER BY heading ASC"></asp:SqlDataSource>
+			    </div>	
+		    </div>
+		    <!--end of row-->	
+	    </div>
     </div>
 </asp:Content>
 
