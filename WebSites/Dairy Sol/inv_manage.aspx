@@ -29,7 +29,7 @@
 				
 				<div class="row">
                     <div class="col-md-12">
-                        <asp:GridView ID="del_product_GridView" runat="server" AutoGenerateColumns="False" DataKeyNames="product_id,batch_id" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True" BackColor="White" CssClass="table table-bordered table-hover table-striped">
+                        <asp:GridView ID="del_product_GridView" runat="server" AutoGenerateColumns="False" DataKeyNames="product_id,batch_id" DataSourceID="SqlDataSource1" AllowSorting="True" BackColor="White" CssClass="table table-bordered table-hover table-striped">
                             <Columns>
                                 <asp:BoundField DataField="batch_id" HeaderText="Batch Id" InsertVisible="False" ReadOnly="True" SortExpression="batch_id" />
                                 <asp:BoundField DataField="product_name" HeaderText="Product Name" SortExpression="product_name">
@@ -41,7 +41,7 @@
                                 <asp:BoundField DataField="price" HeaderText="Price" SortExpression="price" />
                                 <asp:CommandField ShowDeleteButton="True" HeaderText="Delete" />
                                 <asp:CommandField HeaderText="Update" ShowEditButton="True" />
-                                <asp:HyperLinkField HeaderText="Details" NavigateUrl="products.aspx" Text="View" />
+                                <asp:HyperLinkField HeaderText="Details" NavigateUrl="~/site_products.aspx" Text="View" />
                             </Columns>
                             <FooterStyle BackColor="White" ForeColor="#000066" />
                             <HeaderStyle BackColor="#808080" Font-Bold="True" ForeColor="White" />

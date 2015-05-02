@@ -30,13 +30,15 @@
 				<div class="row">
 					<div class="col-md-12">
                         <div>
-                            <asp:GridView ID="order_customer_GridView" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" AutoGenerateEditButton="True" BackColor="White" DataSourceID="SqlDataSource1" CssClass="table table-bordered table-hover table-striped">
+                            <asp:GridView ID="order_customer_GridView" runat="server" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" DataSourceID="SqlDataSource1" CssClass="table table-bordered table-hover table-striped">
                                 <Columns>
                                     <asp:BoundField DataField="order_id" HeaderText="Order ID" SortExpression="order_id" />
                                     <asp:BoundField DataField="product_id" HeaderText="Product ID" SortExpression="product_id" />
                                     <asp:BoundField DataField="quantity" HeaderText="Quantity" SortExpression="quantity" />
                                     <asp:BoundField DataField="order_date" HeaderText="Order Date" SortExpression="order_date" />
                                     <asp:BoundField DataField="supplier_name" HeaderText="Supplier Name" SortExpression="supplier_name" />
+                                    <asp:CommandField HeaderText="Update" ShowEditButton="True" />
+                                    <asp:CommandField HeaderText="Delete" ShowDeleteButton="True" />
                                 </Columns>
                                 <FooterStyle BackColor="White" ForeColor="#000066" />
                                 <HeaderStyle BackColor="#808080" Font-Bold="True" ForeColor="White" />

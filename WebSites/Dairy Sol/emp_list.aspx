@@ -29,7 +29,7 @@
 
 				<div class="row">	
 					<div class="col-lg-12">
-                        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" CssClass="table table-bordered table-hover table-striped" GridLines="None"  DataKeyNames="employee_id" DataSourceID="SqlDataSource1">
+                        <asp:GridView ID="GridView1" runat="server" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" CssClass="table table-bordered table-hover table-striped" GridLines="None"  DataKeyNames="employee_id" DataSourceID="SqlDataSource1">
                             <Columns>
                                 <asp:BoundField DataField="employee_id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="employee_id" />
                                 <asp:ImageField ControlStyle-CssClass="padding: 50px" AccessibleHeaderText="Image" DataImageUrlField="employee_picture" HeaderText="Picture" NullImageUrl="~/images/profile_default.jpg">
@@ -39,7 +39,7 @@
                                 <asp:BoundField DataField="gender" HeaderText="Gender" SortExpression="gender" />
                                 <asp:BoundField DataField="email_id" HeaderText="Email ID" SortExpression="email_id" />
                                 <asp:BoundField DataField="mobile_number" HeaderText="Mobile Number" SortExpression="mobile_number" />
-                                <asp:CommandField ShowEditButton="True" HeaderText="Edit" />
+                                <asp:CommandField ShowEditButton="True" HeaderText="Update" />
                             </Columns>
                             <FooterStyle BackColor="White" ForeColor="#000066" />
                             <HeaderStyle BackColor="#808080" Font-Bold="True" ForeColor="White" />
