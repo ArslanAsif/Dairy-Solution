@@ -87,7 +87,7 @@
                   </div>
                   <div class="modal-footer">
                       <div>
-                          <asp:Button ID="Button1" runat="server" CssClass="btn btn-danger" Text="Cancel" />
+                          <asp:Button ID="Button1" runat="server" CssClass="btn btn-danger" Text="Cancel" data-dismiss="modal" />
                           <asp:Button ID="Button2" runat="server" CssClass="btn btn-primary" Text="Send" />
                       </div>
                   </div>
