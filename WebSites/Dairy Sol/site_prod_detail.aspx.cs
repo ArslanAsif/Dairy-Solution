@@ -13,7 +13,7 @@ public partial class _Default : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         string prod_id = Request.QueryString["id"];
-        string query = "SELECT inventory_products.price, inventory_products.quantity, products.name,products.picture, products.specs, products.description FROM products INNER JOIN inventory_products ON products.product_id = inventory_products.product_id WHERE products.product_id = '" +prod_id+ "'";
+        string query = "SELECT inventory_products.price, inventory_products.quantity, products.product_name,products.picture, products.specs, products.description FROM products INNER JOIN inventory_products ON products.product_id = inventory_products.product_id WHERE products.product_id = '" +prod_id+ "'";
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
         SqlConnection con = new SqlConnection(constring);
         SqlCommand cmd = new SqlCommand();
