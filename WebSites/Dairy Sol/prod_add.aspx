@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage2.master" AutoEventWireup="true" EnableEventValidation="false" CodeFile="prd_add.aspx.cs" Inherits="_Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage2.master" AutoEventWireup="true" EnableEventValidation="false" CodeFile="prod_add.aspx.cs" Inherits="_Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
@@ -23,8 +23,8 @@
                             <div class="container opaque">	
 		<div class = 'center'>
 				<div class = 'row'>
-					<div class="col-md-6 col-md-offset-3 boxDesign" style = " margin-top: -35px"">
-						<div style="margin-top: 10%"">
+					<div class="col-md-6 col-md-offset-3 boxDesign">
+						<div>
 							<br/>
 							<form role="form">
                                 <asp:TextBox ID="product_name" runat="server" type="text" class="form-control control-height" placeholder="Product Name"></asp:TextBox>
