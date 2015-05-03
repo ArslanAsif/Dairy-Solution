@@ -23,20 +23,20 @@
 							<br/>
 							<form role="form">
                                 <asp:Label ID="validate" runat="server" Text="Label" EnableViewState="false" Visible="false"></asp:Label>
-                                <asp:TextBox ID="inventory_name" runat="server" style="width: 98%" type="text" class="form-control control-height" placeholder="Product Name"></asp:TextBox>
+                                <asp:TextBox ID="inventory_name" runat="server" type="text" class="form-control control-height" placeholder="Product Name"></asp:TextBox>
 								<br/>
-                                <asp:TextBox ID="inventory_entry_date" runat="server" style="width: 98%" type="text" class="form-control control-height"></asp:TextBox>
+                                <asp:TextBox ID="inventory_entry_date" runat="server" type="text" class="form-control control-height"></asp:TextBox>
 								<br/>
-                                <asp:TextBox ID="inventory_product_id" runat="server" style="width: 98%" type="text" class="form-control control-height" placeholder="Product ID"></asp:TextBox>
+                                <asp:TextBox ID="inventory_product_id" runat="server" type="text" class="form-control control-height" placeholder="Product ID"></asp:TextBox>
 								<br/>
-								<asp:TextBox ID="inventory_quantity" runat="server" style="width: 98%" type="text" class="form-control control-height" placeholder="Product Quantity"></asp:TextBox>
+								<asp:TextBox ID="inventory_quantity" runat="server" type="text" class="form-control control-height" placeholder="Product Quantity"></asp:TextBox>
 								<br/>
-                                <asp:TextBox ID="product_price" runat="server" style="width: 98%" type="text" class="form-control control-height" placeholder="Product Price"></asp:TextBox>
+                                <asp:TextBox ID="product_price" runat="server" type="text" class="form-control control-height" placeholder="Product Price"></asp:TextBox>
 								<br/>
-                                <asp:TextBox ID="product_discount" runat="server" style="width: 98%" type="text" class="form-control control-height" placeholder="Product Discount"></asp:TextBox>
+                                <asp:TextBox ID="product_discount" runat="server" type="text" class="form-control control-height" placeholder="Product Discount"></asp:TextBox>
 								<br/>
-								<asp:TextBox ID="expiry_date" runat="server" style="width: 98%" type="date" class="form-control control-height"></asp:TextBox><br />
-                                <asp:Button ID="inventory_button" runat="server" Text="Add Inventory" style = "width: 98%; margin-left: 2px" type = "submit" class = "btn btn-primary" OnClick="inventory_button_Click"/>
+								<asp:TextBox ID="expiry_date" runat="server" type="date" class="form-control control-height"></asp:TextBox><br />
+                                <asp:Button ID="inventory_button" runat="server" Text="Add Inventory" style = "width: 100%" type = "submit" class = "btn btn-primary" OnClick="inventory_button_Click"/>
                                 <br/>
                                 <br/>
                                 <br/>

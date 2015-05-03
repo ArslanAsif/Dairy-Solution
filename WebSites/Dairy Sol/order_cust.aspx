@@ -33,7 +33,7 @@
 					<div class="col-md-12">
                         
 	                    <div>
-                            <asp:GridView ID="order_customer_GridView" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" DataKeyNames="order_id" DataSourceID="SqlDataSource1"  CssClass="table table-bordered table-hover table-striped">
+                            <asp:GridView ID="order_customer_GridView" runat="server" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" DataKeyNames="order_id" DataSourceID="SqlDataSource1"  CssClass="table table-bordered table-hover table-striped">
                                 <Columns>
                                     <asp:BoundField DataField="order_id" HeaderText="Order Id" ReadOnly="True" SortExpression="order_id" InsertVisible="False" />
                                     <asp:BoundField DataField="product_id" HeaderText="Product Id" SortExpression="product_id" />
@@ -41,8 +41,8 @@
                                     <asp:BoundField DataField="customer_id" HeaderText="Customer Id" SortExpression="customer_id" />
                                     <asp:BoundField DataField="order_date" HeaderText="Order Date" SortExpression="order_date" />
                                     <asp:BoundField DataField="description" HeaderText="Description" SortExpression="description" />
-                                    <asp:CommandField HeaderText="Edit row" ShowEditButton="True" />
-                                    <asp:CommandField ShowDeleteButton="True" HeaderText="Delete row" />
+                                    <asp:CommandField HeaderText="Update" ShowEditButton="True" />
+                                    <asp:CommandField ShowDeleteButton="True" HeaderText="Delete" />
                                 </Columns>
                                 <FooterStyle BackColor="White" ForeColor="#000066" />
                                 <HeaderStyle BackColor="#808080" Font-Bold="True" ForeColor="White" />

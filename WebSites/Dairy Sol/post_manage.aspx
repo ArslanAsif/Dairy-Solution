@@ -30,7 +30,7 @@
 				<div class="row">
                     <div class="col-lg-12">
 
-                        <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" CssClass="table table-bordered table-hover table-striped" GridLines="None"  DataKeyNames="post_id" DataSourceID="SqlDataSource1">
+                        <asp:GridView ID="GridView1" runat="server" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" CssClass="table table-bordered table-hover table-striped" GridLines="None"  DataKeyNames="post_id" DataSourceID="SqlDataSource1">
                             <Columns>
                                 <asp:BoundField DataField="post_id" HeaderText="Post Id" InsertVisible="False" ReadOnly="True" SortExpression="post_id" />
                                 <asp:BoundField DataField="heading" HeaderText="Heading" SortExpression="heading" />
@@ -39,7 +39,7 @@
                                 <asp:ImageField HeaderText="Picture" DataImageUrlField="picture" NullImageUrl="~/images/updates/update2.jpg">
                                     <ControlStyle Height="75px" Width="75px" />
                                 </asp:ImageField>
-                                <asp:CommandField ShowEditButton="True" EditText="Update" HeaderText="Edit" />
+                                <asp:CommandField ShowEditButton="True" EditText="Update" HeaderText="Update" />
                                 <asp:CommandField HeaderText="Delete" ShowDeleteButton="True" />
                             </Columns>
                             <FooterStyle BackColor="White" ForeColor="#000066" />

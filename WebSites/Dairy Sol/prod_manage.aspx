@@ -26,15 +26,15 @@
                 </div>
             </div>
 
-            <asp:GridView ID="product_GridView" runat="server" AutoGenerateColumns="False" DataKeyNames="product_id" DataSourceID="ACER" AllowPaging="True" AllowSorting="True" BackColor="White" OnSelectedIndexChanged="product_GridView1_SelectedIndexChanged" CssClass="table table-bordered table-hover table-striped">
+            <asp:GridView ID="product_GridView" runat="server" AutoGenerateColumns="False" DataKeyNames="product_id" DataSourceID="SqlDataSource1" AllowSorting="True" BackColor="White" OnSelectedIndexChanged="product_GridView1_SelectedIndexChanged" CssClass="table table-bordered table-hover table-striped">
                 <Columns>
-                    <asp:BoundField DataField="product_id" HeaderText="product_id" SortExpression="product_id" ReadOnly="True" />
-                    <asp:BoundField DataField="product_name" HeaderText="product_name" SortExpression="product_name">
+                    <asp:BoundField DataField="product_id" HeaderText="Product ID" SortExpression="product_id" ReadOnly="True" InsertVisible="False" />
+                    <asp:BoundField DataField="product_name" HeaderText="Product Name" SortExpression="product_name">
                     </asp:BoundField>
-                    <asp:BoundField DataField="minimum_level" HeaderText="minimum_level" SortExpression="minimum_level"/>
+                    <asp:BoundField DataField="minimum_level" HeaderText="Minimum Level" SortExpression="minimum_level"/>
                     <asp:CommandField HeaderText="Delete" ShowDeleteButton="True" />
-                    <asp:CommandField EditText="Update" HeaderText="Edit" ShowEditButton="True" />
-                    <asp:HyperLinkField NavigateUrl="~/products.aspx" Text="View" HeaderText="Details" />
+                    <asp:CommandField HeaderText="Update" ShowEditButton="True" />
+                    <asp:HyperLinkField HeaderText="Details" NavigateUrl="~/site_products.aspx" Text="View" />
                 </Columns>
                 <FooterStyle BackColor="White" ForeColor="#000066" />
                 <HeaderStyle BackColor="#808080" Font-Bold="True" ForeColor="White" />
@@ -46,6 +46,25 @@
                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                 <SortedDescendingHeaderStyle BackColor="#00547E" />
             </asp:GridView>
+
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" DeleteCommand="DELETE FROM [products] WHERE [product_id] = @original_product_id AND (([product_name] = @original_product_name) OR ([product_name] IS NULL AND @original_product_name IS NULL)) AND (([minimum_level] = @original_minimum_level) OR ([minimum_level] IS NULL AND @original_minimum_level IS NULL))" InsertCommand="INSERT INTO [products] ([product_name], [minimum_level]) VALUES (@product_name, @minimum_level)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [product_name], [product_id], [minimum_level] FROM [products]" UpdateCommand="UPDATE [products] SET [product_name] = @product_name, [minimum_level] = @minimum_level WHERE [product_id] = @original_product_id AND (([product_name] = @original_product_name) OR ([product_name] IS NULL AND @original_product_name IS NULL)) AND (([minimum_level] = @original_minimum_level) OR ([minimum_level] IS NULL AND @original_minimum_level IS NULL))">
+                <DeleteParameters>
+                    <asp:Parameter Name="original_product_id" Type="Int32" />
+                    <asp:Parameter Name="original_product_name" Type="String" />
+                    <asp:Parameter Name="original_minimum_level" Type="Int32" />
+                </DeleteParameters>
+                <InsertParameters>
+                    <asp:Parameter Name="product_name" Type="String" />
+                    <asp:Parameter Name="minimum_level" Type="Int32" />
+                </InsertParameters>
+                <UpdateParameters>
+                    <asp:Parameter Name="product_name" Type="String" />
+                    <asp:Parameter Name="minimum_level" Type="Int32" />
+                    <asp:Parameter Name="original_product_id" Type="Int32" />
+                    <asp:Parameter Name="original_product_name" Type="String" />
+                    <asp:Parameter Name="original_minimum_level" Type="Int32" />
+                </UpdateParameters>
+            </asp:SqlDataSource>
 
             <asp:SqlDataSource ID="ACER" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT * FROM products" UpdateCommand="UPDATE products SET product_name = @product_name, minimum_level = @minimum_level 
 WHERE (product_id = @product_id)">

@@ -125,7 +125,7 @@
                                 </HeaderTemplate>
 
                                 <ItemTemplate>
-                                    <li class="catAlign"><a href="#"><%# Eval("product_name") %>></a></li>
+                                    <li class="catAlign"><a href="#"><%# Eval("product_name") %></a></li>
                                 </ItemTemplate>
 
                                   <FooterTemplate>
