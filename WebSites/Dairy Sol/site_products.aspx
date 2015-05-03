@@ -19,17 +19,18 @@
                     <table>
                 </HeaderTemplate>
 
+
           <ItemTemplate>
           <tr>
               <div class="col-md-4 boxDesign">
-						<h2 class = "h3"><%# Eval("product_name") %></h3><br>
+						<h2 class = "h3"><%# Eval("product_name") %></h2><br>
 						<div class="pBox" style = "margin-top: -20px">
 							<img class="img_border" src="<%# Eval("picture") %>" alt="Image Not Available" width="100%" height="240px"></img>
-                            <br/><br/><p id="change_text" runat="server" class="boxAlign" style = "margin-top: 5px; text-align: center" ><%# Eval("description") %></p>
+                            <br/><br/><p id="change_text" runat="server" class="boxAlign" style = "margin-top: 5px; text-align: center" ><%# Eval("short_description") %></p>
 							<br/>
                             <div class="btnAlign">
 								<button class = "btn btn-success pdBtn" formaction="site_prod_detail.aspx?id=<%# Eval("product_id") %>"><span class = "glyphicon glyphicon-list"></span>&nbsp;View Details</button>
-								<button class = "btn btn-primary pdBtn" formaction="#"><span class = "glyphicon glyphicon-shopping-cart"></span>&nbsp;Order now</button>
+								<asp:Button cssClass = "btn btn-primary pdBtn" runat="server" onClick="check_user" Text="Order now"></asp:Button>
 							</div>
 						</div>
 			</div>
@@ -43,11 +44,11 @@
 						<h2 class = "h3"><%# Eval("product_name") %></h3><br>
 						<div class="pBox" style = "margin-top: -20px">
 							<img class="img_border" src="<%# Eval("picture") %>" alt="Image Not Available" width="100%" height="240px"></img>
-							<br><br><p class="boxAlign" style = "margin-top: 5px; text-align: center"><%# Eval("description") %></p>
+							<br><br><p class="boxAlign" style = "margin-top: 5px; text-align: center"><%# Eval("short_description") %></p>
 							<br>
 							<div class="btnAlign">
 								<button class = "btn btn-success pdBtn" formaction="site_prod_detail.aspx?id=<%# Eval("product_id") %>"><span class = "glyphicon glyphicon-list"></span>&nbsp;View Details</button>
-								<button class = "btn btn-primary pdBtn" formaction="#"><span class = "glyphicon glyphicon-shopping-cart"></span>&nbsp;Order now</button>
+								<button class = "btn btn-primary pdBtn" formaction="signIn.aspx"><span class = "glyphicon glyphicon-shopping-cart"></span>&nbsp;Order now</button>
 							</div>
 						</div>
 					</div>
@@ -68,11 +69,11 @@
 			<ul class="pagination">
 			<li class="disabled"><a href="#" aria-label="Previous">&laquo;</a></li>
 			<li class="active"><a href="#">1 </a></li>
-			<li class=""><a href="#">2</a></li>
+			<li clas\s=""><a href="#">2</a></li>
 			<li class=""><a href="#" aria-label="Next">&raquo;</a></li>
 			</ul>
 		</nav>
-			</div>
+        	</div>
 		</div> 
     </div>
 </asp:Content>
