@@ -15,7 +15,7 @@
 				
 				<div class = "col-md-7">
 					<div id = "prd_des">
-						<h2 class = "flatBox h2" style="text-align: center">Automatic Foot Bath</h2>
+						<h2 runat="server" id="heading" class = "flatBox h2" style="text-align: center"></h2>
 						<div class = "" style = "margin-left: 30%; margin-top: 20px">
 							</br>
 							<asp:label runat="server"><strong>Product ID: </strong>&nbsp;&nbsp;&nbsp;</asp:label><asp:Label runat="server" ID="product_id"></asp:Label><br>
@@ -25,7 +25,7 @@
 						</div>
 						
 						<div class = "" style="margin-left:27%">
-							<button class = "btn btn-success btn pdDtBtn"><span class = "glyphicon glyphicon-shopping-cart"></span><br>Add to Cart</button>
+							<button id="add_to_cart" runat="server" class = "btn btn-success btn pdDtBtn"><span class = "glyphicon glyphicon-shopping-cart"></span><br>Add to Cart</button>
 							<button class = "btn btn-default btn pdDtBtn"><span class = "glyphicon glyphicon-pencil"></span><br>Send a Query</button>
 						</div>
 						
