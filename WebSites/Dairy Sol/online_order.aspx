@@ -8,40 +8,49 @@
     <br/>
     <br/>
     <div class="col-md-8 col-md-offset-1">
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="877px">
+    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="product_name" DataSourceID="SqlDataSource1" Width="877px">
         <Columns>
-            <asp:ImageField DataImageUrlField="product_picture" HeaderText="Product Picture" ReadOnly="True" ControlStyle-Width="150" ControlStyle-Height = "150">
-            <ControlStyle Height="150px" Width="150px"></ControlStyle>
-                <ItemStyle Wrap="True" />
+            <asp:ImageField DataImageUrlField="product_picture" ControlStyle-Width="150"  ControlStyle-Height="150" ReadOnly="True">
+<ControlStyle Height="150px" Width="150px"></ControlStyle>
             </asp:ImageField>
             <asp:BoundField DataField="product_picture" HeaderText="product_picture" SortExpression="product_picture" Visible="False"/>
-            <asp:BoundField DataField="product_name" HeaderText="Product Name" SortExpression="product_name" ReadOnly="True" />
-            <asp:BoundField DataField="product_price" HeaderText="Product Price" SortExpression="product_price" ReadOnly="True" />
+            <asp:BoundField DataField="product_name" HeaderText="product_name" SortExpression="product_name" ReadOnly="True" />
+            <asp:BoundField DataField="product_price" HeaderText="product_price" SortExpression="product_price" ReadOnly="True" />
             
-            <asp:TemplateField HeaderText="Quantity">
-                <ItemTemplate>
-                    <asp:TextBox ID="TextBox1" runat="server" Text="1"></asp:TextBox>
-                </ItemTemplate>
-            </asp:TemplateField>
-            <asp:TemplateField HeaderText="Sub Total">
-                <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text=""><%# Eval("product_price")%></asp:Label>
-                </ItemTemplate>
-            </asp:TemplateField>
-            <asp:CommandField ShowDeleteButton="True" HeaderText="Remove Item" />
+            <asp:CommandField ShowEditButton="True" />
+            
+            <asp:BoundField DataField="quantity" HeaderText="quantity" SortExpression="quantity" />
+            
+            <asp:CommandField ShowDeleteButton="True" />
             
         </Columns>
     </asp:GridView>
     
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand = "SELECT product_picture, product_name, product_price, quantity FROM order_page_info"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand = "SELECT [product_picture], [product_name], [product_price], [quantity] FROM [order_page_info] WHERE ([session_id] = @session_id)" InsertCommand="INSERT INTO [order_page_info] ([product_picture], [product_name], [product_price], [quantity]) VALUES (@product_picture, @product_name, @product_price, @quantity)" DeleteCommand="DELETE FROM order_page_info WHERE [product_name]=@product_name" UpdateCommand="UPDATE order_page_info SET quantity=@quantity WHERE product_name=@product_name">
+        <DeleteParameters>
+            <asp:Parameter Name="product_name" />
+        </DeleteParameters>
+        <InsertParameters>
+            <asp:Parameter Name="product_picture" Type="String" />
+            <asp:Parameter Name="product_name" Type="String" />
+            <asp:Parameter Name="product_price" Type="Int32" />
+            <asp:Parameter Name="quantity" Type="Int32" />
+        </InsertParameters>
+        <SelectParameters>
+            <asp:SessionParameter Name="session_id" SessionField="userId" Type="String" />
+        </SelectParameters>
+        <UpdateParameters>
+            <asp:Parameter Name="quantity" />
+            <asp:Parameter Name="product_name" />
+        </UpdateParameters>
+        </asp:SqlDataSource>
     <br/>
             <div class="row">
                 <div class="col-md-3">
                     <asp:Button ID="continue_shop" runat="server" cssClass="btn btn-primary" formAction="site_products.aspx" Text="Continue Shopping" />
                 </div>
                 <div class="col-md-6 col-md-offset-3">
-                    <asp:Button ID="clear_cart" runat="server" cssClass="btn btn-primary" Text="Clear Shopping Cart" OnClick="clear_cart_Click" />
-                    <asp:Button ID="update_cart" runat="server" cssClass="btn btn-primary" Text="Update Shopping Cart" OnClick="update_cart_Click" />
+                    <asp:Button ID="clear_cart" runat="server" cssClass="btn btn-primary pull-right" Text="Clear Shopping Cart" OnClick="clear_cart_Click"/>
                 </div>
             </div>
     <br/>
