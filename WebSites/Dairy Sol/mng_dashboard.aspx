@@ -131,7 +131,7 @@
                                         <FooterTemplate></FooterTemplate>
                                     </asp:Repeater>
                                     
-                                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT TOP 5 * FROM tasks ORDER BY task_date DESC;"></asp:SqlDataSource>
+                                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT TOP 5 * FROM tasks ORDER BY task_date ASC;"></asp:SqlDataSource>
                                 </div>
                                 <div class="text-right">
                                     <a href="#">View All Activity <i class="fa fa-arrow-circle-right"></i></a>
@@ -238,16 +238,14 @@
                             <asp:TextBox ID ="task_desc" runat="server" CssClass="form-control control-height" placeholder="Task Description" type="text"></asp:TextBox></br>
                             <asp:TextBox ID ="task_date" runat="server" CssClass="form-control control-height" placeholder="Due Date" type="date"></asp:TextBox></br>
                             <asp:TextBox ID ="task_type" runat="server" CssClass="form-control control-height" placeholder="Type" type="text"></asp:TextBox></br>
-                            
-                            <div class="pull-right">
-                                <button class="btn btn-danger">Cancel</button>
-                                <asp:Button ID="task_submit" runat="server" Text="Submit" type = "submit" class = "btn btn-primary" OnClick="add_task_Click"/>
-                            </div>
                         </form>
                     </div>
 
                     <div class="modal-footer">
-                        
+                        <div class="pull-right">
+                            <asp:Button ID="Button1" runat="server" CssClass="btn btn-danger" Text="Cancel" data-dismiss="modal" />
+                            <asp:Button ID="task_submit" runat="server" Text="Submit" type = "submit" class = "btn btn-primary" OnClick="add_task_Click"/>
+                        </div>
                     </div>
                 </div>
             </div>

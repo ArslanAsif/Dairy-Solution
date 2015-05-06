@@ -23,13 +23,16 @@ public partial class _Default : System.Web.UI.Page
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
         SqlConnection con = new SqlConnection(constring);
 
-        String query = " INSERT INTO tasks(task_desc, task_date, task_type, added_on, added_by, added_to) VALUES(@task_desc, @task_date, @task_type, DateTime.Now.ToString(), user_name, user_name)";
+        String query = " INSERT INTO tasks(task_desc, task_date, task_type, added_on, added_by, added_to) VALUES(@task_desc, @task_date, @task_type, @added_on, @added_by, @added_to)";
                         
         SqlCommand cmd = new SqlCommand(query, con);
 
         cmd.Parameters.AddWithValue("@task_desc", task_desc.Text);
         cmd.Parameters.AddWithValue("@task_date", task_date.Text);
         cmd.Parameters.AddWithValue("@task_type", task_type.Text);
+        cmd.Parameters.AddWithValue("@added_on", DateTime.Now.ToString());
+        cmd.Parameters.AddWithValue("@added_by", user_name);
+        cmd.Parameters.AddWithValue("@added_to", user_name);
 
         cmd.Connection = con;
 
@@ -38,7 +41,7 @@ public partial class _Default : System.Web.UI.Page
         cmd.ExecuteNonQuery();
         //for insert remove data reader and replace cmd.executenonquery()
 
-        Response.Redirect("order_add.aspx");
+        Response.Redirect("mng_dashboard.aspx");
 
         con.Close();
     }
