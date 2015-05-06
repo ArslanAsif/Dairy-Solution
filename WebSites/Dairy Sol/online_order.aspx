@@ -33,11 +33,11 @@
         </Columns>
     </asp:GridView>
     
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT product_picture, product_name, product_price, quantity FROM order_page_info"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand = "SELECT product_picture, product_name, product_price, quantity FROM order_page_info"></asp:SqlDataSource>
     <br/>
             <div class="row">
                 <div class="col-md-3">
-                    <asp:Button ID="continue_shop" runat="server" cssClass="btn btn-primary" formAction="products.aspx" Text="Continue Shopping" />
+                    <asp:Button ID="continue_shop" runat="server" cssClass="btn btn-primary" formAction="site_products.aspx" Text="Continue Shopping" />
                 </div>
                 <div class="col-md-6 col-md-offset-3">
                     <asp:Button ID="clear_cart" runat="server" cssClass="btn btn-primary" Text="Clear Shopping Cart" OnClick="clear_cart_Click" />

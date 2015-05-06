@@ -39,7 +39,7 @@ public partial class _Default : System.Web.UI.Page
             else
             {
                 cmd.CommandText = cus_query;
-                redirect = "products.aspx";
+                redirect = "site_products.aspx";
                 user = "customer_id";
                 username = "Customer_name";
             }
@@ -55,7 +55,7 @@ public partial class _Default : System.Web.UI.Page
                 Response.Redirect(redirect);
             }
             else
-                Response.Redirect("signin.aspx");
+                Response.Redirect("site_signIn.aspx");
             con.Close();
     }
     }

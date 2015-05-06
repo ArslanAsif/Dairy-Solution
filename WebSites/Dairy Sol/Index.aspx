@@ -98,9 +98,9 @@
                                         &nbsp;&nbsp;</div>
                                         <div class="media-body">
                                             <h4 class="media-heading"><%# Eval("heading") %></h4>
-                                            <p type"datetime">10-25-2014</p>
+                                            <p><%# Eval("date") %></p>
                                             <p><%# Eval("detail") %></p>
-                                            <a href="#" class="more">Read more...</a>
+                                            <a href="site_post_detail.aspx?id=<%# Eval("post_id") %>" class="more">Read more...</a>
                                         </div>
                                     </div>
                                     </tr>
@@ -125,7 +125,7 @@
                                 </HeaderTemplate>
 
                                 <ItemTemplate>
-                                    <li class="catAlign"><a href="#"><%# Eval("product_name") %></a></li>
+                                    <li class="catAlign"><a href="site_prod_detail.aspx?id=<%# Eval("product_id") %>"><%# Eval("product_name") %></a></li>
                                 </ItemTemplate>
 
                                   <FooterTemplate>
@@ -133,7 +133,7 @@
                                   </FooterTemplate>
                                 </asp:Repeater>
 
-                                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT product_name FROM [products] ORDER BY product_name ASC"></asp:SqlDataSource>
+                                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT product_name, product_id FROM [products] ORDER BY product_name ASC"></asp:SqlDataSource>
 						</div>
 					</div>
 				</div>

@@ -15,7 +15,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
         }
         else
         {
-            login_status.InnerText = "Log Out";
+            login_status.InnerText = Session["username"].ToString();
         }
     }
 

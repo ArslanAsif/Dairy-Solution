@@ -19,8 +19,16 @@
 			<div id="headBar">
 				<div class="container">
 					<img id="logo" width= "170px" src="images\logo.png"/>
-                    <a id="login_status" href="#" runat="server" class="signIn">Sign In</a>
-                        <div class="col-xs-3 col-sm-3 col-md-3 pull-right">
+
+                    <div class="dropdown signIn">
+			            <button type="button" id = "login_status" runat="server" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Sign In<span class="caret"></span></button>
+			            <ul class="dropdown-menu" role="menu">
+				            <li><a href="#">Settings</a></li>
+				            <li><a href="#" onServerClick="decide" runat="server">Log Out</a></li>
+				        </ul>
+		            </div>
+                        
+                    <div class="col-xs-3 col-sm-3 col-md-3 pull-right" style="padding-right:70px; margin-top:-23px">
 						<form role="search">
 							<div class="input-group mySearchBar">
 								<input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
@@ -30,6 +38,7 @@
 							</div>
 						</form>
 					</div>
+
 				</div>
 			</div>
 			
