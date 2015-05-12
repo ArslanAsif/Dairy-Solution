@@ -25,41 +25,127 @@
                 </div>
             </div>
 
-            <div>
+            <div class="row">
+                <!--Conversation list-->
+                <div class="col-md-4">
                 <div class="list-group" style="cursor: pointer; cursor: hand">
 
-                    <asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlDataSource2">       
+                    <asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlDataSource2" EnableViewState="False">       
                         <HeaderTemplate></HeaderTemplate>
 
                         <ItemTemplate>
-                            <div class="list-group-item" data-toggle="modal" data-target="#messagesModal">
+                            <div class="list-group-item">
                                 <div class="media">
                                     <button type="button" class="close"><span>&times;</span></button>
                                     <div class="media-left">
-                                        <a href="">
+                                        <a href="#">
                                             <img class="media-object" src="<%#Eval("employee_picture") %>" width="65px" height="65px">
+                                            <asp:Label runat="server" ID="msg_src_id" hidden><%#Eval("source_id") %></asp:Label>
                                         </a>
                                     </div>
                                 
                                     <div class="media-body">
-                                        <h4 class="media-heading"><%#Eval("employee_name") %> <span class="badge"><%#Eval("status") %></span></h4>
+                                        <h4 class="media-heading"><span id="getName"><%#Eval("employee_name") %></span> <span class="badge"><%#Eval("status") %></span></h4>
+                                        
                                         <p><%#Eval("message") %></p>
                                     </div>
                                 </div>
                             </div>
                         </ItemTemplate>
-											
-                        <FooterTemplate></FooterTemplate>
+					
+                        <FooterTemplate>
+                        </FooterTemplate>
                     </asp:Repeater>
                                     
-                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT e.employee_picture, e.employee_name, m.status, m.message, m.date 
-                                                                                                                                                                    FROM (SELECT TOP 1 * from messages WHERE (dest_id = @user_id) ORDER BY date DESC) AS m 
+                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT m.source_id, e.employee_picture, e.employee_name, m.status, m.message, m.date 
+                                                                                                                                                                    FROM (SELECT * from messages WHERE (dest_id = @user_id) ) AS m 
                                                                                                                                                                     INNER JOIN employee_info AS e 
-                                                                                                                                                                    ON m.source_id = e.employee_id">
+                                                                                                                                                                    ON m.source_id = e.employee_id
+                                                                                                                                                                    ORDER BY date DESC">
                         <SelectParameters>
                             <asp:SessionParameter DefaultValue="NULL" Name="user_id" SessionField="userId" Type="Int64" />
                         </SelectParameters>
                     </asp:SqlDataSource>
+
+                    <asp:Label ID="newLabel" runat="server"></asp:Label>
+                    
+                </div>
+                </div>
+
+                <!--Conversation repeater-->
+                <div class="col-md-8">
+                    <div class="list-group"><div class="list-group-item">
+                    
+
+                    <form class="form-group">
+                        <div class="input-group">
+                            <asp:TextBox ID ="message_input" runat="server" CssClass="form-control control-height" placeholder="Send Message" type="text"></asp:TextBox>
+                            <div class="input-group-btn">
+                            <asp:Button ID="msg_submit2" runat="server" Text="Send" type = "submit" class = "btn btn-primary" OnClick="msg_submit2_Click"/>
+                        </div>
+                        </div><hr />
+                    </form>
+                    
+                    
+                    <asp:Repeater ID="Repeater3" runat="server" DataSourceID="SqlDataSource3" EnableViewState="False">      
+                        <HeaderTemplate></HeaderTemplate>
+
+                        <ItemTemplate>
+                            <div class="media">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="media-left">
+                                            <a href="">
+                                                <img class="media-object" src="<%#Eval("employee_picture") %>" width="65px" height="65px">
+                                            </a>
+                                        </div>
+                                
+                                        <div class="media-body" style="padding-right: 75px">
+                                            <h4 class="media-heading"><span><%#Eval("employee_name") %></h4>
+                                            <p><%#Eval("message") %></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ItemTemplate>
+
+                        <AlternatingItemTemplate>
+                            <div class="media">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="pull-right">
+                                            <div class="media-body" style="padding-left: 75px">
+                                                <h4 class="media-heading"><%#Eval("employee_name") %></span></h4>
+                                                <p><%#Eval("message") %></p>
+                                            </div>
+                                
+                                            <div class="media-right">
+                                                <a href="">
+                                                    <img class="media-object" src="<%#Eval("employee_picture") %>" width="65px" height="65px">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </AlternatingItemTemplate>
+											
+                        <FooterTemplate>
+                        </FooterTemplate>
+                    </asp:Repeater>
+                    
+                    </div></div>
+                                    
+                    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT m.source_id, e.employee_picture, e.employee_name, m.status, m.message, m.date 
+                                                                                                                                                                    FROM (SELECT * from messages WHERE (((dest_id = @user_id) AND (source_id = 3)) OR ((source_id = @user_id) AND (dest_id = 3))) ) AS m 
+                                                                                                                                                                    INNER JOIN employee_info AS e 
+                                                                                                                                                                    ON m.source_id = e.employee_id
+                                                                                                                                                                    ORDER BY date DESC">
+                        <SelectParameters>
+                            <asp:SessionParameter DefaultValue="NULL" Name="user_id" SessionField="userId" Type="Int64" />
+                        </SelectParameters>
+                    </asp:SqlDataSource>
+
                 </div>
             </div>
 
@@ -72,25 +158,15 @@
                     <h4 class="modal-title"><i class="fa fa-edit"></i> Create Message</h4>
                   </div>
                   <div class="modal-body">
-                    </br>
-                    <form class="form-group">
-                        <asp:TextBox ID ="send_to" runat="server" CssClass="form-control control-height" placeholder="Enter ID" type="text"></asp:TextBox></br>
-                        <asp:TextBox ID ="message" runat="server" CssClass="form-control control-height" placeholder="Message" type="text"></asp:TextBox></br>
-                    </form>
-
-                    <div class="media" hidden>
-                        <div class="media-body" style="padding-left: 75px">
-                            <h4 class="media-heading">Me</h4>
-                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                        </div>
-                    
-                        <div class="media-right">
-                        <a href="#">
-                            <img class="media-object" src="images\profile_default.jpg" alt="" width="65px" height="65px">
-                        </a>
-                        </div>
-                    </div>
-
+                    <br/>
+                        <asp:DropDownList ID="msg_DropDownList" runat="server" DataSourceID="SqlDataSource1" DataTextField="employee_name" DataValueField="employee_id" CssClass="form-control control-height">
+                        </asp:DropDownList>
+                      <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:Dairy_SolutionConnectionString %>' SelectCommand="SELECT [employee_id], [employee_name] FROM [employee_info] WHERE ([employee_id] != @employee_id)">
+                          <SelectParameters>
+                              <asp:SessionParameter SessionField="userId" Name="employee_id" Type="Int32"></asp:SessionParameter>
+                          </SelectParameters>
+                      </asp:SqlDataSource></br/>
+                        <asp:TextBox ID ="message1" runat="server" CssClass="form-control control-height" placeholder="Message"></asp:TextBox><br/>
                   </div>
                   <div class="modal-footer">
                       <div class="pull-right">
