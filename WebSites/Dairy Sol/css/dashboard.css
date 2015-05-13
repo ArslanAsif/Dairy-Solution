@@ -8,6 +8,11 @@
     height: 100%;
 }
 
+#formHoriz label{
+    text-align: right;
+    margin-top: 10px;
+}
+
 /* Global Styles */
 .navbar-brand{
 	margin-top: -25px;

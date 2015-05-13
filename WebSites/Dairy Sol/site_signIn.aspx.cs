@@ -19,8 +19,8 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void SignIn_Click(object sender, EventArgs e)
     {    
-            string emp_query = "select * from employee_info where email_id ='" + inputEmail.Text + "' and password = '" + inputPass.Text + "'";
-            string cus_query = "select * from customer_info where customer_email_id ='" + inputEmail.Text + "' and customer_password = '" + inputPass.Text + "'";
+            string emp_query = "select * from employee_info where email_id ='" + inputEmail.Value + "' and password = '" + inputPass.Value + "'";
+            string cus_query = "select * from customer_info where customer_email_id ='" + inputEmail.Value + "' and customer_password = '" + inputPass.Value + "'";
             string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString; 
             SqlConnection con = new SqlConnection(constring);
             SqlCommand cmd = new SqlCommand();
