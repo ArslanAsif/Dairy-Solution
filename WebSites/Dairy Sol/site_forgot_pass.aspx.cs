@@ -66,8 +66,6 @@ public partial class _Default : System.Web.UI.Page
             }
         }
 
-        //for insert remove data reader and replace cmd.executenonquery()
-        //Response.Redirect("products.aspx");
         con.Close();
     }
     protected void submit_btn_click(object sender, EventArgs e)
@@ -135,9 +133,6 @@ public partial class _Default : System.Web.UI.Page
                 }
             }
         }
-
-        //for insert remove data reader and replace cmd.executenonquery()
-        //Response.Redirect("products.aspx");
         con.Close();
     }
 }

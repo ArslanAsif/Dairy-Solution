@@ -50,7 +50,7 @@
                     <asp:Button ID="continue_shop" runat="server" cssClass="btn btn-primary" formAction="site_products.aspx" Text="Continue Shopping" />
                 </div>
                 <div class="col-md-6 col-md-offset-3">
-                    <asp:Button ID="clear_cart" runat="server" cssClass="btn btn-primary pull-right" Text="Clear Shopping Cart" OnClick="clear_cart_Click"/>
+                    <asp:Button ID="clear_cart" runat="server" cssClass="btn btn-primary pull-right" Text="Clear Shopping Cart" onClick="clear_cart_Click"/>
                 </div>
             </div>
     <br/>
