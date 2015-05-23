@@ -36,9 +36,19 @@
                                     <asp:BoundField DataField="product_id" HeaderText="Product ID" SortExpression="product_id" />
                                     <asp:BoundField DataField="quantity" HeaderText="Quantity" SortExpression="quantity" />
                                     <asp:BoundField DataField="order_date" HeaderText="Order Date" SortExpression="order_date" />
-                                    <asp:BoundField DataField="supplier_name" HeaderText="Supplier Name" SortExpression="supplier_name" />
+                                    <asp:BoundField DataField="supplier_id" HeaderText="Supplier ID" SortExpression="supplier_id" />
                                     <asp:CommandField HeaderText="Update" ShowEditButton="True" />
                                     <asp:CommandField HeaderText="Delete" ShowDeleteButton="True" />
+                                    <asp:TemplateField HeaderText="Supplier Name">
+                                        <ItemTemplate>
+                                            
+                                        </ItemTemplate>
+                                        <EditItemTemplate>
+                                            <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource1" DataTextField="supplier_name" DataValueField="supplier_id">
+                                            </asp:DropDownList>
+                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT [supplier_name], [supplier_id] FROM [supplier_info]"></asp:SqlDataSource>
+                                        </EditItemTemplate>
+                                    </asp:TemplateField>
                                 </Columns>
                                 <FooterStyle BackColor="White" ForeColor="#000066" />
                                 <HeaderStyle BackColor="#808080" Font-Bold="True" ForeColor="White" />
@@ -50,7 +60,7 @@
                                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                                 <SortedDescendingHeaderStyle BackColor="#00547E" />
                             </asp:GridView>
-                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT ordered_products.order_id, ordered_products.product_id, supplier_order.quantity, supplier_order.supplier_name, supplier_order.order_date FROM ordered_products INNER JOIN supplier_order ON ordered_products.order_id = supplier_order.order_id" UpdateCommand="UPDATE supplier_order SET supplier_name = @supplier_name, order_date = @order_date, quantity = @quantity FROM supplier_order INNER JOIN ordered_products ON supplier_order.order_id = ordered_products.order_id WHERE (supplier_order.order_id = @order_id) AND (ordered_products.product_id = @product_id)">
+                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT ordered_products.order_id, (select product_name from products where products.product_id = ordered_products.product_id) as product_id, supplier_order.quantity, (select supplier_name from supplier_info where supplier_id = supplier_order.supplier_id) as supplier_id, supplier_order.order_date FROM ordered_products INNER JOIN supplier_order ON ordered_products.order_id = supplier_order.order_id" UpdateCommand="UPDATE supplier_order SET supplier_name = @supplier_name, order_date = @order_date, quantity = @quantity FROM supplier_order INNER JOIN ordered_products ON supplier_order.order_id = ordered_products.order_id WHERE (supplier_order.order_id = @order_id) AND (ordered_products.product_id = @product_id)">
                                 <UpdateParameters>
                                     <asp:Parameter Name="supplier_name" />
                                     <asp:Parameter Name="order_date" />

@@ -39,8 +39,8 @@
                                 <asp:ImageField HeaderText="Picture" DataImageUrlField="picture" NullImageUrl="~/images/updates/update2.jpg">
                                     <ControlStyle Height="75px" Width="75px" />
                                 </asp:ImageField>
-                                <asp:CommandField ShowEditButton="True" EditText="Update" HeaderText="Update" />
                                 <asp:CommandField HeaderText="Delete" ShowDeleteButton="True" />
+                                <asp:HyperLinkField Text="Update" DataNavigateUrlFields="post_id" DataNavigateUrlFormatString="post_update.aspx?id={0}"/>
                             </Columns>
                             <FooterStyle BackColor="White" ForeColor="#000066" />
                             <HeaderStyle BackColor="#808080" Font-Bold="True" ForeColor="White" />
