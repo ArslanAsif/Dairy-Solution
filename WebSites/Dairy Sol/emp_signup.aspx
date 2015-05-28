@@ -8,8 +8,10 @@
 				<div class = 'row'>
                     <div class="col-md-4 col-md-offset-2">
                         <br/><br/>
-                        <asp:Image ID="emp_img" runat="server" width="250" Height="250"/><br/>
+                        <asp:Image ID="emp_img" ImageUrl="~/images/updates/update1.jpg " runat="server" width="250" Height="250"/><br/>
                         <label>Attach Picture</label>&nbsp; &nbsp;<asp:FileUpload ID="empl_image" runat="server" />
+                        <asp:Button runat="server" cssClass="btn btn-xs btn-primary" OnClick="changePic" Text="Upload"/>
+                        <asp:Label runat="server" ID="label1"></asp:Label>
                         <br/>
                     </div>
 

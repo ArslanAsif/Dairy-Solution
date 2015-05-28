@@ -70,13 +70,13 @@ public partial class _Default : System.Web.UI.Page
             else
             {
                 string pathName = "images/" + Path.GetFileName(empl_image.PostedFile.FileName);
-                empl_image.SaveAs(Server.MapPath("~/images/updates/" + empl_image.FileName));
+                empl_image.SaveAs(Server.MapPath("~/images/employee_picture/" + empl_image.FileName));
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "popup", "alert('File Uploaded!');", true);
             }
         }
         string emp_id = Request.QueryString["id"];
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
-        string query = "UPDATE employee_info SET employee_name=@employee_name, email_id=@email_id, password=@password, cnic=@cnic, marital_status=@marital_status, no_of_children=@no_of_children, siblings=@siblings, phone_number=@phone_number, date_of_birth=@date_of_birth WHERE employee_id = '" + emp_id + "'" +
+        string query = "UPDATE employee_info SET employee_name=@employee_name, email_id=@email_id, password=@password, cnic=@cnic, marital_status=@marital_status, no_of_children=@no_of_children, siblings=@siblings, phone_number=@phone_number, date_of_birth=@date_of_birth, employee_picture=@picture WHERE employee_id = '" + emp_id + "'" +
             "UPDATE employee_address SET permanent_address=@permanent_address, other_address=@other_address, city=@city WHERE employee_id='"+emp_id+"'";
         SqlConnection con = new SqlConnection(constring);
         SqlCommand cmd = new SqlCommand();
@@ -98,7 +98,7 @@ public partial class _Default : System.Web.UI.Page
 
         if (empl_image.PostedFile.FileName != "")
         {
-            cmd.Parameters.AddWithValue("@picture", "images/updates/" + empl_image.PostedFile.FileName.ToString());
+            cmd.Parameters.AddWithValue("@picture", "images/employee_picture/" + empl_image.PostedFile.FileName.ToString());
         }
         else
         {
@@ -115,7 +115,10 @@ public partial class _Default : System.Web.UI.Page
     {
         if (empl_image.HasFile)
         {
-            emp_img.ImageUrl = "images/updates/" + empl_image.PostedFile.FileName.ToString();
+            string fullPath;
+            fullPath = Path.GetFullPath(Path.GetFileName(empl_image.PostedFile.FileName));
+            label1.Text = fullPath;
+            emp_img.ImageUrl = "" + fullPath + "" + empl_image.PostedFile.FileName.ToString();
         }
     }
     
