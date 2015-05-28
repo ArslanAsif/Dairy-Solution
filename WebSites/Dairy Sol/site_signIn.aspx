@@ -23,16 +23,15 @@
 
                                 <div class="input-group">
                                   <span class="input-group-addon" id="sizing-addon1"><i class="fa fa-user"></i></span>
-                                  <input type="email" class="form-control" runat="server" ID="inputEmail" placeholder="Email Address" aria-describedby="sizing-addon1">
+                                  <input type="email" class="form-control" runat="server" required="required" ID="inputEmail" placeholder="Email Address" aria-describedby="sizing-addon1">
                                 </div>
                                 <asp:RegularExpressionValidator ID="EmailExpressionValidator" runat="server" ForeColor="Red" ErrorMessage="Email Incorrect" ValidationExpression="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" ControlToValidate="inputEmail"></asp:RegularExpressionValidator>
                                 <br/>
 
                                 <div class="input-group">
                                   <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-lock"></i></span>
-                                  <input ID="inputPass" runat="server" type="password" class="form-control" placeholder="Enter Password" aria-describedby="sizing-addon2">
+                                  <input ID="inputPass" runat="server" required="required" type="password" class="form-control" placeholder="Enter Password" aria-describedby="sizing-addon2">
                                 </div>
-                                <asp:RequiredFieldValidator ID="PassRequiredFieldValidator" runat="server" SetFocusOnError="true" ErrorMessage="Enter Password" ControlToValidate="inputPass" BorderStyle="NotSet" ForeColor="Red"></asp:RequiredFieldValidator>
                                 <br/>
                                 <asp:RequiredFieldValidator CssClass="RadioRequiredFieldValidator" ID="RadioRequiredFieldValidator" runat="server" SetFocusOnError="true" ErrorMessage="Select user type" ControlToValidate="radioOptions1" BorderStyle="NotSet" ForeColor="Red"></asp:RequiredFieldValidator>
                                 

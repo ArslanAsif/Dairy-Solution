@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using System.Configuration;
 
 public partial class _Default : System.Web.UI.Page
 {
@@ -17,7 +18,7 @@ public partial class _Default : System.Web.UI.Page
     {
         string emp_query = "select secret_question, secret_answer from employee_info where email_id = '" + email_id.Text + "'";
         string cus_query = "select secret_question, secret_answer from customer_info where customer_email_id = '" + email_id.Text + "'";
-        string constring = @"Data Source=ACER;Initial Catalog=Dairy_Solution;Integrated Security=True";
+        string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString; 
         SqlConnection con = new SqlConnection(constring);
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = con;
@@ -76,7 +77,7 @@ public partial class _Default : System.Web.UI.Page
         string answer = "";
         string emp_query = "select secret_answer, password from employee_info where email_id = '" + email_id.Text + "'";
         string cus_query = "select secret_answer, password from customer_info where customer_email_id = '" + email_id.Text + "'";
-        string constring = @"Data Source=ACER;Initial Catalog=Dairy_Solution;Integrated Security=True";
+        string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString; 
         SqlConnection con = new SqlConnection(constring);
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = con;
