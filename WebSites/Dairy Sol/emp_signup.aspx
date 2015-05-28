@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="emp_signup.aspx.cs" Inherits="_Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" enableEventValidation="false" AutoEventWireup="true" CodeFile="emp_signup.aspx.cs" Inherits="_Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
@@ -6,58 +6,60 @@
     <div class="container opaque">	
 		<div class = 'center'>
 				<div class = 'row'>
-					<div class="col-md-4 col-md-offset-4 boxDesign">
+                    <div class="col-md-4 col-md-offset-2">
+                        <br/><br/>
+                        <asp:Image ID="emp_img" ImageUrl="~/images/updates/update1.jpg " runat="server" width="250" Height="250"/><br/>
+                        <label>Attach Picture</label>&nbsp; &nbsp;<asp:FileUpload ID="empl_image" runat="server" />
+                        <asp:Button runat="server" cssClass="btn btn-xs btn-primary" OnClick="changePic" Text="Upload"/>
+                        <asp:Label runat="server" ID="label1"></asp:Label>
+                        <br/>
+                    </div>
+
+					<div class="col-md-4 col-md-offset-1 boxDesign">
 						<div style="margin-top: 10%"">
-							<h2 style="text-align: center">Sign Up</h2>
+							<h2 style="text-align: center">Update Employee Info</h2>
 							<br/>
 							<form role="form">
-                                <asp:TextBox ID="empl_su_inputFirstName" runat="server" style="width: 98%" type="text" class="form-control" placeholder="First Name"></asp:TextBox>
+                                <label>Name: </label>
+                                <asp:TextBox ID="empl_Name" runat="server" style="width: 98%" type="text" class="form-control" placeholder="First Name"></asp:TextBox>
 								<br/>
-                                <asp:TextBox ID="empl_su_inputLastName" runat="server" style="width: 98%" type="text" class="form-control" placeholder="Last Name"></asp:TextBox>
+                                <label>Email Id: </label>
+								<asp:TextBox ID="empl_Email" runat="server" style="width: 98%" type="text" class="form-control"></asp:TextBox>
 								<br/>
-                                
-								<label>Gender:</label>&nbsp; &nbsp;<br/>
-								<label class="radio-inline">
-                                    <asp:RadioButton ID="empl_radioOptions1" runat="server" type ="radio"/>
-                                    <input type="radio" name="radioOptions" value="member" checked = "checked"> Male
-								</label>
-								<label class="radio-inline">
-                                    <asp:RadioButton ID="empl_radioOptions2" runat="server" type ="radio"/>
-                                    <input type="radio" name="radioOptions" value="member" checked = "checked"> Female
-								</label>
-								<br/><br/>
-								<asp:TextBox ID="empl_su_inputEmail" runat="server" style="width: 98%" type="text" class="form-control" placeholder="Enter email address"></asp:TextBox>
+                                <label>Password: </label>
+                                <asp:TextBox ID="empl_Pass" runat="server" style="width: 98%" type="text" class="form-control"></asp:TextBox>
 								<br/>
-                                <asp:TextBox ID="empl_su_inputPass" runat="server" style="width: 98%" type="text" class="form-control" placeholder="Enter Password"></asp:TextBox>
+                                <label>CNIC: </label>
+                                <asp:TextBox ID="empl_CNIC" runat="server" style="width: 98%" type="text" class="form-control"></asp:TextBox>
 								<br/>
-                                <asp:TextBox ID="empl_password_cnfrm" runat="server" style="width: 98%" type="text" class="form-control" placeholder="Enter Password again"></asp:TextBox>
-                                <br/>
-                                <asp:TextBox ID="empl_su_inputCNIC" runat="server" style="width: 98%" type="text" class="form-control" placeholder="CNIC"></asp:TextBox>
-								<br/>
-                                <asp:TextBox ID="empl_marital_status" runat="server" style="width: 98%" type="text" class="form-control" placeholder="Marital Status"></asp:TextBox>
+                                <label>Marital Status: </label>
+                                <asp:TextBox ID="empl_marital_status" runat="server" style="width: 98%" type="text" class="form-control"></asp:TextBox>
                                 <br />
-                                <asp:TextBox ID="empl_no_children" runat="server" style="width: 98%" type="text" class="form-control" placeholder="Number of children"></asp:TextBox>
+                                <label>Number Of Children: </label>
+                                <asp:TextBox ID="empl_no_children" runat="server" style="width: 98%" type="text" class="form-control" ></asp:TextBox>
                                 <br/>
-                                <asp:TextBox ID="empl_no_siblings" runat="server" style="width: 98%" type="text" class="form-control" placeholder="Number of siblings"></asp:TextBox>
+                                <label>Number of Siblings: </label>
+                                <asp:TextBox ID="empl_no_siblings" runat="server" style="width: 98%" type="text" class="form-control" ></asp:TextBox>
                                 <br/>
-                                <asp:TextBox ID="empl_phone_number" runat="server" style="width: 98%" type="text" class="form-control" placeholder="Residence Number"></asp:TextBox>
+                                <label>Phone Number: </label>
+                                <asp:TextBox ID="empl_phone_number" runat="server" style="width: 98%" type="text" class="form-control"></asp:TextBox>
                                 <br/>
-                                <asp:TextBox ID="empl_mobile_number" runat="server" style="width: 98%" type="text" class="form-control" placeholder="Mobile Number"></asp:TextBox>
+                                <label>Moblile Number: </label>
+                                <asp:TextBox ID="empl_mobile_number" runat="server" style="width: 98%" type="text" class="form-control"></asp:TextBox>
                                 <br />
-                                <asp:TextBox ID="empl_su_inputAddress" runat="server" style="width: 98%" type="text" class="form-control" placeholder="Address"></asp:TextBox>
+                                <label>Address: </label>
+                                <asp:TextBox ID="empl_Address" runat="server" style="width: 98%" type="text" class="form-control" ></asp:TextBox>
 								<br/>
-                                <label>Attach Picture</label>&nbsp; &nbsp;<asp:FileUpload ID="empl_image" runat="server" />
-                                <br/>
+                                <label>Other Address: </label>
+                                <asp:TextBox ID="empl_other_address" runat="server" style="width: 98%" type="text" class="form-control" placeholder="No Other Address"></asp:TextBox>
+								<br/>
+                                <label>City: </label>
+                                <asp:TextBox ID="empl_city" runat="server" style="width: 98%" type="text" class="form-control"></asp:TextBox>
+								<br/>
 								<label>Date of birth :</label>
-                                <asp:TextBox ID="empl_su_inputDob" runat="server" style="width: 98%" type="date" class="form-control"></asp:TextBox><br />
-                                <label>Secret Question :</label>
-                                <asp:DropDownList ID="DropDownList1" runat="server" CssClass ="form-control" Width ="98%">
-                                    <asp:ListItem>What is your favourite pet name?</asp:ListItem>
-                                    <asp:ListItem>What is your favourite uncle name?</asp:ListItem>
-                                    <asp:ListItem>What is your hobby?</asp:ListItem>
-                                </asp:DropDownList>
+                                <asp:TextBox ID="empl_Dob" runat="server" style="width: 98%" type="text" class="form-control"></asp:TextBox><br />
                                 <br />
-                                <asp:Button ID="empl_signUp" runat="server" Text="Sign Up" style = "width: 98%; margin-left: 2px" type = "submit" class = "btn btn-primary"/>
+                                <asp:Button ID="empl_signUp" runat="server" Text="Update" style = "width: 98%; margin-left: 2px" type = "submit" class = "btn btn-primary" OnClick="updatePost_Click"/>
                                 
 							</form>
 						</div>

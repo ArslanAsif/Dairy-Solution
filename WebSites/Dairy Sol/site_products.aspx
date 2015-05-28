@@ -30,7 +30,7 @@
 							<br/>
                             <div class="btnAlign">
 								<button class = "btn btn-success pdBtn" formaction="site_prod_detail.aspx?id=<%# Eval("product_id") %>"><span class = "glyphicon glyphicon-list"></span>&nbsp;View Details</button>
-								<asp:Button cssClass = "btn btn-primary pdBtn" runat="server" onClick="check_user" Text="Order now"></asp:Button>
+								<asp:Button cssClass = "btn btn-primary pdBtn" runat="server" CommandArgument='<%# Eval("product_id") %>' onClick="check_user" Text="Order now"></asp:Button>
 							</div>
 						</div>
 			</div>
@@ -48,7 +48,7 @@
 							<br>
 							<div class="btnAlign">
 								<button class = "btn btn-success pdBtn" formaction="site_prod_detail.aspx?id=<%# Eval("product_id") %>"><span class = "glyphicon glyphicon-list"></span>&nbsp;View Details</button>
-								<button class = "btn btn-primary pdBtn" formaction="signIn.aspx"><span class = "glyphicon glyphicon-shopping-cart"></span>&nbsp;Order now</button>
+								<asp:Button cssClass = "btn btn-primary pdBtn" runat="server" CommandArgument='<%# Eval("product_id") %>' onClick="check_user" Text="Order now"></asp:Button>
 							</div>
 						</div>
 					</div>
