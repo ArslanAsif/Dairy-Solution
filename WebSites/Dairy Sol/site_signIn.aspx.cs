@@ -46,18 +46,19 @@ public partial class _Default : System.Web.UI.Page
 
             con.Open();
             SqlDataReader dr = cmd.ExecuteReader();
-            while(dr.Read()){
-            //for insert remove data reader and replace cmd.executenonquery()
-            if (dr.HasRows)
+            while(dr.Read())
             {
-                Session["userId"] = dr[user];
-                Session["username"] = dr[username];
-                Response.Redirect(redirect);
+                //for insert remove data reader and replace cmd.executenonquery()
+                if (dr.HasRows)
+                {
+                    Session["userId"] = dr[user];
+                    Session["username"] = dr[username];
+                    Response.Redirect(redirect);
+                }
+                else
+                    Response.Redirect("site_signIn.aspx");
+                con.Close();
             }
-            else
-                Response.Redirect("site_signIn.aspx");
-            con.Close();
-    }
     }
     protected void signUp_Click(object sender, EventArgs e)
     {

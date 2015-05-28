@@ -11,10 +11,13 @@ public partial class MasterPage : System.Web.UI.MasterPage
     {
         if ( Session["username"] == null )
         {
-            login_status.InnerText = "Sign In";
+            login_status.Visible = false;
+            link.Visible = true;
         }
         else
         {
+            login_status.Visible = true;
+            link.Visible = false;
             login_status.InnerText = Session["username"].ToString();
         }
     }

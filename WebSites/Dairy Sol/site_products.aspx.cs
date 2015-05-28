@@ -20,7 +20,7 @@ public partial class _Default : System.Web.UI.Page
         if (Session["username"] == null)
         {
             Response.Redirect("site_signin.aspx");
-        }
+        }// if session not created
         else
         {
             Button btn = (Button)sender;
@@ -44,7 +44,7 @@ public partial class _Default : System.Web.UI.Page
                     prod_price = Convert.ToInt32(dr["price"].ToString());
                     prod_name = dr["product_name"].ToString();
                     prod_picture = dr["picture"].ToString();
-                    insert_values( prod_price, prod_name, prod_picture, prod_id );
+                    check_data( prod_price, prod_name, prod_picture, prod_id );
                 }
             }// end while loop
             Response.Redirect("online_order.aspx");
@@ -72,6 +72,38 @@ public partial class _Default : System.Web.UI.Page
         cmd.ExecuteNonQuery();
 
         con.Close();
+        Response.Redirect("online_order.aspx");
     }
 
+    protected void check_data(int price, string name, string picture, string id) 
+    {
+        bool found = false;
+        string query = "SELECT * FROM order_page_info WHERE session_id = '" + Session["userId"].ToString() + "'";
+        string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
+        SqlConnection con = new SqlConnection(constring);
+        SqlCommand cmd = new SqlCommand();
+        cmd.Connection = con;
+        cmd.CommandText = query;
+
+        con.Open();
+        SqlDataReader dr = cmd.ExecuteReader();
+        while (dr.Read())
+        {
+            if (dr.HasRows)
+            {
+                if (dr["product_id"].ToString() == id)
+                {
+                    found = true;
+                }
+            }
+        }// end while loop
+        if (found == true)
+        {
+            Response.Redirect("online_order.aspx");
+        }
+        else 
+        {
+            insert_values( price, name, picture, id );
+        }
+    }
 }

@@ -19,12 +19,12 @@
 			<div id="headBar">
 				<div class="container">
 					<img id="logo" width= "170px" src="images\logo.png"/>
-
+                    <a href="site_signIn.aspx" runat="server" class="signIn"><button class="btn btn-default" runat="server" id="link">Sign In</button></a>
                     <div class="dropdown signIn">
 			            <button type="button" id = "login_status" runat="server" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Sign In<span class="caret"></span></button>
 			            <ul class="dropdown-menu" role="menu">
-				            <li><a href="#">Settings</a></li>
-				            <li><a href="#" onServerClick="decide" runat="server">Log Out</a></li>
+				            <li><a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a></li>
+				            <li><a href="#" onServerClick="decide" runat="server"><i class="fa fa-fw fa-power-off"></i> Log Out</a></li>
 				        </ul>
 		            </div>
                         
