@@ -47,43 +47,44 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu message-dropdown">
+                        <asp:Repeater ID="Repeater" runat="server" DataSourceID="SqlDataSource">       
+                            <HeaderTemplate></HeaderTemplate>
+
+                            <ItemTemplate>
+                                <li class="message-preview">
+                                    <a href='messages.aspx?id=<%#Eval("source_id") %>'>
+                                        <div class="media">
+                                            <span class="pull-left">
+                                                <img class="media-object" src="<%#Eval("employee_picture") %>" width="50px" height="50px">
+                                            </span>
+                                            <div class="media-body">
+                                                <h5 class="media-heading"><strong><%#Eval("employee_name") %></strong></h5>
+                                                <p class="small text-muted"><i class="fa fa-clock-o"></i> <%#Eval("date") %></p>
+                                                <p><%#Eval("message") %></p>
+                                             </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                         <asp:SqlDataSource ID="SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT m.source_id, e.employee_picture, e.employee_name, m.status, m.message, m.date 
+                                                                                                                                                                        FROM messages AS m 
+                                                                                                                                                                        INNER JOIN employee_info AS e 
+                                                                                                                                                                        ON m.source_id = e.employee_id 
+                                                                                                                                                                        INNER JOIN (select source_id, max(date) As Date from messages where dest_id=@user_id group by source_id) as g_sid 
+                                                                                                                                                                        ON m.source_id = g_sid.source_id AND m.date = g_sid.Date 
+                                                                                                                                                                        ORDER BY date DESC">
+                            <SelectParameters>
+                                <asp:SessionParameter DefaultValue="NULL" Name="user_id" SessionField="userId" Type="Int64" />
+                            </SelectParameters>
+                         </asp:SqlDataSource>
                         
-                        <li class="message-preview">
-                            <a href="#" data-toggle="modal" data-target="#messagesModal">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading"><strong>Muaz Ahmed</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Today at 9:05 AM</p>
-                                        <p>Waab ka message to nai aya?</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        
-                        <li class="message-preview">
-                            <a href="#" data-toggle="modal" data-target="#messagesModal">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading"><strong>Arslan Asif</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 3:32 PM</p>
-                                        <p>Uper wala message waab ka ae!</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
                         <li class="message-footer">
                             <a href="messages.aspx">Read All Messages</a>
                         </li>
                     </ul>
                 </li>
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu alert-dropdown">
@@ -227,86 +228,6 @@
             <!-- /.navbar-collapse -->
         </nav>
 
-        <!--Messages conversation modal -->
-        <div class="modal fade" id="messagesModal">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"><i class="fa fa-envelope"></i> <asp:label id="setName" value="" runat="server"/></h4>
-                <asp:label id="setId" value="" runat="server" hidden/>
-              </div>
-              <div class="modal-body">
-                  <asp:Repeater ID="Repeater3" runat="server" DataSourceID="SqlDataSource3">       
-                        <HeaderTemplate></HeaderTemplate>
-
-                        <ItemTemplate>
-                            <div class="media">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="media-left">
-                                            <a href="">
-                                                <img class="media-object" src="<%#Eval("employee_picture") %>" width="65px" height="65px">
-                                            </a>
-                                        </div>
-                                
-                                        <div class="media-body" style="padding-right: 75px">
-                                            <h4 class="media-heading"><span><%#Eval("employee_name") %></h4>
-                                            <p><%#Eval("message") %></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </ItemTemplate>
-
-                        <AlternatingItemTemplate>
-                            <div class="media">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="pull-right">
-                                            <div class="media-body" style="padding-left: 75px">
-                                                <h4 class="media-heading"><%#Eval("employee_name") %></span></h4>
-                                                <p><%#Eval("message") %></p>
-                                            </div>
-                                
-                                            <div class="media-right">
-                                                <a href="">
-                                                    <img class="media-object" src="<%#Eval("employee_picture") %>" width="65px" height="65px">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </AlternatingItemTemplate>
-											
-                        <FooterTemplate>
-                        </FooterTemplate>
-                    </asp:Repeater>
-                                    
-                  <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand=   "SELECT m.source_id, e.employee_picture, e.employee_name, m.status, m.message, m.date 
-                                                                                                                                                                    FROM (SELECT TOP 1 * from messages WHERE ((dest_id = @user_id) AND (source_id = @set_id)) ORDER BY date DESC) AS m 
-                                                                                                                                                                    INNER JOIN employee_info AS e 
-                                                                                                                                                                    ON m.source_id = e.employee_id">
-                        <SelectParameters>
-                            <asp:SessionParameter DefaultValue="NULL" Name="user_id" SessionField="userId" Type="Int64" />
-                            <asp:ControlParameter ControlID="setId" PropertyName="Text" Name="set_id" Type="Int64"></asp:ControlParameter>
-                        </SelectParameters>
-                    </asp:SqlDataSource>
-
-
-              </div>
-              <div class="modal-footer">
-                  <div class="input-group">
-                    <input runat="server" type="text" class="form-control control-height" placeholder="Send Message" name="message" id="message_input">
-                    <div class="input-group-btn">
-	                    <button runat="server" id="send_btn" class="btn btn-primary" type="submit"><i class="fa fa-paper-plane-o"></i></button>
-                    </div>
-				  </div>
-              </div>
-            </div><!-- /.modal-content -->
-          </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
 
         <!--Profile Modal-->
         <div class="modal fade" id="profileModal">

@@ -167,9 +167,9 @@
                                                 <tr>
                                                     <td><%# Eval("order_id") %></td>
                                                     <td><%# Eval("customer_name") %></td>
-                                                    <td><%# Eval("product_name") %></td>
+                                                    
                                                     <td><%# Eval("order_date") %></td>
-                                                    <td><%# Eval("price") %></td>
+                                                    
                                                 </tr>
                                             </ItemTemplate>
 											
@@ -178,7 +178,7 @@
                                             </FooterTemplate>
                                         </asp:Repeater>
 
-                                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT TOP 5 o.order_id, c.customer_name, p.product_name, o.order_date, i.price FROM orders AS o INNER JOIN products AS p ON o.product_id = p.product_id INNER JOIN customer_info AS c ON o.customer_id = c.customer_id INNER JOIN inventory_products AS i ON i.product_id = o.product_id WHERE i.product_id IN (SELECT TOP 1 i.product_id WHERE i.quantity != 0 ORDER BY i.batch_id ASC) ORDER BY o.order_date DESC;"></asp:SqlDataSource>
+                                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT TOP 5 o.order_id, c.customer_name, o.order_date FROM orders AS o INNER JOIN customer_info AS c ON o.customer_id = c.customer_id ORDER BY o.order_date DESC;"></asp:SqlDataSource>
                                         
                                     </table>
                                 </div>

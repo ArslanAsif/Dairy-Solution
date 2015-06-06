@@ -12,12 +12,14 @@ public partial class MasterPage2 : System.Web.UI.MasterPage
         if (Session["username"] == null)
         {
             user_name.Text = "Login";
-            Response.Redirect("signin.aspx");
+            Response.Redirect("site_signin.aspx");
         }
         else
         {
             user_name.Text = Session["username"].ToString();
         }
+
+
     }// end function page_load
 
 }
