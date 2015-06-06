@@ -27,6 +27,100 @@ public partial class MasterPage2 : System.Web.UI.MasterPage
         select_notifications();
     }// end function page_load
 
+    public struct DateTimeSpan
+    {
+        private readonly int years;
+        private readonly int months;
+        private readonly int days;
+        private readonly int hours;
+        private readonly int minutes;
+        private readonly int seconds;
+        private readonly int milliseconds;
+
+        public DateTimeSpan(int years, int months, int days, int hours, int minutes, int seconds, int milliseconds)
+        {
+            this.years = years;
+            this.months = months;
+            this.days = days;
+            this.hours = hours;
+            this.minutes = minutes;
+            this.seconds = seconds;
+            this.milliseconds = milliseconds;
+        }
+
+        public int Years { get { return years; } }
+        public int Months { get { return months; } }
+        public int Days { get { return days; } }
+        public int Hours { get { return hours; } }
+        public int Minutes { get { return minutes; } }
+        public int Seconds { get { return seconds; } }
+        public int Milliseconds { get { return milliseconds; } }
+
+        enum Phase { Years, Months, Days, Done }
+
+        public static DateTimeSpan CompareDates(DateTime date1, DateTime date2)
+        {
+            if (date2 < date1)
+            {
+                var sub = date1;
+                date1 = date2;
+                date2 = sub;
+            }
+
+            DateTime current = date1;
+            int years = 0;
+            int months = 0;
+            int days = 0;
+
+            Phase phase = Phase.Years;
+            DateTimeSpan span = new DateTimeSpan();
+
+            while (phase != Phase.Done)
+            {
+                switch (phase)
+                {
+                    case Phase.Years:
+                        if (current.AddYears(years + 1) > date2)
+                        {
+                            phase = Phase.Months;
+                            current = current.AddYears(years);
+                        }
+                        else
+                        {
+                            years++;
+                        }
+                        break;
+                    case Phase.Months:
+                        if (current.AddMonths(months + 1) > date2)
+                        {
+                            phase = Phase.Days;
+                            current = current.AddMonths(months);
+                        }
+                        else
+                        {
+                            months++;
+                        }
+                        break;
+                    case Phase.Days:
+                        if (current.AddDays(days + 1) > date2)
+                        {
+                            current = current.AddDays(days);
+                            var timespan = date2 - current;
+                            span = new DateTimeSpan(years, months, days, timespan.Hours, timespan.Minutes, timespan.Seconds, timespan.Milliseconds);
+                            phase = Phase.Done;
+                        }
+                        else
+                        {
+                            days++;
+                        }
+                        break;
+                }
+            }
+
+            return span;
+        }
+    }
+
     protected void check_min_level( int[] ids, int count ) 
     {
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
@@ -96,7 +190,7 @@ public partial class MasterPage2 : System.Web.UI.MasterPage
         }// end while loop
         con.Close();
         check_min_level( product_ids, i );
-        //check_expiry( product_ids, i );
+        check_expiry( product_ids, i );
       }
 
     protected void check_expiry( int[] ids, int count ) 
@@ -109,7 +203,7 @@ public partial class MasterPage2 : System.Web.UI.MasterPage
 
         for (int i = 0; i <= count; i++)
         {
-            query = "SELECT inventory_products.quantity, inventory_products.expiry_date FROM products INNER JOIN inventory_products ON products.product_id = inventory_products.product_id WHERE products.product_id = '" + ids[i] + "'";
+            query = "SELECT products.product_id, inventory_products.quantity, inventory_products.expiry_date FROM products INNER JOIN inventory_products ON products.product_id = inventory_products.product_id WHERE products.product_id = '" + ids[i] + "'";
             cmd.Connection = con;
             cmd.CommandText = query;
             con.Open();
@@ -119,12 +213,12 @@ public partial class MasterPage2 : System.Web.UI.MasterPage
             {
                 if (dr.HasRows)
                 {
-                    String d = dr["expiry_date"].ToString();
-                    DateTime date_1 = DateTime.ParseExact(d, "dd/MM/yy hr:min:sec", null);
-                    DateTime date_2 = DateTime.Now.AddMonths(-12);
+                    DateTime d = Convert.ToDateTime(dr["expiry_date"]);
+                    DateTime now = DateTime.Now;
 
-                    TimeSpan ts = date_1 - date_2;
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert("+ts+")", true);
+                    var datespan = DateTimeSpan.CompareDates(d,now);
+                    
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert("+datespan.Months+")", true);
                 }
 
             }// end while loop
@@ -151,12 +245,11 @@ public partial class MasterPage2 : System.Web.UI.MasterPage
         cmd.ExecuteNonQuery();
 
         con.Close();
-        Response.Redirect("online_order.aspx");
     }
 
     protected void select_notifications()
     {
-        string query = "SELECT description, date_time FROM notificaions";
+        string query = "SELECT description, date_time FROM notifications";
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
         SqlConnection con = new SqlConnection(constring);
         SqlCommand cmd = new SqlCommand();
