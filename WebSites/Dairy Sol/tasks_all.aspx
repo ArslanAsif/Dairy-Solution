@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <h1 class="page-header">
-                            My Tasks <small><a href="#" class="btn btn-sm btn-default" style="float: right; margin-right: 15px; margin-top: 5px" data-toggle="modal" data-target="#addTask_modal"><i class="fa fa-plus-square" style="color: grey"> Add Task</i></a></small>
+                            Employee's Tasks <small><a href="#" class="btn btn-sm btn-default" style="float: right; margin-right: 15px; margin-top: 5px" data-toggle="modal" data-target="#addTask_modal"><i class="fa fa-plus-square" style="color: grey"> Add Task</i></a></small>
                         </h1>
                         
                     </div>
