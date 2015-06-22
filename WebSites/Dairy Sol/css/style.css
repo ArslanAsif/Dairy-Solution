@@ -163,3 +163,12 @@ body{
 	//position: fixed;
     //bottom: 0;
 }
+
+.validateAlign {
+    position:absolute;
+    margin-top: 7px;
+}
+
+.reAlign {
+    margin-left: 0px;
+}

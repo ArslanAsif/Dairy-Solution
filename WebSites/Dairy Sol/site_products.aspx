@@ -8,7 +8,7 @@
     	
 <div class="container opaque">
 <div class = 'center'>
-			
+    <form runat="server">
     <h2>Our Products & Services</h2>
            
 	<div style="margin-top: -15px">
@@ -53,11 +53,12 @@
 			<ul class="pagination">
 			<li class="disabled"><a href="#" aria-label="Previous">&laquo;</a></li>
 			<li class="active"><a href="#">1 </a></li>
-			<li clas\s=""><a href="#">2</a></li>
+			<li class=""><a href="#">2</a></li>
 			<li class=""><a href="#" aria-label="Next">&raquo;</a></li>
 			</ul>
 		</nav>
         	</div>
+        </form>
 		</div> 
     </div>
 </asp:Content>
