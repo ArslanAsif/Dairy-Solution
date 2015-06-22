@@ -12,7 +12,7 @@
 						<div style="margin-top: 20%"">
 							<h2 style="text-align: center">Forgot Password</h2>
 							<br/>
-							<form class="form-group">
+							<form class="form-group" runat="server">
                                 <asp:TextBox ID="email_id" runat="server" type="text" class="form-control" placeholder="Email ID"></asp:TextBox><br />
                                 <asp:Label ID="secret_question" class="form-control" runat="server" Text="" Visible ="false" EnableViewState="False"></asp:Label>
                                 <br/>

@@ -11,7 +11,7 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+
     }
 
     protected void add_task_Click(object sender, EventArgs e)
@@ -23,7 +23,7 @@ public partial class _Default : System.Web.UI.Page
         SqlConnection con = new SqlConnection(constring);
 
         String query = " INSERT INTO tasks(task_desc, task_date, task_type, added_on, added_by, added_to) VALUES(@task_desc, @task_date, @task_type, @added_on, @added_by, @added_to)";
-                        
+
         SqlCommand cmd = new SqlCommand(query, con);
 
         cmd.Parameters.AddWithValue("@task_desc", task_desc.Text);
