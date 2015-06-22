@@ -18,6 +18,7 @@ public partial class _Default : System.Web.UI.Page
             retrieve_data();
         }
     }
+    string picture = "";
     protected void retrieve_data()
     {
         string emp_id = Request.QueryString["id"];
@@ -115,11 +116,20 @@ public partial class _Default : System.Web.UI.Page
     {
         if (empl_image.HasFile)
         {
-            string fullPath;
-            fullPath = Path.GetFullPath(Path.GetFileName(empl_image.PostedFile.FileName));
-            label1.Text = fullPath;
-            emp_img.ImageUrl = "";
+            string extension = System.IO.Path.GetExtension(empl_image.FileName);
+            if (extension.ToLower() != ".gif" && extension.ToLower() != ".png" && extension.ToLower() != ".jpg" && extension.ToLower() != ".jpeg")
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "popup", "alert('Invalid Image Format!');", true);
+            }
+            else
+            {
+                string pathName = "images/" + Path.GetFileName(empl_image.PostedFile.FileName);
+                empl_image.SaveAs(Server.MapPath("~/images/employee_picture/" + empl_image.FileName));
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "popup", "alert('File Uploaded!');", true);
+            }
         }
+        emp_img.ImageUrl = "images/employee_picture/" + empl_image.PostedFile.FileName.ToString();
+        picture = emp_img.ImageUrl;
     }
     
 }
