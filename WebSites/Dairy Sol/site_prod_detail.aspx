@@ -25,8 +25,8 @@
 						</div>
 						
 						<div class = "" style="margin-left:27%">
-							<asp:Button id = "order_btn" cssClass = "btn btn-primary" runat="server" CommandArgument='<%# Eval("product_id") %>' onClick="check_user" Text="Add To Cart"></asp:Button>
-							<asp:Button id = "query_btn" cssClass = "btn btn-primary" runat="server" CommandArgument='<%# Eval("product_id") %>' onClick="check_user" Text="Send Query"></asp:Button>
+							<asp:Button id = "order_btn" cssClass = "btn btn-primary" runat="server" CommandArgument="" onClick="check_user" Text="Add To Cart"></asp:Button>
+							<asp:Button id = "query_btn" cssClass = "btn btn-primary" runat="server" formaction="site_contactUs.aspx" Text="Send Query"></asp:Button>
 						</div>
 						
 					</div>
