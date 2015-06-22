@@ -52,7 +52,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="tasks.aspx">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -131,10 +131,14 @@
                                         <FooterTemplate></FooterTemplate>
                                     </asp:Repeater>
                                     
-                                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT TOP 5 * FROM tasks ORDER BY task_date ASC;"></asp:SqlDataSource>
+                                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT TOP 5 * FROM tasks WHERE added_to = @user_id ORDER BY task_date ASC">
+                                        <SelectParameters>
+                                            <asp:SessionParameter DefaultValue="NULL" Name="user_id" SessionField="userId" Type="Int64" />
+                                        </SelectParameters>
+                                    </asp:SqlDataSource>
                                 </div>
                                 <div class="text-right">
-                                    <a href="#">View All Activity <i class="fa fa-arrow-circle-right"></i></a>
+                                    <a href="tasks.aspx">View All Activity <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -152,7 +156,6 @@
                                             <tr>
                                                 <th>Order #</th>
                                                 <th>Customer Name</th>
-                                                <th>Items</th>
                                                 <th>Order Date</th>
                                                 <th>Amount (RS)</th>
                                             </tr>
@@ -167,8 +170,8 @@
                                                 <tr>
                                                     <td><%# Eval("order_id") %></td>
                                                     <td><%# Eval("customer_name") %></td>
-                                                    
                                                     <td><%# Eval("order_date") %></td>
+                                                    <td><%# Eval("price") %></td>
                                                     
                                                 </tr>
                                             </ItemTemplate>
@@ -178,7 +181,16 @@
                                             </FooterTemplate>
                                         </asp:Repeater>
 
-                                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT TOP 5 o.order_id, c.customer_name, o.order_date FROM orders AS o INNER JOIN customer_info AS c ON o.customer_id = c.customer_id ORDER BY o.order_date DESC;"></asp:SqlDataSource>
+                                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT TOP 5 o.order_id, c.customer_name, o.order_date, (SELECT sum(i.price) 
+                                                                                                                                                                                        FROM inventory_products AS i 
+                                                                                                                                                                                        INNER JOIN services_or_products AS s 
+                                                                                                                                                                                        ON i.product_id = s.product_id
+                                                                                                                                                                                        WHERE s.order_id = o.order_id
+                                                                                                                                                                                        ) AS Price
+
+                                                                                                                                                                                        FROM orders AS o INNER JOIN customer_info AS c 
+                                                                                                                                                                                        ON o.customer_id = c.customer_id
+                                                                                                                                                                                        ORDER BY o.order_date DESC"></asp:SqlDataSource>
                                         
                                     </table>
                                 </div>
@@ -235,9 +247,10 @@
 
                     <div class="modal-body">
                         <form class="form-group">
-                            <asp:TextBox ID ="task_desc" runat="server" CssClass="form-control control-height" placeholder="Task Description" type="text"></asp:TextBox></br>
-                            <asp:TextBox ID ="task_date" runat="server" CssClass="form-control control-height" placeholder="Due Date" type="date"></asp:TextBox></br>
-                            <asp:TextBox ID ="task_type" runat="server" CssClass="form-control control-height" placeholder="Type" type="text"></asp:TextBox></br>
+                            <asp:TextBox ID ="task_type" runat="server" CssClass="form-control control-height" placeholder="Type" type="text"></asp:TextBox><br />
+                            <asp:TextBox ID ="task_desc" runat="server" CssClass="form-control control-height" TextMode="MultiLine" Rows="3" placeholder="Task Description" type="text"></asp:TextBox><br />
+                            <asp:TextBox ID ="task_date" runat="server" CssClass="form-control control-height" placeholder="Due Date" type="date"></asp:TextBox><br />
+                            
                         </form>
                     </div>
 

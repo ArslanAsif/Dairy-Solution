@@ -31,7 +31,7 @@ public partial class _Default : System.Web.UI.Page
         cmd.Parameters.AddWithValue("@task_type", task_type.Text);
         cmd.Parameters.AddWithValue("@added_on", DateTime.Now.ToString());
         cmd.Parameters.AddWithValue("@added_by", user_name);
-        cmd.Parameters.AddWithValue("@added_to", user_name);
+        cmd.Parameters.AddWithValue("@added_to", emp_DropDownList.SelectedItem.Value);
 
         cmd.Connection = con;
 
@@ -40,7 +40,7 @@ public partial class _Default : System.Web.UI.Page
         cmd.ExecuteNonQuery();
         //for insert remove data reader and replace cmd.executenonquery()
 
-        Response.Redirect("mng_dashboard.aspx");
+        Response.Redirect("tasks_all.aspx");
 
         con.Close();
     }

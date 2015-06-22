@@ -114,12 +114,6 @@
                         <li>
                             <a href="#" data-toggle="modal" data-target="#profileModal"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>
-                        <li>
-                            <a href="messages.aspx"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                        </li>
                         <li class="divider"></li>
                         <li>
                             <a href="site_signIn.aspx"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
@@ -180,7 +174,7 @@
                         </ul>    
                     </li>
 						
-						<li>
+					<li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo4"><i class="fa fa-fw fa-group"></i> Manage Employees <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo4" class="collapse">
                             <li>
@@ -220,6 +214,20 @@
                     </li>
 
                     <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo7"><i class="fa fa-fw fa-group"></i> Tasks <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo7" class="collapse">
+                            <li>
+								<a href="tasks.aspx"><i class="fa fa-fw fa-table"></i> My Tasks</a>
+							</li>
+
+							
+							<li>
+                                <a href="tasks_all.aspx"><i class="fa fa-fw fa-table"></i> Employee's Tasks</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
                         <a href="reports.aspx"><i class="fa fa-fw fa-files-o"></i> Reports</a>
                     </li>
 
@@ -237,18 +245,18 @@
 						<button class="close" data-dismiss="modal"><span>&times;</span></button>
 						<h3 class="modal-title">Authentication Console</h3>
 					</div>-->
-						
+					
 					<div class="modal-body">
                         <button class="close" data-dismiss="modal"><span>&times;</span></button>
 						<div class="row">
                             <div class="col-md-6 my_div">
-								<img src="images/profile_default.jpg"/>
-							</div>
+								<asp:Image runat="server" ID="usr_image" ImageUrl="images/profile_default.jpg" Width="280" Height="280" />
+                            </div>
 								
 							<div class="col-md-6">
-								<h3>Muhammad Arslan Asif</h3>
+								<h3><asp:Label ID="usr_name" runat="server" Text="User"></asp:Label></h3>
 								<div>
-                                    <p>Administrator</p>
+                                    <p><asp:Label ID="usr_designation" runat="server" Text="Designation"></asp:Label></p>
                                     <button class="btn btn-default">Edit Profile</button>
 								</div>
 							</div>
