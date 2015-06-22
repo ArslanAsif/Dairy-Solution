@@ -47,56 +47,44 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu message-dropdown">
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading"><strong>Muaz Ahmed</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Today at 9:05 AM</p>
-                                        <p>Waab ka message to nai aya?</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading"><strong>Abdul Wahab</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Today at 4:00 PM</p>
-                                        <p>I am waab...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading"><strong>Arslan Asif</strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 3:32 PM</p>
-                                        <p>Uper wala message waab ka ae!</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
+                        <asp:Repeater ID="Repeater" runat="server" DataSourceID="SqlDataSource">       
+                            <HeaderTemplate></HeaderTemplate>
+
+                            <ItemTemplate>
+                                <li class="message-preview">
+                                    <a href='messages.aspx?id=<%#Eval("source_id") %>'>
+                                        <div class="media">
+                                            <span class="pull-left">
+                                                <img class="media-object" src="<%#Eval("employee_picture") %>" width="50px" height="50px">
+                                            </span>
+                                            <div class="media-body">
+                                                <h5 class="media-heading"><strong><%#Eval("employee_name") %></strong></h5>
+                                                <p class="small text-muted"><i class="fa fa-clock-o"></i> <%#Eval("date") %></p>
+                                                <p><%#Eval("message") %></p>
+                                             </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                         <asp:SqlDataSource ID="SqlDataSource" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT m.source_id, e.employee_picture, e.employee_name, m.status, m.message, m.date 
+                                                                                                                                                                        FROM messages AS m 
+                                                                                                                                                                        INNER JOIN employee_info AS e 
+                                                                                                                                                                        ON m.source_id = e.employee_id 
+                                                                                                                                                                        INNER JOIN (select source_id, max(date) As Date from messages where dest_id=@user_id group by source_id) as g_sid 
+                                                                                                                                                                        ON m.source_id = g_sid.source_id AND m.date = g_sid.Date 
+                                                                                                                                                                        ORDER BY date DESC">
+                            <SelectParameters>
+                                <asp:SessionParameter DefaultValue="NULL" Name="user_id" SessionField="userId" Type="Int64" />
+                            </SelectParameters>
+                         </asp:SqlDataSource>
+                        
                         <li class="message-footer">
-                            <a href="#">Read All Messages</a>
+                            <a href="messages.aspx">Read All Messages</a>
                         </li>
                     </ul>
                 </li>
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu alert-dropdown">
@@ -121,16 +109,10 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <asp:Label ID="user_name" runat="server" Text="Khalid Mansoor"></asp:Label> <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <asp:Label ID="user_name" runat="server" Text="User"></asp:Label> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                            <a href="#" data-toggle="modal" data-target="#profileModal"><i class="fa fa-fw fa-user"></i> Profile</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -192,7 +174,7 @@
                         </ul>    
                     </li>
 						
-						<li>
+					<li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo4"><i class="fa fa-fw fa-group"></i> Manage Employees <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo4" class="collapse">
                             <li>
@@ -232,6 +214,20 @@
                     </li>
 
                     <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo7"><i class="fa fa-fw fa-group"></i> Tasks <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo7" class="collapse">
+                            <li>
+								<a href="tasks.aspx"><i class="fa fa-fw fa-table"></i> My Tasks</a>
+							</li>
+
+							
+							<li>
+                                <a href="tasks_all.aspx"><i class="fa fa-fw fa-table"></i> Employee's Tasks</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
                         <a href="reports.aspx"><i class="fa fa-fw fa-files-o"></i> Reports</a>
                     </li>
 
@@ -239,6 +235,41 @@
             </div>
             <!-- /.navbar-collapse -->
         </nav>
+
+
+        <!--Profile Modal-->
+        <div class="modal fade" id="profileModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<!--<div class="modal-header">
+						<button class="close" data-dismiss="modal"><span>&times;</span></button>
+						<h3 class="modal-title">Authentication Console</h3>
+					</div>-->
+					
+					<div class="modal-body">
+                        <button class="close" data-dismiss="modal"><span>&times;</span></button>
+						<div class="row">
+                            <div class="col-md-6 my_div">
+								<asp:Image runat="server" ID="usr_image" ImageUrl="images/profile_default.jpg" Width="280" Height="280" />
+                            </div>
+								
+							<div class="col-md-6">
+								<h3><asp:Label ID="usr_name" runat="server" Text="User"></asp:Label></h3>
+								<div>
+                                    <p><asp:Label ID="usr_designation" runat="server" Text="Designation"></asp:Label></p>
+                                    <button class="btn btn-default">Edit Profile</button>
+								</div>
+							</div>
+						</div>
+					</div>
+						
+					<!--<div class="modal-footer">
+						<p class="text-left">© Copyright 2015</p>
+						<img class="pull-right" src="http://ciitlahore.edu.pk/images/ciit-logo.png"></img>
+					</div>-->
+				</div>
+			</div>
+		</div>
 
     <form id="form1" runat="server">
     <div>
@@ -253,6 +284,7 @@
     
     <!-- jQuery -->
     <script src="js\jquery.js"></script>
+    <script src="js\script.js" type="text/javascript"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js\bootstrap.min.js"></script>
