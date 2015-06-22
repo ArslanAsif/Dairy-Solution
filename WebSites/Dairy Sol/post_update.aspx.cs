@@ -18,7 +18,7 @@ public partial class _Default : System.Web.UI.Page
             retrieve_data();
         }
     }
-
+    string picture = "";
     protected void retrieve_data( ) 
     { 
         string post_id = Request.QueryString["id"];
@@ -48,20 +48,6 @@ public partial class _Default : System.Web.UI.Page
 
     protected void updatePost_Click(object sender, EventArgs e) 
     {
-        if (postImage.HasFile)
-        {
-            string extension = System.IO.Path.GetExtension(postImage.FileName);
-            if (extension.ToLower() != ".gif" && extension.ToLower() != ".png" && extension.ToLower() != ".jpg" && extension.ToLower() != ".jpeg")
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "popup", "alert('Invalid Image Format!');", true);
-            }
-            else
-            {
-                string pathName = "images/" + Path.GetFileName(postImage.PostedFile.FileName);
-                postImage.SaveAs(Server.MapPath("~/images/updates/" + postImage.FileName));
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "popup", "alert('File Uploaded!');", true);
-            }
-        }
         string post_id = Request.QueryString["id"];
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
         string query = "UPDATE posts SET heading=@heading, summary=@summary, detail=@detail, picture=@picture, date=@date WHERE post_id = '" + post_id + "'";
@@ -98,7 +84,19 @@ public partial class _Default : System.Web.UI.Page
     {
         if (postImage.HasFile)
         {
-            Image1.ImageUrl = "images/updates/" + postImage.PostedFile.FileName.ToString();
+            string extension = System.IO.Path.GetExtension(postImage.FileName);
+            if (extension.ToLower() != ".gif" && extension.ToLower() != ".png" && extension.ToLower() != ".jpg" && extension.ToLower() != ".jpeg")
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "popup", "alert('Invalid Image Format!');", true);
+            }
+            else
+            {
+                string pathName = "images/" + Path.GetFileName(postImage.PostedFile.FileName);
+                postImage.SaveAs(Server.MapPath("~/images/updates/" + postImage.FileName));
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "popup", "alert('File Uploaded!');", true);
+            }
         }
+        Image1.ImageUrl = "images/updates/" + postImage.PostedFile.FileName.ToString();
+        picture = Image1.ImageUrl;
     }
 }

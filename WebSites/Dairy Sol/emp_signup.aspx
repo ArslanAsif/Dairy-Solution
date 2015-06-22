@@ -5,13 +5,13 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div class="container opaque">	
 		<div class = 'center'>
+            <form role="form" runat="server">
 				<div class = 'row'>
                     <div class="col-md-4 col-md-offset-2">
                         <br/><br/>
-                        <asp:Image ID="emp_img" ImageUrl="~/images/updates/update1.jpg " runat="server" width="250" Height="250"/><br/>
+                        <asp:Image ID="emp_img" runat="server" width="250" Height="250"/><br/>
                         <label>Attach Picture</label>&nbsp; &nbsp;<asp:FileUpload ID="empl_image" runat="server" />
-                        <asp:Button runat="server" cssClass="btn btn-xs btn-primary" OnClick="changePic" Text="Upload"/>
-                        <asp:Label runat="server" ID="label1"></asp:Label>
+                        <asp:Button runat="server" cssClass="btn btn-xs btn-primary" OnClick="changePic" Text="Upload"/>                        
                         <br/>
                     </div>
 
@@ -19,7 +19,7 @@
 						<div style="margin-top: 10%"">
 							<h2 style="text-align: center">Update Employee Info</h2>
 							<br/>
-							<form role="form">
+							
                                 <label>Name: </label>
                                 <asp:TextBox ID="empl_Name" runat="server" style="width: 98%" type="text" class="form-control" placeholder="First Name"></asp:TextBox>
 								<br/>
@@ -61,10 +61,10 @@
                                 <br />
                                 <asp:Button ID="empl_signUp" runat="server" Text="Update" style = "width: 98%; margin-left: 2px" type = "submit" class = "btn btn-primary" OnClick="updatePost_Click"/>
                                 
-							</form>
 						</div>
 					</div>		
 				</div>
+                        </form>
 		</div>  
     </div>
 	<br/><br/>
