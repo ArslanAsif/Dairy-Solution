@@ -118,7 +118,7 @@ public partial class _Default : System.Web.UI.Page
             string fullPath;
             fullPath = Path.GetFullPath(Path.GetFileName(empl_image.PostedFile.FileName));
             label1.Text = fullPath;
-            emp_img.ImageUrl = "" + fullPath + "" + empl_image.PostedFile.FileName.ToString();
+            emp_img.ImageUrl = "";
         }
     }
     

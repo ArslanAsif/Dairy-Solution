@@ -25,8 +25,8 @@
 						</div>
 						
 						<div class = "" style="margin-left:27%">
-							<button id="add_to_cart" runat="server" class = "btn btn-success btn pdDtBtn"><span class = "glyphicon glyphicon-shopping-cart"></span><br>Add to Cart</button>
-							<button class = "btn btn-default btn pdDtBtn"><span class = "glyphicon glyphicon-pencil"></span><br>Send a Query</button>
+							<asp:Button id = "order_btn" cssClass = "btn btn-primary" runat="server" CommandArgument='<%# Eval("product_id") %>' onClick="check_user" Text="Add To Cart"></asp:Button>
+							<asp:Button id = "query_btn" cssClass = "btn btn-primary" runat="server" CommandArgument='<%# Eval("product_id") %>' onClick="check_user" Text="Send Query"></asp:Button>
 						</div>
 						
 					</div>

@@ -151,12 +151,12 @@ public partial class MasterPage2 : System.Web.UI.MasterPage
         cmd.ExecuteNonQuery();
 
         con.Close();
-        Response.Redirect("online_order.aspx");
+        //Response.Redirect("online_order.aspx");
     }
 
     protected void select_notifications()
     {
-        string query = "SELECT description, date_time FROM notificaions";
+        string query = "SELECT description, date_time FROM notifications";
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
         SqlConnection con = new SqlConnection(constring);
         SqlCommand cmd = new SqlCommand();
