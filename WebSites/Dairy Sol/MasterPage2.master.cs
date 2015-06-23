@@ -23,8 +23,8 @@ public partial class MasterPage2 : System.Web.UI.MasterPage
         {
             user_name.Text = Session["username"].ToString();
         }
-        count_products();
-        select_notifications();
+        //count_products();
+        //select_notifications();
     }// end function page_load
 
     public struct DateTimeSpan
@@ -262,7 +262,7 @@ public partial class MasterPage2 : System.Web.UI.MasterPage
         {
             if (dr.HasRows)
             {
-                notify.InnerText = dr["description"].ToString();
+               notify.InnerText = dr["description"].ToString();
             }
         }// end while loop
         con.Close();

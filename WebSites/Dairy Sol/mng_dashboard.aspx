@@ -13,7 +13,7 @@
                         <h1 class="page-header">
                             Dashboard <small>(Management)</small>
                         </h1>
-                    
+                        <label runat="server" id="lab2"></label>
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-primary">
