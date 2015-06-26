@@ -40,6 +40,7 @@
                                 <asp:BoundField DataField="email_id" HeaderText="Email ID" SortExpression="email_id" />
                                 <asp:BoundField DataField="mobile_number" HeaderText="Mobile Number" SortExpression="mobile_number" />
                                 <asp:HyperLinkField DataNavigateUrlFields="employee_id" DataNavigateUrlFormatString="emp_signup.aspx?id={0}" Text="Update" />
+                                <asp:HyperLinkField DataNavigateUrlFields="employee_id" DataNavigateUrlFormatString="emp_profile.aspx?id={0}" Text="View" HeaderText="Full Profile"></asp:HyperLinkField>
                             </Columns>
                             <FooterStyle BackColor="White" ForeColor="#000066" />
                             <HeaderStyle BackColor="#808080" Font-Bold="True" ForeColor="White" />

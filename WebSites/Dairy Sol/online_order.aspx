@@ -7,6 +7,7 @@
     <div class="container">
     <br/>
     <br/>
+    <form runat="server">
     <div class="col-md-8 col-md-offset-1">
     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="product_name" DataSourceID="SqlDataSource1" Width="877px">
         <Columns>
@@ -53,6 +54,7 @@
                     <asp:Button ID="clear_cart" runat="server" cssClass="btn btn-primary pull-right" Text="Clear Shopping Cart" onClick="clear_cart_Click"/>
                 </div>
             </div>
+        </form>
     <br/>
     <br/>
     </div>

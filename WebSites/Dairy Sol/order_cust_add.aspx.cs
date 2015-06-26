@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Net;
 
 public partial class _Default : System.Web.UI.Page
 {
@@ -14,6 +15,9 @@ public partial class _Default : System.Web.UI.Page
     List<TextBox> tbArray = new List<TextBox>();
     
     int count_tb = 0;
+
+    string cust_email;
+    int[] products;
 
     string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
 
@@ -140,6 +144,8 @@ public partial class _Default : System.Web.UI.Page
 
     protected void add_order_Click(object sender, EventArgs e)
     {
+        cust_email = email.Text;
+
         foreach (DropDownList ddl in prod.Controls.OfType<DropDownList>())
         {
             ddlArray.Add(ddl);
@@ -232,6 +238,8 @@ public partial class _Default : System.Web.UI.Page
             }
 
             alert_success.Visible = true;
+
+            //SendMail(); //Send confirmation mail to customer
         }
         catch (Exception ex)
         {
@@ -327,7 +335,16 @@ public partial class _Default : System.Web.UI.Page
         String order_id = return_order_id();
         int tb_count = 0; 
 
+        products = new int[NumberOfControls]; //array of products
+        for (int x = 0; x < NumberOfControls; x++)
+        {
+            products[x] = int.Parse(ddlArray[x].SelectedValue);
+        }
+
+
+
         SqlConnection con2 = new SqlConnection(constring);
+
         for (int x = 0; x < NumberOfControls; x++)
         {
             string order_prod_insert_query = "INSERT INTO services_or_products (product_id, quantity, services, order_id) VALUES(@ProdDropDownList, @quantity, @services, @order_id)";
@@ -352,5 +369,37 @@ public partial class _Default : System.Web.UI.Page
     protected void formReset_Click(object sender, EventArgs e)
     {
         Response.Redirect("order_cust_add.aspx");
+    }
+
+    protected void SendMail()
+    {
+        string items = "";
+        for (int i = 0; i < NumberOfControls; i++)
+        {
+            items += products[i] + ", ";
+        }
+
+        // Gmail Address from where you send the mail
+        var fromAddress = "dairysolutionlahore.inquiry@gmail.com";
+        // any address where the email will be sending
+        var toAddress = cust_email;
+        //Password of your gmail address
+        const string fromPassword = "dairysolution";
+        // Passing the values and make a email formate to display
+        string subject = "Order Confirmation";
+        string body = "From: " + "Dairy Solution" + "\n";
+        body += "Email: " + "Your order is confirmed. \nYou ordered " + items + "\n";
+        // smtp settings
+        var smtp = new System.Net.Mail.SmtpClient();
+        {
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 587;
+            smtp.EnableSsl = true;
+            smtp.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+            smtp.Credentials = new NetworkCredential(fromAddress, fromPassword);
+            smtp.Timeout = 20000;
+        }
+        // Passing values to smtp object
+        smtp.Send(fromAddress, toAddress, subject, body);
     }
 }
