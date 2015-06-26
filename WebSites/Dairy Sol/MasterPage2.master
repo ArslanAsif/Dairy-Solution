@@ -265,7 +265,8 @@
 								<h3><asp:Label ID="usr_name" runat="server" Text="User"></asp:Label></h3>
 								<div>
                                     <p><asp:Label ID="usr_designation" runat="server" Text="Designation"></asp:Label></p>
-                                    <button class="btn btn-default">Edit Profile</button>
+                                    <a href="emp_edit_myprofile.aspx"><button class="btn btn-default">Edit Profile</button></a>
+                                    <a href="emp_profile.aspx"><button class="btn btn-default">Full Profile</button></a>
 								</div>
 							</div>
 						</div>

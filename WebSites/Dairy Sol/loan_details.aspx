@@ -38,6 +38,17 @@
                     </div>
 
                     <div class="panel-body" runat="server" id="prod">
+                        
+                        <div class="row">
+				            <label class = "col-md-2 control-label">Employee Name: </label>
+				            <div class = "col-md-4 ">
+                                <asp:Label runat="server" ID="emp_id" class = "control-label" hidden="hidden">N.A.</asp:Label>
+                                <asp:Label runat="server" ID="emp_name" class = "control-label">N.A.</asp:Label>
+
+                                <asp:Button runat="server" CssClass="btn btn-sm btn-default" ID="redirect_profile" OnClick="redirect_profile_Click" Text="View Profile"></asp:Button>
+				            </div>
+                        </div>
+
                         <div class="row">
 				            <label class = "col-md-2 control-label">Loan Amount</label>
 				            <div class = "col-md-4">
@@ -60,7 +71,6 @@
                 </div>
 
                 <div class="pull-right">
-                    <asp:Button runat="server" CssClass="btn btn-warning" ID="formReset" Text="Reset" OnClick="formReset_Click"/>
                     <asp:Button runat="server" CssClass="btn btn-danger" ID="Button1" Text="Reject" OnClick="refuse_req_Click"/>
                     
                     <asp:Button ID="add_inv" runat="server" Text="Accept" style = "margin-left: 2px" type = "submit" class = "btn btn-primary" OnClick="send_req_Click" />

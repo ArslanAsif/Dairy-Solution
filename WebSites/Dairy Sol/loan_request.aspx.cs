@@ -13,7 +13,13 @@ public partial class Default2 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-         
+        if(Request.QueryString != null && Request.QueryString.Count > 0)
+        {
+            if (int.Parse(Request.QueryString["success"]) == 1)
+            {
+                alert_success.Visible = true;
+            }
+        }
     }
 
     protected void formReset_Click(object sender, EventArgs e)
@@ -42,7 +48,7 @@ public partial class Default2 : System.Web.UI.Page
             cmd.ExecuteNonQuery();
             con.Close();
 
-            alert_success.Visible = true;
+            Response.Redirect("loan_request.aspx?success=1");
         }
         catch (Exception ex)
         {

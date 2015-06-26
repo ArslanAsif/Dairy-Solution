@@ -59,6 +59,48 @@
                     <asp:Button ID="add_inv" runat="server" Text="Submit" style = "margin-left: 2px" type = "submit" class = "btn btn-primary" OnClick="send_req_Click" />
                 </div>
 				
+                <br /><br /><br />
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class=""></i>Request History</h3>
+                    </div>
+
+                    <div class="panel-body" runat="server" id="Div1">
+                        
+                        <div class="col-lg-12">
+
+                            <asp:GridView ID="GridView1" runat="server" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" CssClass="table table-bordered table-hover table-striped" GridLines="None" DataKeyNames="req_id" DataSourceID="SqlDataSource1" AllowPaging="True">
+                                <Columns>
+                                
+                                    <asp:BoundField DataField="req_id" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="req_id" />
+                                    <asp:BoundField DataField="employee_name" HeaderText="Employee Name" SortExpression="emp_id" />
+                                    <asp:BoundField DataField="amount" HeaderText="Amount" SortExpression="amount" />
+                                    <asp:BoundField DataField="req_date" HeaderText="Request Date" SortExpression="req_date" />
+                                    <asp:BoundField DataField="span" HeaderText="Loan Span (Months)" SortExpression="span" />
+                                    <asp:BoundField DataField="status" HeaderText="Status" SortExpression="status" />
+                                    
+                                </Columns>
+                                <FooterStyle BackColor="White" ForeColor="#000066" />
+                                <HeaderStyle BackColor="#808080" Font-Bold="True" ForeColor="White" />
+                                <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                                <RowStyle ForeColor="#000066" />
+                                <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                                <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                                <SortedAscendingHeaderStyle BackColor="#007DBB" />
+                                <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                                <SortedDescendingHeaderStyle BackColor="#00547E" />
+                            </asp:GridView>
+				            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT l.req_id, e.employee_name, l.amount, l.req_date, l.span, l.status FROM [loan_request] AS l INNER JOIN [employee_info] AS e ON l.emp_id = e.employee_id WHERE e.employee_id = @user_id">
+                                <SelectParameters>
+                                    <asp:SessionParameter DefaultValue="NULL" Name="user_id" SessionField="userId" Type="Int64" />
+                                </SelectParameters>
+                            </asp:SqlDataSource>
+                        </div>
+				    </div>
+
+                    </div>
+                </div>
+
             </div>
             <!-- /.container-fluid -->
 

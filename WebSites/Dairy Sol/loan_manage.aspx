@@ -40,6 +40,7 @@
                                 <asp:BoundField DataField="req_date" HeaderText="Request Date" SortExpression="req_date" />
                                 <asp:BoundField DataField="span" HeaderText="Loan Span (Months)" SortExpression="span" />
                                 <asp:BoundField DataField="status" HeaderText="Status" SortExpression="status" />
+                                <asp:CommandField ShowDeleteButton="True" HeaderText="Delete"></asp:CommandField>
                                 <asp:HyperLinkField HeaderText="Action" Text="Details" DataNavigateUrlFields="req_id" DataNavigateUrlFormatString="loan_details.aspx?id={0}" />
                                 
                             </Columns>
@@ -53,8 +54,10 @@
                             <SortedDescendingCellStyle BackColor="#CAC9C9" />
                             <SortedDescendingHeaderStyle BackColor="#00547E" />
                         </asp:GridView>
-				        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT l.req_id, e.employee_name, l.amount, l.req_date, l.span, l.status FROM [loan_request] AS l INNER JOIN [employee_info] AS e ON l.emp_id = e.employee_id">
-                            
+				        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT l.req_id, e.employee_name, l.amount, l.req_date, l.span, l.status FROM [loan_request] AS l INNER JOIN [employee_info] AS e ON l.emp_id = e.employee_id" DeleteCommand="DELETE FROM loan_request WHERE req_id = @req_id">
+                            <DeleteParameters>
+                                <asp:Parameter Name="req_id" />
+                            </DeleteParameters>
                         </asp:SqlDataSource>
                     </div>
 				</div>
