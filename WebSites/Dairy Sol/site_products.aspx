@@ -8,13 +8,13 @@
     	
 <div class="container opaque">
 <div class = 'center'>
-			
+    <form runat="server">
     <h2>Our Products & Services</h2>
            
 	<div style="margin-top: -15px">
 		<div class = 'row'>
                      
-			<asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1">       
+			<asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1" OnItemDataBound="Repeater1_ItemDataBound">       
                 <HeaderTemplate>
                     <table>
                 </HeaderTemplate>
@@ -24,13 +24,13 @@
           <tr>
               <div class="col-md-4 boxDesign">
 						<h2 class = "h3"><%# Eval("product_name") %></h2><br>
-						<div class="pBox" style = "margin-top: -20px">
+						<div class="pBox" style = "margin-top: -20px;height: 370px">
 							<img class="img_border" src="<%# Eval("picture") %>" alt="Image Not Available" width="100%" height="240px"></img>
-                            <br/><br/><p id="change_text" runat="server" class="boxAlign" style = "margin-top: 5px; text-align: center" ><%# Eval("short_description") %></p>
+                            <br/><br/><asp:Label id="change_text" runat="server" class="boxAlign" style = "margin-top: 5px; text-align: center; position: absolute; padding-right: 10px" ></asp:Label>
 							<br/>
-                            <div class="btnAlign">
-								<button class = "btn btn-success pdBtn" formaction="site_prod_detail.aspx?id=<%# Eval("product_id") %>"><span class = "glyphicon glyphicon-list"></span>&nbsp;View Details</button>
-								<asp:Button cssClass = "btn btn-primary pdBtn" runat="server" CommandArgument='<%# Eval("product_id") %>' onClick="check_user" Text="Order now"></asp:Button>
+                            <div class="btnAlign" style="margin-top:40px">
+								<button class = "btn btn-success pdBtn" formaction="site_prod_detail.aspx?id=<%# Eval("product_id") %>"><span class = "glyphicon glyphicon-list" ></span>&nbsp;View Details</button>
+								<asp:Button id = "order_btn" cssClass = "btn btn-primary pdBtn" runat="server" CommandArgument='<%# Eval("product_id") %>' onClick="check_user" Text="Order now"></asp:Button>
 							</div>
 						</div>
 			</div>
@@ -38,22 +38,6 @@
           </tr>
           </ItemTemplate>
 
-          <AlternatingItemTemplate>
-                <tr>
-                     <div class="col-md-4 boxDesign">
-						<h2 class = "h3"><%# Eval("product_name") %></h3><br>
-						<div class="pBox" style = "margin-top: -20px">
-							<img class="img_border" src="<%# Eval("picture") %>" alt="Image Not Available" width="100%" height="240px"></img>
-							<br><br><p class="boxAlign" style = "margin-top: 5px; text-align: center"><%# Eval("short_description") %></p>
-							<br>
-							<div class="btnAlign">
-								<button class = "btn btn-success pdBtn" formaction="site_prod_detail.aspx?id=<%# Eval("product_id") %>"><span class = "glyphicon glyphicon-list"></span>&nbsp;View Details</button>
-								<asp:Button cssClass = "btn btn-primary pdBtn" runat="server" CommandArgument='<%# Eval("product_id") %>' onClick="check_user" Text="Order now"></asp:Button>
-							</div>
-						</div>
-					</div>
-                </tr>
-          </AlternatingItemTemplate>
 
           <FooterTemplate>
               </table>
@@ -69,11 +53,12 @@
 			<ul class="pagination">
 			<li class="disabled"><a href="#" aria-label="Previous">&laquo;</a></li>
 			<li class="active"><a href="#">1 </a></li>
-			<li clas\s=""><a href="#">2</a></li>
+			<li class=""><a href="#">2</a></li>
 			<li class=""><a href="#" aria-label="Next">&raquo;</a></li>
 			</ul>
 		</nav>
         	</div>
+        </form>
 		</div> 
     </div>
 </asp:Content>

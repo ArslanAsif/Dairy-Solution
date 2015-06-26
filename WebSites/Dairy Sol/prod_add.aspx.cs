@@ -35,26 +35,14 @@ public partial class _Default : System.Web.UI.Page
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
         SqlConnection con = new SqlConnection(constring);
 
-        String query = "insert into products (product_name, minimum_level, description, specs, picture, short_description) values (@product_name, @product_min_level, @product_description, @product_spec, @product_picture, @short_description);";
+        String query = "insert into products (product_name, minimum_level, description, specs, picture) values (@product_name, @product_min_level, @product_description, @product_spec, @product_picture)";
         SqlCommand cmd = new SqlCommand(query, con);
 
-        string sub_str = "";
-        string str = product_description.Value;
-        if (str.Length <= 120)
-        {
-            sub_str = str;
-        }
-        else
-        {
-            sub_str = str.Substring(0, 120);
-            sub_str = sub_str + "...";
-        }
         cmd.Parameters.AddWithValue("@product_name", product_name.Text);
         cmd.Parameters.AddWithValue("@product_min_level", product_min_level.Text);
         cmd.Parameters.AddWithValue("@product_description", product_description.Value);
         cmd.Parameters.AddWithValue("@product_spec", product_spec.Value);
         cmd.Parameters.AddWithValue("@product_picture", "images/products/" + product_picture.PostedFile.FileName.ToString());
-        cmd.Parameters.AddWithValue("@short_description", sub_str);
         cmd.Connection = con;
 
         con.Open();

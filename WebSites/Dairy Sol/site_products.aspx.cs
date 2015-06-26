@@ -106,4 +106,42 @@ public partial class _Default : System.Web.UI.Page
             insert_values( price, name, picture, id );
         }
     }
+    protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
+    {
+        if( e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem )
+        {
+            Label label = (Label)e.Item.FindControl("change_text");
+            Button btn = (Button)e.Item.FindControl("order_btn");
+
+            string query = "SELECT description FROM products WHERE product_id = '" +btn.CommandArgument+ "'";
+            string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
+            SqlConnection con = new SqlConnection(constring);
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = query;
+        
+            con.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                if (dr.HasRows)
+                {
+                    string sub_str = "";
+                    string str = dr["description"].ToString();
+                    
+                    if (str.Length <= 120)
+                    {
+                        sub_str = str;
+                    }
+                    else
+                    {
+                        sub_str = str.Substring(0, 120);
+                        sub_str = sub_str + "...";
+                    }
+                    label.Text = sub_str;
+                }
+            }// end while
+            
+        }// end if
+    }
 }
