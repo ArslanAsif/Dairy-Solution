@@ -51,27 +51,27 @@
 				
 				<div class = 'row'>
 					<div class="col-md-4 boxDesign">
-						<div class = " pBox">
-							<h2 class = "h3">Our Team</h3>
-							<p class="boxAlign">I'm a Paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double click me and you can start adding your own content and make changes to the font.<br>I’m a great place for you to let your users know a little more about you. If you want to delete me just click on me and press delete.</p>
-							<button class="btn btn-default">More</button>
+						<div class = " pBox" style="padding-bottom: 87px">
+							<h2 class = "h3">Mission Statement</h3>
+							<p class="boxAlign">Our mission is to be the one stop shop for the Farmers. To work with the best companies in the world and to bring best quality products at best price from all over the world for our farmers.<br></p>
+							<a href="http://localhost:64820/site_about.aspx#mStatement"><button class="btn btn-default" style="float: right; margin-top: 45px">More</button></a>
 						</div>
 					</div>
 					<div class="col-md-4 boxDesign">
-						<div class = " pBox">
+						<div class = " pBox" style="padding-bottom: 67px">
 							<h3 class = "h3">Our Team</h3>
-							<p class="boxAlign">I'm a Paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double click me and you can start adding your own content and make changes to the font.<br>I’m a great place for you to let your users know a little more about you. If you want to delete me just click on me and press delete.</p>
-							<button class="btn btn-default">More</button>
+							<p class="boxAlign">Our highly trained project team understands the essential elements to balance costs with time-to-market and rollout requirements. We optimize the coordination, communications, and resource usage to turn tight rollout project plans into reality.</p>
+							<a href="http://localhost:64820/site_about.aspx#into"><button class="btn btn-default" style="float: right; margin-top: 25px">More</button></a>
 						</div>
 					</div>
 					<div class="col-md-4">
-						<div class = "flatBox cntBox">
+						<div class = "flatBox cntBox" style="padding-bottom: 3px">
 							<h3>Connect with Us</h3>
 							<p>We are here to help resolve your issue and inquires.</p>
 							<p><a href="#"><span class="fa fa-phone" style="color: white"></span></a><strong> +92-42-35169450-51</strong></p>
 							<p><a href="#"><span class="fa fa-envelope" style="color: white"></span></a><strong> info@dairysolution.com</strong></p>
 							<p>FOLLOW US:</p>
-							<ul id="socialList" style="padding-bottom: 10px">
+							<ul id="socialList" style="padding-bottom: 0px">
 								<li><a href="#"><img src="images\social\fb.png" width="50" height="50"></img></a></li>
 								<li><a href="#"><img src="images\social\g.png" width="50" height="50"></img></a></li>
 								<li><a href="#"><img src="images\social\tw.png" width="50" height="50"></img></a></li>
@@ -93,7 +93,7 @@
                                     <div class="media">
                                         <div class="media-left">
                                             <a href="#">
-                                            <img class="media-object" src="<%# Eval("picture") %>" alt="...">
+                                            <img class="media-object" height="100px" width="100px" src="<%# Eval("picture") %>" alt="...">
                                             </a>
                                         &nbsp;&nbsp;</div>
                                         <div class="media-body">

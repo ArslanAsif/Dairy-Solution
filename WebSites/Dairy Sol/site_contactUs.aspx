@@ -37,7 +37,7 @@
 							<br/>
                             <asp:TextBox ID="sender_email" runat="server" type="text" class="form-control" placeholder="Email"></asp:TextBox>
 							<br/>
-                            <asp:TextBox ID="subject" runat="server" type="text" class="form-control" placeholder="Subject"></asp:TextBox>
+                            <asp:TextBox ID="sender_subject" runat="server" type="text" class="form-control" placeholder="Subject"></asp:TextBox>
 							<br/>
                             <asp:TextBox ID="message" runat="server" type="text" TextMode="MultiLine" Rows="5" class="form-control" placeholder="Message"></asp:TextBox>
                             <br/>

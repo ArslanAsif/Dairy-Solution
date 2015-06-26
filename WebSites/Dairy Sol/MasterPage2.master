@@ -189,6 +189,14 @@
                                     
                                 </ul>
                             </li>
+
+                            <li>
+								<a href="loan_request.aspx"><i class="fa fa-fw fa-bar-chart-o"></i> Request Loan</a>
+							</li>
+
+                            <li>
+								<a href="loan_manage.aspx"><i class="fa fa-fw fa-bar-chart-o"></i> Loan Requests</a>
+							</li>
 							
 							<li>
 								<a href="emp_performance.aspx"><i class="fa fa-fw fa-bar-chart-o"></i> Performance</a>

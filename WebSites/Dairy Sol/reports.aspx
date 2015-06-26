@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 
-    <div id="page-wrapper">
+    <div id="page-wrapper" style="height:93vh">
 
             <div class="container-fluid">
 
@@ -18,76 +18,33 @@
                 </div>
 				
 				<div class="row">
-					<div class="col-md-12">
-						
-						<h2>Balance Sheet</h2>
-						<div style = " float: right; margin-top: -45px" class="btn-group" role="group">
-							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-							  Type
-							  <span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu" role="menu">
-							  <li><a href="#">Balance Sheet</a></li>
-							  <li><a href="#">Income Statement</a></li>
-							  <li><a href="#">Cash Flow Statement</a></li>
-							</ul>
-						  </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><a href="#">57</a></td>
-                                        <td>Nov 1, 2014</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">57</a></td>
-                                        <td>Nov 1, 2014</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">57</a></td>
-                                        <td>Nov 1, 2014</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">57</a></td>
-                                        <td>Nov 1, 2014</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">57</a></td>
-                                        <td>Nov 1, 2014</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">57</a></td>
-                                        <td>Nov 1, 2014</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="#">57</a></td>
-                                        <td>Nov 1, 2014</td>
-                                    </tr>
-									<tr>
-                                        <td><a href="#">57</a></td>
-                                        <td>Nov 1, 2014</td>
-                                    </tr>
-                                    
-                                </tbody>
-                            </table>
-							<div class="pull-right" style="margin-top: -25px;">
-								<nav>
-								  <ul class="pagination">
-									<li><a href="#"><span aria-hidden="true">&laquo;</span><span class="sr-only">Previous</span></a></li>
-									<li><a href="#">1</a></li>
-									<li class="active"><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#"><span aria-hidden="true">&raquo;</span><span class="sr-only">Next</span></a></li>
-								  </ul>
-								</nav>
-							</div>
-                        </div>
+                    <div class="alert alert-danger alert-dismissible" role="alert" runat="server" visible="false" id="alert_error">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <p>No report selected! Please choose a report from dropdown and click generate.</p>
+                    </div>
+
+                    <div class="alert alert-danger alert-dismissible" role="alert" runat="server" visible="false" id="alert_fail">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <asp:Label runat="server" ID="error"></asp:Label>
+                    </div>
+
+                    <br /><br />
+
+					<div class="col-md-6 col-md-offset-3">
+				        <div class="input-group input-group-lg">
+					        <asp:DropDownList runat="server" ID="report_list" type="text" class="form-control" style="height: auto">
+                                <asp:ListItem Value="-1" Selected="True">---Please select an option---</asp:ListItem>
+                                <asp:ListItem Value="inv_report">Inventory</asp:ListItem>
+                                <asp:ListItem Value="inv_minLevel_report">Inventory Min Level</asp:ListItem>
+                                <asp:ListItem Value="product_expiry_report">Product Expiry</asp:ListItem>
+                                <asp:ListItem>Unsold Products</asp:ListItem>
+                                <asp:ListItem>Inventory IN</asp:ListItem>
+                                <asp:ListItem>Inventory OUT</asp:ListItem>
+                            </asp:DropDownList>
+                            <div class="input-group-btn">
+                                <asp:Button runat="server" ID="select_report_btn" Text="Generate Report" class="btn btn-default" type="submit" OnClick="select_report_btn_Click"/>
+                            </div>
+						</div>
                     </div>
 				</div>
                 <!-- /.row -->
