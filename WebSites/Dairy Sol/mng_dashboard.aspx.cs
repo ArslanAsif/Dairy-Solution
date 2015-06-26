@@ -17,41 +17,51 @@ public partial class _Default : System.Web.UI.Page
         }
         
         count_products();
-        //select_notifications();
     }
 
-    protected void select_notifications()
+    protected void check_notification(string msg, string type)
     {
-        string query = "SELECT description, date_time FROM notifications";
+        string query = "select * from notifications where description = '"+msg+"'";
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
         SqlConnection con = new SqlConnection(constring);
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = con;
         cmd.CommandText = query;
-
+        bool read = false;
+        
         con.Open();
         SqlDataReader dr = cmd.ExecuteReader();
         while (dr.Read())
         {
             if (dr.HasRows)
             {
-                //notify.InnerText = dr["description"].ToString();
+                read = true;
+            }
+            else 
+            {
+                insert_notification(msg,type);
             }
         }// end while loop
+        if( read == false )
+        {
+            insert_notification(msg, type);
+        }
+        read = false;
         con.Close();
     }
 
-    protected void insert_notification()
+    protected void insert_notification( string msg, string type )
     {
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
         SqlConnection con = new SqlConnection(constring);
 
-        String query = "insert into notifications (description, date_time, status) values (@description, @date_time, @status)";
+        String query = "insert into notifications (description, date_time, status, type) values (@description, @date_time, @status, @type)";
         SqlCommand cmd = new SqlCommand(query, con);
 
-        cmd.Parameters.AddWithValue("@description", "Product Minimum Inventory Level Reached!");
+        cmd.Parameters.AddWithValue("@description", msg);
         cmd.Parameters.AddWithValue("@date_time", DateTime.Now);
         cmd.Parameters.AddWithValue("@status", "0");
+        cmd.Parameters.AddWithValue("@type", type);
 
         cmd.Connection = con;
 
@@ -92,13 +102,13 @@ public partial class _Default : System.Web.UI.Page
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
         SqlConnection con = new SqlConnection(constring);
         SqlCommand cmd = new SqlCommand();
-        string query = "";
+        string query = "", prod_name = "";
         int total = 0;
         bool status = false;
 
         for (int i = 0; i <= count; i++)
         {
-            query = "SELECT inventory_products.quantity, products.minimum_level FROM products INNER JOIN inventory_products ON products.product_id = inventory_products.product_id WHERE products.product_id = '" + ids[i] + "'";
+            query = "SELECT (select product_name from products where product_id = inventory_products.product_id) as product_name, inventory_products.quantity, products.minimum_level FROM products INNER JOIN inventory_products ON products.product_id = inventory_products.product_id WHERE products.product_id = '" + ids[i] + "'";
             cmd.Connection = con;
             cmd.CommandText = query;
             con.Open();
@@ -114,23 +124,22 @@ public partial class _Default : System.Web.UI.Page
                 if (total <= Convert.ToInt16(dr["minimum_level"].ToString()))
                 {
                     status = true;
+                    prod_name = dr["product_name"].ToString();
                 }
                 else
                 {
                     status = false;
+                    prod_name = "";
                 }
             }// end while loop
             con.Close();
+            if (status == true)
+            {
+                check_notification("Product Minimum Inventory Level Reached! Product name: " + prod_name, "inventory" );
+            }
             total = 0;
+            status = false;
         }// end for loop
-        if (status == true)
-        {
-            insert_notification();
-        }
-        else
-        {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('All Products above Minimum Level!')", true);
-        }
     }
 
     protected void check_expiry(int[] ids, int count)
@@ -143,31 +152,40 @@ public partial class _Default : System.Web.UI.Page
 
         for (int i = 0; i <= count; i++)
         {
-            query = "SELECT products.product_id, inventory_products.quantity, inventory_products.expiry_date FROM products INNER JOIN inventory_products ON products.product_id = inventory_products.product_id WHERE products.product_id = '" + ids[i] + "'";
+            query = "SELECT products.product_id, products.product_name, inventory_products.batch_id, inventory_products.quantity, inventory_products.expiry_date FROM products INNER JOIN inventory_products ON products.product_id = inventory_products.product_id WHERE products.product_id = '" + ids[i] + "'";
             cmd.Connection = con;
             cmd.CommandText = query;
             con.Open();
             SqlDataReader dr = cmd.ExecuteReader();
+            string prod_name = "", batch_no = "", msg = "";
 
             while (dr.Read())
             {
                 if (dr.HasRows)
                 {
                     DateTime date = Convert.ToDateTime(dr["expiry_date"]);
-                    //DateTime date = Convert.ToDateTime("11-07-2015");
                     DateTime now = DateTime.Now;
                     var datespan = DateTimeSpan.CompareDates(date, now);
                     if( date > now )
                     {
                         if( datespan.Months <= 1 )
                         {
-                            lab2.InnerText = "Expiry date reaching! Months left: "+ (datespan.Months + 1);//notify here
+                            prod_name = dr["product_name"].ToString();
+                            batch_no = dr["batch_id"].ToString();
+                            msg = "Product Name: "+prod_name+" Batch Number: "+batch_no+" Expiry date reaching! Months left: "+ (datespan.Months + 1);
+                            status = true;
                         }// if months left are less than 2
                     }
                 }
-
+                
             }// end while loop
             con.Close();
+            if (status == true)
+            {   
+                check_notification(msg, "inventory");
+            }
+            status = false;
+            msg = "";
         }// end for loop
 
     }
