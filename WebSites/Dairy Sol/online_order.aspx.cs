@@ -12,6 +12,10 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["username"] == null)
+        {
+            Response.Redirect("site_signIn.aspx");
+        }
     }
 
     protected void clear_cart_Click(object sender, EventArgs e)
@@ -28,5 +32,9 @@ public partial class _Default : System.Web.UI.Page
         cmd.ExecuteNonQuery();
         con.Close();
         Response.Redirect("site_products.aspx");
+    }
+    protected void check_out_btn_click(object sender, EventArgs e)
+    {
+        Response.Redirect("site_online_order.aspx");
     }
 }

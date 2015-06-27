@@ -18,11 +18,11 @@
             <asp:BoundField DataField="product_name" HeaderText="product_name" SortExpression="product_name" ReadOnly="True" />
             <asp:BoundField DataField="product_price" HeaderText="product_price" SortExpression="product_price" ReadOnly="True" />
             
-            <asp:CommandField ShowEditButton="True" />
+            <asp:CommandField ShowEditButton="True" HeaderText="Edit Quantity" />
             
             <asp:BoundField DataField="quantity" HeaderText="quantity" SortExpression="quantity" />
             
-            <asp:CommandField ShowDeleteButton="True" />
+            <asp:CommandField ShowDeleteButton="True" DeleteText="Remove" />
             
         </Columns>
     </asp:GridView>
@@ -48,10 +48,13 @@
     <br/>
             <div class="row">
                 <div class="col-md-3">
-                    <asp:Button ID="continue_shop" runat="server" cssClass="btn btn-primary" formAction="site_products.aspx" Text="Continue Shopping" />
+                    <asp:Button ID="continue_shop" runat="server" cssClass="btn btn-primary" formAction="site_products.aspx" Text="Buy More Products" />
                 </div>
-                <div class="col-md-6 col-md-offset-3">
-                    <asp:Button ID="clear_cart" runat="server" cssClass="btn btn-primary pull-right" Text="Clear Shopping Cart" onClick="clear_cart_Click"/>
+                <div class="col-md-2">
+                    <asp:Button ID="check_out" runat="server" cssClass="btn btn-primary" Text="Check Out" onClick="check_out_btn_click"/>
+                </div>
+                <div class="col-md-7">
+                    <asp:Button ID="clear_cart" runat="server" cssClass="btn btn-primary" style="float:right" Text="Clear Cart" onClick="clear_cart_Click"/>
                 </div>
             </div>
         </form>

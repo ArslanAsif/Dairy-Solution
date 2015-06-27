@@ -15,8 +15,11 @@ public partial class _Default : System.Web.UI.Page
         {
             Response.Redirect("site_signIn.aspx");
         }
-        
-        count_products();
+        if( !IsPostBack )
+        {
+            ScriptManager.RegisterStartupScript(this, GetType(), "refresh", "window.setTimeout('window.location.reload(true);',120000);", true);
+            count_products();
+        }
     }
 
     protected void check_notification(string msg, string type)
@@ -135,7 +138,7 @@ public partial class _Default : System.Web.UI.Page
             con.Close();
             if (status == true)
             {
-                check_notification("Product Minimum Inventory Level Reached! Product name: " + prod_name, "inventory" );
+                check_notification("Product Minimum Inventory Level Reached! Product name: " + prod_name, "min inv" );
             }
             total = 0;
             status = false;
@@ -182,7 +185,7 @@ public partial class _Default : System.Web.UI.Page
             con.Close();
             if (status == true)
             {   
-                check_notification(msg, "inventory");
+                check_notification(msg, "exp date");
             }
             status = false;
             msg = "";
