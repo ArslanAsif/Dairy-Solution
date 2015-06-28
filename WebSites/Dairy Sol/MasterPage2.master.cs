@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -24,172 +23,43 @@ public partial class MasterPage2 : System.Web.UI.MasterPage
         {
             user_name.Text = Session["username"].ToString();
         }
-        get_user_info();
-        count_products();
-        select_notifications();
+        select_minInv_notifications();
+        select_exp_notifications();
+        select_task_notifications();
     }// end function page_load
 
-
-    protected void get_user_info()
+    protected void select_minInv_notifications()
     {
-        string user_name = Session["userId"].ToString();
-
-        string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
-        SqlConnection con = new SqlConnection(constring);
-
-        String query = "SELECT e.employee_name, e.employee_picture, c.designation FROM employee_info AS e INNER JOIN employee_company_info AS c ON e.employee_id = c.employee_id  WHERE e.employee_id = '" + user_name + "'";
-
-        SqlCommand cmd = new SqlCommand(query, con);
-
-        con.Open();
-
-        SqlDataReader dr = cmd.ExecuteReader();
-
-        if (dr.Read())
-        {
-            usr_name.Text = dr["employee_name"].ToString();
-            usr_designation.Text = dr["designation"].ToString();
-            usr_image.ImageUrl = dr["employee_picture"].ToString();
-        }
-
-        con.Close();
-    }
-
-    protected void check_min_level( int[] ids, int count ) 
-    {
-        string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
-        SqlConnection con = new SqlConnection(constring);
-        SqlCommand cmd = new SqlCommand();
-        string query = "";
-        int total = 0;
-        bool status = false;
-
-        for (int i = 0; i <= count; i++ )
-        {
-            query = "SELECT inventory_products.quantity, products.minimum_level FROM products INNER JOIN inventory_products ON products.product_id = inventory_products.product_id WHERE products.product_id = '" + ids[i] + "'";
-            cmd.Connection = con;
-            cmd.CommandText = query;
-            con.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
-            
-            while (dr.Read())
-            {
-                if (dr.HasRows)
-                {
-                    total = total + Convert.ToInt16(dr["quantity"].ToString());
-                }
-
-                if (total <= Convert.ToInt16(dr["minimum_level"].ToString()))
-                {
-                    status = true;
-                }
-                else 
-                {
-                    status = false;
-                }
-            }// end while loop
-            con.Close();
-            total = 0;
-        }// end for loop
-        if (status == true)
-        {
-            insert_notification();
-        }
-        else 
-        {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('All Products above Minimum Level!')", true);
-        }
-    }
-
-    protected void count_products()
-    {
-        int[] product_ids = new int[30];
-        int i = 0;
-        string query = "SELECT product_id FROM products";
+        string query = "SELECT description, date_time, status FROM notifications where status = '0' and type = 'min inv'";
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
         SqlConnection con = new SqlConnection(constring);
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = con;
         cmd.CommandText = query;
-
-        con.Open();
-        SqlDataReader dr = cmd.ExecuteReader();
-        while (dr.Read())
-        {
-            if (dr.HasRows)
-            {
-                product_ids[i] = Convert.ToInt16(dr["product_id"].ToString());
-                i++;
-            }
-        }// end while loop
-        con.Close();
-        check_min_level( product_ids, i );
-        //check_expiry( product_ids, i );
-      }
-
-    protected void check_expiry( int[] ids, int count ) 
-    {
-        string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
-        SqlConnection con = new SqlConnection(constring);
-        SqlCommand cmd = new SqlCommand();
-        string query = "";
-        bool status = false;
-
-        for (int i = 0; i <= count; i++)
-        {
-            query = "SELECT inventory_products.quantity, inventory_products.expiry_date FROM products INNER JOIN inventory_products ON products.product_id = inventory_products.product_id WHERE products.product_id = '" + ids[i] + "'";
-            cmd.Connection = con;
-            cmd.CommandText = query;
-            con.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
-
-            while (dr.Read())
-            {
-                if (dr.HasRows)
-                {
-                    String d = dr["expiry_date"].ToString();
-                    DateTime date_1 = DateTime.ParseExact(d, "dd/MM/yy hr:min:sec", null);
-                    DateTime date_2 = DateTime.Now.AddMonths(-12);
-
-                    TimeSpan ts = date_1 - date_2;
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert("+ts+")", true);
-                }
-
-            }// end while loop
-            con.Close();
-        }// end for loop
+        int inv_count = 0;
         
-    }
-
-    protected void insert_notification() 
-    {
-        string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
-        SqlConnection con = new SqlConnection(constring);
-
-        String query = "insert into notifications (description, date_time, status) values (@description, @date_time, @status)";
-        SqlCommand cmd = new SqlCommand(query, con);
-
-        cmd.Parameters.AddWithValue("@description", "Product Minimum Inventory Level Reached!");
-        cmd.Parameters.AddWithValue("@date_time", DateTime.Now);
-        cmd.Parameters.AddWithValue("@status", "0");
-
-        cmd.Connection = con;
-
         con.Open();
-        cmd.ExecuteNonQuery();
-
+        SqlDataReader dr = cmd.ExecuteReader();
+        while (dr.Read())
+        {
+            if (dr.HasRows)
+            {
+                inv_count++;
+            }
+        }// end while loop
+        notify.InnerText = Convert.ToString(inv_count) + "  Min Level Notifications";
         con.Close();
-        //Response.Redirect("online_order.aspx");
     }
 
-    protected void select_notifications()
+    protected void select_exp_notifications()
     {
-        string query = "SELECT description, date_time FROM notifications";
+        string query = "SELECT description, date_time, status FROM notifications where status = '0' and type = 'exp date'";
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
         SqlConnection con = new SqlConnection(constring);
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = con;
         cmd.CommandText = query;
+        int exp_count = 0;
 
         con.Open();
         SqlDataReader dr = cmd.ExecuteReader();
@@ -197,9 +67,33 @@ public partial class MasterPage2 : System.Web.UI.MasterPage
         {
             if (dr.HasRows)
             {
-                notify.InnerText = dr["description"].ToString();
+                exp_count++;
             }
         }// end while loop
+        notify2.InnerText = Convert.ToString(exp_count) + "  Expiry Notifications";
+        con.Close();
+    }
+
+    protected void select_task_notifications()
+    {
+        string query = "SELECT task_desc, task_date, task_status, added_by, added_to, task_type FROM tasks where task_status = '0'";
+        string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
+        SqlConnection con = new SqlConnection(constring);
+        SqlCommand cmd = new SqlCommand();
+        cmd.Connection = con;
+        cmd.CommandText = query;
+        int task_count = 0;
+
+        con.Open();
+        SqlDataReader dr = cmd.ExecuteReader();
+        while (dr.Read())
+        {
+            if (dr.HasRows)
+            {
+                task_count++;
+            }
+        }// end while loop
+        notify3.InnerText = Convert.ToString(task_count) + "  Task Notifications";
         con.Close();
     }
 }

@@ -79,7 +79,7 @@ public partial class _Default : System.Web.UI.Page
     {
         SqlConnection con = new SqlConnection(constring);
 
-        String query = "SELECT TOP 1 order_id FROM orders ORDER BY order_id DESC";
+        String query = "SELECT TOP 1 order_id FROM orders where customer_id = '"+Session["userId"]+"' ORDER BY order_id DESC";
 
         SqlCommand cmd = new SqlCommand(query, con);
         cmd.Connection = con;

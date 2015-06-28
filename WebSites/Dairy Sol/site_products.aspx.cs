@@ -28,7 +28,7 @@ public partial class _Default : System.Web.UI.Page
             int prod_price = 0;
             string prod_name = "", prod_picture = "";
 
-            string query = "SELECT inventory_products.price, products.product_name, products.picture FROM products INNER JOIN inventory_products ON products.product_id = inventory_products.product_id WHERE products.product_id = '" +prod_id+ "'";
+            string query = "select products.product_id, products.product_name, products.picture, inventory_products.price, inventory_products.entry_date from products inner join inventory_products on products.product_id = inventory_products.product_id where products.product_id = '"+prod_id+"' And entry_date = (Select MIN(entry_date) From inventory_products Where product_id = '"+prod_id+"')";
             string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
             SqlCommand cmd = new SqlCommand();
