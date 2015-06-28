@@ -26,6 +26,7 @@ public partial class MasterPage2 : System.Web.UI.MasterPage
         select_minInv_notifications();
         select_exp_notifications();
         select_task_notifications();
+        get_user_info();
     }// end function page_load
 
     protected void select_minInv_notifications()
@@ -94,6 +95,31 @@ public partial class MasterPage2 : System.Web.UI.MasterPage
             }
         }// end while loop
         notify3.InnerText = Convert.ToString(task_count) + "  Task Notifications";
+        con.Close();
+    }
+
+    protected void get_user_info()
+    {
+        string user_name = Session["userId"].ToString();
+
+        string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
+        SqlConnection con = new SqlConnection(constring);
+
+        String query = "SELECT e.employee_name, e.employee_picture, c.designation FROM employee_info AS e INNER JOIN employee_company_info AS c ON e.employee_id = c.employee_id  WHERE e.employee_id = '" + user_name + "'";
+
+        SqlCommand cmd = new SqlCommand(query, con);
+
+        con.Open();
+
+        SqlDataReader dr = cmd.ExecuteReader();
+
+        if (dr.Read())
+        {
+            usr_name.Text = dr["employee_name"].ToString();
+            usr_designation.Text = dr["designation"].ToString();
+            usr_image.ImageUrl = dr["employee_picture"].ToString();
+        }
+
         con.Close();
     }
 }
