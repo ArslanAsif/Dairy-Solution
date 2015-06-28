@@ -28,21 +28,21 @@ public partial class _Default : System.Web.UI.Page
             {
                 string pathName = "images/" + Path.GetFileName(postImage.PostedFile.FileName);
                 postImage.SaveAs(Server.MapPath("~/images/updates/" + postImage.FileName));
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "popup", "alert('File Uploaded!');", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "popup", "alert('Post Uploaded!');", true);
             }
         }
 
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
         SqlConnection con = new SqlConnection(constring);
 
-        String query = "insert into posts (heading, summary, detail, picture) values (@postHeading, @postSummary, @postDetail, @postImage);";
+        String query = "insert into posts (heading, summary, detail, picture, date) values (@postHeading, @postSummary, @postDetail, @postImage, @date);";
         SqlCommand cmd = new SqlCommand(query, con);
 
         cmd.Parameters.AddWithValue("@postHeading", postHeading.Text);
         cmd.Parameters.AddWithValue("@postSummary", postSummary.Value);
         cmd.Parameters.AddWithValue("@postDetail", postDetail.Value);
         cmd.Parameters.AddWithValue("@postImage", "images/updates/" + postImage.PostedFile.FileName.ToString());
-
+        cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString());
         cmd.Connection = con;
 
         con.Open();
@@ -50,8 +50,7 @@ public partial class _Default : System.Web.UI.Page
         cmd.ExecuteNonQuery();
         //for insert remove data reader and replace cmd.executenonquery()
 
-        Response.Redirect("signin.aspx");
-
+       
         con.Close();
     }
 }

@@ -446,7 +446,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>(Products least/not sold)</Value>
+                  <Value>(Products least sold)</Value>
                   <Style>
                     <FontSize>11pt</FontSize>
                     <Color>White</Color>
