@@ -19,6 +19,7 @@ public partial class _Default : System.Web.UI.Page
         {
             ScriptManager.RegisterStartupScript(this, GetType(), "refresh", "window.setTimeout('window.location.reload(true);',120000);", true);
             count_products();
+            check_tasks();
         }
     }
 
@@ -50,6 +51,39 @@ public partial class _Default : System.Web.UI.Page
             insert_notification(msg, type);
         }
         read = false;
+        con.Close();
+    }
+
+    protected void check_tasks()
+    {
+        string user_id = Session["userId"].ToString();
+        string query = "select * from tasks where DATEDIFF(day, GETDATE(),task_date) = 0 and task_status = 0 and added_to = '"+user_id+"'";
+        string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
+        SqlConnection con = new SqlConnection(constring);
+        SqlCommand cmd = new SqlCommand();
+        cmd.Connection = con;
+        cmd.CommandText = query;
+        
+        con.Open();
+        SqlDataReader dr = cmd.ExecuteReader();
+        while (dr.Read())
+        {
+            if (dr.HasRows)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "popup", "alert('Reminder!"+"  "+dr["task_desc"].ToString()+"');", true);
+                string constring1 = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
+                string query1 = "UPDATE tasks SET task_status = '1' WHERE task_status = '0' and added_to = '"+user_id+"'";
+                SqlConnection con1 = new SqlConnection(constring1);
+                SqlCommand cmd1 = new SqlCommand();
+                cmd1.Connection = con1;
+                cmd1.CommandText = query1;
+
+                con1.Open();
+                cmd1.ExecuteNonQuery();
+                con1.Close();
+            }
+        }// end while loop
+        
         con.Close();
     }
 
