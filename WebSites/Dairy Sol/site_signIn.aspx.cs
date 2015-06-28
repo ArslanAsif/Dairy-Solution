@@ -26,39 +26,50 @@ public partial class _Default : System.Web.UI.Page
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
 
-            string redirect = "";
-            string user = "";
-            string username;
-            if (radioOptions1.SelectedValue == "Employee")
-            {
-                cmd.CommandText = emp_query;
-                redirect = "mng_dashboard.aspx";
-                user = "employee_id";
-                username  = "Employee_name";
-            }
-            else
-            {
-                cmd.CommandText = cus_query;
-                redirect = "site_products.aspx";
-                user = "customer_id";
-                username = "Customer_name";
-            }
+            int x = 0;
+            
+            cmd.CommandText = emp_query;
 
             con.Open();
             SqlDataReader dr = cmd.ExecuteReader();
-            while(dr.Read())
+            while (dr.Read())
             {
                 //for insert remove data reader and replace cmd.executenonquery()
                 if (dr.HasRows)
                 {
-                    Session["userId"] = dr[user];
-                    Session["username"] = dr[username];
-                    Response.Redirect(redirect);
+                    Session["userId"] = dr["employee_id"];
+                    Session["userName"] = dr["employee_name"];
+                    Response.Redirect("mng_dashboard.aspx");
+                    x = 1;
                 }
-                else
-                    Response.Redirect("site_signIn.aspx");
-                con.Close();
             }
+            con.Close();
+
+            //Customer sign in
+            cmd.CommandText = cus_query;
+
+            con.Open();
+            SqlDataReader dr2 = cmd.ExecuteReader();
+            while (dr2.Read())
+            {
+                //for insert remove data reader and replace cmd.executenonquery()
+                if (dr2.HasRows)
+                {
+                    Session["userId"] = dr2["customer_id"];
+                    Session["userName"] = dr2["customer_name"];
+                    Response.Redirect("site_products.aspx");
+                    x = 1;
+                }
+                    
+            }
+            con.Close();
+
+            err_msg.Text = "Invalid username or password.";
+    }
+
+    protected void get_type()
+    {
+        
     }
     protected void signUp_Click(object sender, EventArgs e)
     {

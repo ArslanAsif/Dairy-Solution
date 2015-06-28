@@ -4,12 +4,12 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div class="container">
+        <form runat="server">
 	    <h2>News & Updates</h2>
 	    <div style = "margin-top: -15px">
 		    <div class = 'row'>
 			    <div class="col-md-9 boxDesign">
-				
-                    <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1">
+                    <asp:Repeater ID="Repeater3" runat="server" EnableViewState="False">
                         <HeaderTemplate>
                             <table>
                         </HeaderTemplate>
@@ -31,29 +31,40 @@
                             </table>
                         </FooterTemplate>
                     </asp:Repeater>
-                        
-                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT * FROM [posts]"></asp:SqlDataSource>
+                    
+                    <br /><br />
+                             
+                    <div>
+                    <asp:Repeater ID="rptPaging" runat="server" OnItemCommand="rptPaging_ItemCommand" OnItemDataBound="rptPaging_ItemDataBound">
+                        <HeaderTemplate><ul class="pagination" style="margin-top: 0px; float: right"></HeaderTemplate>
+                        <ItemTemplate>
+                            
+                            <li>
+                                <asp:LinkButton ID="btnPage"
+                                        
+                                    CommandName="Page" CommandArgument="<%# Container.DataItem %>"
+                                    runat="server"><%# Container.DataItem %>
+                                </asp:LinkButton>
+                            </li>
+                            
+                       </ItemTemplate>
+                        <FooterTemplate></ul></FooterTemplate>
+                    </asp:Repeater>
+                    </div>
+                    
 
-                    <nav  style = "float: right">
-					    <ul class="pagination">
-					    <li class="disabled"><a href="#" aria-label="Previous">&laquo;</span></a></li>
-					    <li class="active"><a href="#">1 </a></li>
-					    <li class=""><a href="#">2</a></li>
-					    <li class=""><a href="#" aria-label="Next">&raquo;</span></a></li>
-					    </ul>
-				    </nav>
 			    </div>
 
 			    <div class="col-md-3 boxDesign">
 				    <h3 class = "flatBox flat">Archive</h3>
                         
-                    <asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlDataSource1">
+                    <asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlDataSource2">
                         <HeaderTemplate>
                             <ul class="category" style="list-style-type: square">
                         </HeaderTemplate>
 
                         <ItemTemplate>
-                            <li class="catAlign"><a href="#"><%# Eval("heading") %></a></li>
+                            <li class="catAlign"><a href="site_post_detail.aspx?id=<%# Eval("post_id") %>"><%# Eval("heading") %></a></li>
                         </ItemTemplate>
                   
                         <FooterTemplate>
@@ -61,11 +72,12 @@
                         </FooterTemplate>
                     </asp:Repeater>
 
-                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT heading FROM [posts] ORDER BY heading ASC"></asp:SqlDataSource>
+                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT heading, post_id FROM [posts] ORDER BY heading ASC"></asp:SqlDataSource>
 			    </div>	
 		    </div>
 		    <!--end of row-->	
 	    </div>
+        </form>
     </div>
 </asp:Content>
 

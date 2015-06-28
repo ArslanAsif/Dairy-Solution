@@ -97,8 +97,9 @@ public partial class _Default : System.Web.UI.Page
                         change_text = dr["password"].ToString();
                         pass_reveal.Text = "Your Password is: " + change_text;
                         SendMail();
-                        //pass_reveal.EnableViewState = true;
-                        //pass_reveal.Visible = true;
+                        pass_reveal.Text = "An email has been sent to your email address containing password.";
+                        pass_reveal.EnableViewState = true;
+                        pass_reveal.Visible = true;
                         pass_reveal.ForeColor = System.Drawing.Color.Green;
                     }
                     else 

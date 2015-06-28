@@ -17,6 +17,9 @@ public partial class _Default : System.Web.UI.Page
 
     protected void mark_attendance_Click(object sender, EventArgs e)
     {
+        try
+        {
+
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
         SqlConnection con = new SqlConnection(constring);
 
@@ -44,6 +47,15 @@ public partial class _Default : System.Web.UI.Page
             attendance_marked.ForeColor = System.Drawing.Color.Red;
         }
 
+        alert_success.Visible = true;
         con.Close();
+
+        Response.Redirect("loan_request.aspx?success=1");
+        }
+        catch (Exception ex)
+        {
+            alert_fail.Visible = true;
+            error.Text = "Error! " + ex.ToString();
+        }
     }
 }

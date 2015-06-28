@@ -33,23 +33,17 @@
                                   <input ID="inputPass" runat="server" required="required" type="password" class="form-control" placeholder="Enter Password" aria-describedby="sizing-addon2">
                                 </div>
                                 <br/>
-                                <asp:RequiredFieldValidator CssClass="RadioRequiredFieldValidator" ID="RadioRequiredFieldValidator" runat="server" SetFocusOnError="true" ErrorMessage="Select user type" ControlToValidate="radioOptions1" BorderStyle="NotSet" ForeColor="Red"></asp:RequiredFieldValidator>
-                                
+                                <asp:Label ID="err_msg" runat="server"></asp:Label>
                                 <asp:Label ID="forgot_pass" runat="server" class ="pull-right"><a href='site_forgot_pass.aspx'>Forgot Password</a></asp:Label>
-                                <br/>
+                                <br/><br />
 								
-                                <asp:RadioButtonList ID="radioOptions1" runat="server" RepeatLayout="Flow" class ="radio-inline">
-                                    <asp:ListItem Value="Member">Member</asp:ListItem>
-                                    <asp:ListItem Value="Employee">Employee</asp:ListItem>
-                                </asp:RadioButtonList>
-
 								<div>
-                                <asp:Button ID="signIn" runat="server" Text="Sign in" style="margin-top: -45px" type="submit" class="btn btn-primary pull-right" name="signInBtn" OnClick="SignIn_Click"/>
+                                    <a href="site_cust_signup.aspx" class = "btn btn-lg btn-success  pull-left" style = "margin: 0px; width: 48%">Sign Up</a>
+                                    <asp:Button ID="signIn" runat="server" Text="Sign in" style="margin: 0px; width: 48%" type="submit" class="btn btn-lg btn-primary pull-right" name="signInBtn" OnClick="SignIn_Click"/>
 								</div>
 
 							</form>
-							<br/>
-                            <a href="site_cust_signup.aspx" class = "btn btn-success" style = "width: 100%">Not a member? Sign Up here</a>
+							
 						</div>
 					</div>
 					

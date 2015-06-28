@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <div id="page-wrapper">
+    <div id="page-wrapper" style="height:93vh">
 
             <div class="container-fluid">
 
@@ -19,9 +19,10 @@
                     <div class="col-md-4 col-md-offset-4">
 				        <div class="input-group" style="margin-top: 55px">
 					
-					        <input type="text" class="form-control control-height" placeholder="Search by Product Name or ID" name="srch-term" id="srch-term">
+					        <asp:TextBox runat="server" type="text" class="form-control control-height" placeholder="Search Product" ID="search"/>
 					        <div class="input-group-btn">
-						        <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                                <asp:Button runat="server" id="srch_btn" class="btn btn-default" type="submit" Text="Search" OnClick="srch_btn_Click"/>
+						        <!--<button id="srch_btn" class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>-->
 					        </div>
 				        </div>
                     </div>
@@ -35,11 +36,11 @@
 	                    <div>
                             <asp:GridView ID="order_customer_GridView" runat="server" AllowSorting="True" AllowPaging="true" AutoGenerateColumns="False" BackColor="White" DataKeyNames="order_id" DataSourceID="SqlDataSource1"  CssClass="table table-bordered table-hover table-striped" OnRowDataBound="order_customer_GridView_RowDataBound">
                                 <Columns>
-                                    <asp:BoundField DataField="order_id" HeaderText="order_id" ReadOnly="True" SortExpression="order_id" InsertVisible="False" />
-                                    <asp:BoundField DataField="order_date" HeaderText="order_date" SortExpression="order_date" />
-                                    <asp:BoundField DataField="EmployeeName" HeaderText="EmployeeName" SortExpression="EmployeeName" ReadOnly="True" />
-                                    <asp:BoundField DataField="CustomerName" HeaderText="CustomerName" SortExpression="CustomerName" ReadOnly="True" />
-                                    <asp:BoundField DataField="description" HeaderText="description" SortExpression="description" />
+                                    <asp:BoundField DataField="order_id" HeaderText="Order ID" ReadOnly="True" SortExpression="order_id" InsertVisible="False" />
+                                    <asp:BoundField DataField="order_date" HeaderText="Order Date" SortExpression="order_date" />
+                                    <asp:BoundField DataField="employee_name" HeaderText="Employee Name" SortExpression="employee_name" ReadOnly="True" />
+                                    <asp:BoundField DataField="customer_name" HeaderText="Customer Name" SortExpression="customer_name" ReadOnly="True" />
+                                    <asp:BoundField DataField="description" HeaderText="Description" SortExpression="description" />
                                     <asp:TemplateField HeaderText="Products">
                                         <ItemTemplate>
                                             <asp:GridView ID="GridView1" runat="server" BackColor="White" BorderColor="#CC9966" BorderStyle="None" BorderWidth="1px" CellPadding="4" ShowHeader="False">
@@ -79,11 +80,12 @@
 
                             </asp:GridView>
 
-                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" DeleteCommand="DELETE FROM [services_or_products] WHERE [order_id] = @order_id
-DELETE FROM [payment_info] WHERE [order_id] = @order_id
-DELETE FROM [orders] WHERE [order_id] = @order_id" InsertCommand="INSERT INTO [orders] ([order_id], [product_id], [employee_id], [customer_id], [order_date], [description]) VALUES (@order_id, @product_id, @employee_id, @customer_id, @order_date, @description)" SelectCommand="select o.order_id, o.order_date, (select e.employee_name from employee_info e where e.employee_id = o.employee_id) as EmployeeName, 
-(select c.customer_name from customer_info c where c.customer_id = o.customer_id) as CustomerName,
-o.description from orders o " UpdateCommand="UPDATE orders SET product_id = @product_id, employee_id = @employee_id, customer_id = @customer_id, order_date = @order_date, description = @description WHERE (order_id = @order_id)">
+                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" 
+                                DeleteCommand="DELETE FROM [services_or_products] WHERE [order_id] = @order_id DELETE FROM [payment_info] WHERE [order_id] = @order_id DELETE FROM [orders] WHERE [order_id] = @order_id" 
+                                InsertCommand="INSERT INTO [orders] ([order_id], [product_id], [employee_id], [customer_id], [order_date], [description]) VALUES (@order_id, @product_id, @employee_id, @customer_id, @order_date, @description)" 
+                                selectCommand ="select o.order_id, o.order_date, e.employee_name, c.customer_name, o.description from orders o INNER JOIN employee_info e ON e.employee_id = o.employee_id INNER JOIN customer_info c ON c.customer_id = o.customer_id"
+                                UpdateCommand="UPDATE orders SET product_id = @product_id, employee_id = @employee_id, customer_id = @customer_id, order_date = @order_date, description = @description WHERE (order_id = @order_id)">
+                                
                                 <DeleteParameters>
                                     <asp:Parameter Name="order_id" Type="Int64" />
                                 </DeleteParameters>
@@ -103,6 +105,36 @@ o.description from orders o " UpdateCommand="UPDATE orders SET product_id = @pro
                                     <asp:Parameter Name="description" Type="String" />
                                     <asp:Parameter Name="order_id" Type="Int64" />
                                 </UpdateParameters>
+                            </asp:SqlDataSource>
+
+                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" 
+                                DeleteCommand="DELETE FROM [services_or_products] WHERE [order_id] = @order_id DELETE FROM [payment_info] WHERE [order_id] = @order_id DELETE FROM [orders] WHERE [order_id] = @order_id" 
+                                InsertCommand="INSERT INTO [orders] ([order_id], [product_id], [employee_id], [customer_id], [order_date], [description]) VALUES (@order_id, @product_id, @employee_id, @customer_id, @order_date, @description)" 
+                                selectCommand ="select o.order_id, o.order_date, e.employee_name, c.customer_name, o.description from orders o INNER JOIN employee_info e ON e.employee_id = o.employee_id INNER JOIN customer_info c ON c.customer_id = o.customer_id WHERE (employee_name LIKE '%' + @name + '%') OR (customer_name LIKE '%' + @name + '%')"
+                                UpdateCommand="UPDATE orders SET product_id = @product_id, employee_id = @employee_id, customer_id = @customer_id, order_date = @order_date, description = @description WHERE (order_id = @order_id)">
+                                
+                                <DeleteParameters>
+                                    <asp:Parameter Name="order_id" Type="Int64" />
+                                </DeleteParameters>
+                                <InsertParameters>
+                                    <asp:Parameter Name="order_id" Type="Int64" />
+                                    <asp:Parameter Name="product_id" Type="Int32" />
+                                    <asp:Parameter Name="employee_id" Type="Int32" />
+                                    <asp:Parameter Name="customer_id" Type="Int64" />
+                                    <asp:Parameter Name="order_date" />
+                                    <asp:Parameter Name="description" Type="String" />
+                                </InsertParameters>
+                                <UpdateParameters>
+                                    <asp:Parameter Name="product_id" Type="Int32" />
+                                    <asp:Parameter Name="employee_id" Type="Int32" />
+                                    <asp:Parameter Name="customer_id" Type="Int64" />
+                                    <asp:Parameter Name="order_date" />
+                                    <asp:Parameter Name="description" Type="String" />
+                                    <asp:Parameter Name="order_id" Type="Int64" />
+                                </UpdateParameters>
+                                <SelectParameters>
+                                    <asp:ControlParameter ControlID="search" PropertyName="Text" Name="name" Type="String"></asp:ControlParameter>
+                                </SelectParameters>
                             </asp:SqlDataSource>
                         </div>
                     </div>

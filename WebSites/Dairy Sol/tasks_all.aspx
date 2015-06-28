@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <div id="page-wrapper">
+    <div id="page-wrapper" style="height: 93vh">
 
             <div class="container-fluid">
 
@@ -20,9 +20,10 @@
                     <div class="col-md-4 col-md-offset-4">
 				        <div class="input-group" style="margin-top: 55px">
 					
-					        <input type="text" class="form-control control-height" placeholder="Search" name="srch-term" id="srch-term">
+					        <asp:TextBox runat="server" type="text" class="form-control control-height" placeholder="Search Product" ID="search"/>
 					        <div class="input-group-btn">
-						        <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                                <asp:Button runat="server" id="srch_btn" class="btn btn-default" type="submit" Text="Search" OnClick="srch_btn_Click"/>
+						        <!--<button id="srch_btn" class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>-->
 					        </div>
 				        </div>
                     </div>
@@ -30,7 +31,7 @@
 				
 				<div class="row">
                     <div class="col-md-12">
-                        <asp:GridView ID="del_product_GridView" runat="server" AutoGenerateColumns="False" DataKeyNames="task_id" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True" BackColor="White" CssClass="table table-bordered table-hover table-striped">
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="task_id" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True" BackColor="White" CssClass="table table-bordered table-hover table-striped">
                             <Columns>
                                 <asp:BoundField DataField="task_id" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="task_id" />
                                 <asp:BoundField DataField="task_desc" HeaderText="Task" SortExpression="task_desc">
@@ -50,11 +51,29 @@
                             <SortedAscendingHeaderStyle BackColor="#007DBB" />
                             <SortedDescendingCellStyle BackColor="#CAC9C9" />
                             <SortedDescendingHeaderStyle BackColor="#00547E" />
+
+                            <pagersettings mode="Numeric"
+                                position="Bottom"           
+                                pagebuttoncount="10"/>
+
+                            <pagerstyle BackColor="#808080"
+                                height="30px"
+                                verticalalign="Bottom"
+                                horizontalalign="Center"
+                                CssClass = "GridPager"/>
+
                         </asp:GridView>
 
                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT t.[task_id], t.[task_desc], t.[task_date], t.[task_type], e.[employee_name], t.[added_on], t.[task_status] FROM [tasks] AS t INNER JOIN [employee_info] AS e ON t.[added_by]=e.[employee_id] WHERE t.added_to != @user_id ORDER BY t.[task_date] DESC">
                             <SelectParameters>
                                 <asp:SessionParameter DefaultValue="NULL" Name="user_id" SessionField="userId" Type="Int64" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
+
+                        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT t.[task_id], t.[task_desc], t.[task_date], t.[task_type], e.[employee_name], t.[added_on], t.[task_status] FROM [tasks] AS t INNER JOIN [employee_info] AS e ON t.[added_by]=e.[employee_id] WHERE (t.[added_to] != @user_id) AND (employee_name LIKE '%' + @name + '%') OR (task_desc LIKE '%' + @name + '%') ORDER BY t.[task_date] DESC">
+                            <SelectParameters>
+                                <asp:SessionParameter DefaultValue="NULL" Name="user_id" SessionField="userId" Type="Int64" />
+                                <asp:ControlParameter ControlID="search" PropertyName="Text" Name="name" Type="String"></asp:ControlParameter>
                             </SelectParameters>
                         </asp:SqlDataSource>
                     </div>
@@ -74,9 +93,9 @@
 
                     <div class="modal-body">
                         <form class="form-group">
-                            <asp:DropDownList ID="emp_DropDownList" runat="server" DataSourceID="SqlDataSource2" DataTextField="employee_name" DataValueField="employee_id" CssClass="form-control control-height">
+                            <asp:DropDownList ID="emp_DropDownList" runat="server" DataSourceID="SqlDataSource3" DataTextField="employee_name" DataValueField="employee_id" CssClass="form-control control-height">
                             </asp:DropDownList>
-                            <asp:SqlDataSource runat="server" ID="SqlDataSource2" ConnectionString='<%$ ConnectionStrings:Dairy_SolutionConnectionString %>' SelectCommand="SELECT [employee_id], [employee_name] FROM [employee_info] WHERE ([employee_id] != @employee_id)">
+                            <asp:SqlDataSource runat="server" ID="SqlDataSource3" ConnectionString='<%$ ConnectionStrings:Dairy_SolutionConnectionString %>' SelectCommand="SELECT [employee_id], [employee_name] FROM [employee_info] WHERE ([employee_id] != @employee_id)">
                                 <SelectParameters>
                                     <asp:SessionParameter SessionField="userId" Name="employee_id" Type="Int32"></asp:SessionParameter>
                                 </SelectParameters>
