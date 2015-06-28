@@ -14,6 +14,18 @@ public partial class _Default : System.Web.UI.Page
 
     }
 
+    protected void srch_btn_Click(object sender, EventArgs e)
+    {
+        if (search.Text == "")
+        {
+            GridView1.DataSourceID = "SqlDataSource1";
+        }
+        else
+        {
+            GridView1.DataSourceID = "SqlDataSource2";
+        }
+    }
+
     protected void add_task_Click(object sender, EventArgs e)
     {
         string user_name = Session["userId"].ToString();

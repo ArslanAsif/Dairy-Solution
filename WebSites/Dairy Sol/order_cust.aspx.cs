@@ -30,4 +30,17 @@ public partial class _Default : System.Web.UI.Page
         grv1.DataSource = dt;
         grv1.DataBind();
     }
+
+
+    protected void srch_btn_Click(object sender, EventArgs e)
+    {
+        if (search.Text == "")
+        {
+            order_customer_GridView.DataSourceID = "SqlDataSource1";
+        }
+        else
+        {
+            order_customer_GridView.DataSourceID = "SqlDataSource2";
+        }
+    }
 }

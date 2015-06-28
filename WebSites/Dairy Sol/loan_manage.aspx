@@ -20,9 +20,10 @@
                     <div class="col-md-4 col-md-offset-4">
 				        <div class="input-group" style="margin-top: 55px">
 					
-					        <input type="text" class="form-control control-height" placeholder="Search" name="srch-term" id="srch-term">
+					        <asp:TextBox runat="server" type="text" class="form-control control-height" placeholder="Search Product" ID="search"/>
 					        <div class="input-group-btn">
-						        <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                                <asp:Button runat="server" id="srch_btn" class="btn btn-default" type="submit" Text="Search" OnClick="srch_btn_Click"/>
+						        <!--<button id="srch_btn" class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>-->
 					        </div>
 				        </div>
                     </div>
@@ -70,6 +71,15 @@
                             <DeleteParameters>
                                 <asp:Parameter Name="req_id" />
                             </DeleteParameters>
+                        </asp:SqlDataSource>
+
+                        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT l.req_id, e.employee_name, l.amount, l.req_date, l.span, l.status FROM [loan_request] AS l INNER JOIN [employee_info] AS e ON l.emp_id = e.employee_id WHERE (employee_name LIKE '%' + @name + '%')" DeleteCommand="DELETE FROM loan_request WHERE req_id = @req_id">
+                            <DeleteParameters>
+                                <asp:Parameter Name="req_id" />
+                            </DeleteParameters>
+                            <SelectParameters>
+                                <asp:ControlParameter ControlID="search" PropertyName="Text" Name="name" Type="String"></asp:ControlParameter>
+                            </SelectParameters>
                         </asp:SqlDataSource>
                     </div>
 				</div>

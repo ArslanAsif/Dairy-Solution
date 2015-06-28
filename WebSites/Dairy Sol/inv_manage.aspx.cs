@@ -11,4 +11,16 @@ public partial class Default2 : System.Web.UI.Page
     {
 
     }
+
+    protected void srch_btn_Click(object sender, EventArgs e)
+    {
+        if (search.Text == "")
+        {
+            del_product_GridView.DataSourceID = "SqlDataSource1";
+        }
+        else
+        {
+            del_product_GridView.DataSourceID = "SqlDataSource2";
+        }
+    }
 }

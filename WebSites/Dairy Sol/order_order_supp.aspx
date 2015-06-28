@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <div id="page-wrapper">
+    <div id="page-wrapper" style="height:93vh">
         <div class="container-fluid">
             <!-- Page Heading -->
             <div class="row">
@@ -38,7 +38,7 @@
 				    <div class = "col-md-4">
 					    <asp:TextBox ID ="name" runat="server" CssClass="form-control control-height"></asp:TextBox><br />
 				    </div>
-				    <label class = "col-md-2 control-label">Contact Number</label>
+				    <label class = "col-md-2 control-label">Contact #</label>
 				    <div class = "col-md-4">
 					    <asp:TextBox ID ="contact_num" runat="server" CssClass="form-control control-height"></asp:TextBox>
 				    </div>

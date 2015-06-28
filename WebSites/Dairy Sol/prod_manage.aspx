@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 
-    <div id="page-wrapper">
+    <div id="page-wrapper" style="height:93vh">
         <div class="container-fluid">
 
             <!-- Page Heading -->
@@ -19,9 +19,10 @@
                 <div class="col-md-4 col-md-offset-4">
 				    <div class="input-group" style="margin-top: 55px">
 					
-					    <input type="text" class="form-control control-height" placeholder="Search by Product Name or ID" name="srch-term" id="srch-term">
+					    <asp:TextBox runat="server" type="text" class="form-control control-height" placeholder="Search Product" ID="search"/>
 					    <div class="input-group-btn">
-						    <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                            <asp:Button runat="server" id="srch_btn" class="btn btn-default" type="submit" Text="Search" OnClick="srch_btn_Click"/>
+						    <!--<button id="srch_btn" class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>-->
 					    </div>
 				    </div>
                 </div>
@@ -48,8 +49,8 @@
                 <SortedDescendingHeaderStyle BackColor="#00547E" />
 
                 <pagersettings mode="Numeric"
-                                  position="Bottom"           
-                                  pagebuttoncount="10"/>
+                    position="Bottom"           
+                    pagebuttoncount="10"/>
 
                 <pagerstyle BackColor="#808080"
                     height="30px"
@@ -75,6 +76,28 @@
                     <asp:Parameter Name="original_product_name" Type="String" />
                     <asp:Parameter Name="original_minimum_level" Type="Int32" />
                 </UpdateParameters>
+            </asp:SqlDataSource>
+
+            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" DeleteCommand="DELETE FROM [products] WHERE [product_id] = @original_product_id AND (([product_name] = @original_product_name) OR ([product_name] IS NULL AND @original_product_name IS NULL)) AND (([minimum_level] = @original_minimum_level) OR ([minimum_level] IS NULL AND @original_minimum_level IS NULL))" InsertCommand="INSERT INTO [products] ([product_name], [minimum_level]) VALUES (@product_name, @minimum_level)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [product_name], [product_id], [minimum_level] FROM [products] WHERE ([product_name] LIKE '%' + @product_name + '%')" UpdateCommand="UPDATE [products] SET [product_name] = @product_name, [minimum_level] = @minimum_level WHERE [product_id] = @original_product_id AND (([product_name] = @original_product_name) OR ([product_name] IS NULL AND @original_product_name IS NULL)) AND (([minimum_level] = @original_minimum_level) OR ([minimum_level] IS NULL AND @original_minimum_level IS NULL))">
+                <DeleteParameters>
+                    <asp:Parameter Name="original_product_id" Type="Int32" />
+                    <asp:Parameter Name="original_product_name" Type="String" />
+                    <asp:Parameter Name="original_minimum_level" Type="Int32" />
+                </DeleteParameters>
+                <InsertParameters>
+                    <asp:Parameter Name="product_name" Type="String" />
+                    <asp:Parameter Name="minimum_level" Type="Int32" />
+                </InsertParameters>
+                <UpdateParameters>
+                    <asp:Parameter Name="product_name" Type="String" />
+                    <asp:Parameter Name="minimum_level" Type="Int32" />
+                    <asp:Parameter Name="original_product_id" Type="Int32" />
+                    <asp:Parameter Name="original_product_name" Type="String" />
+                    <asp:Parameter Name="original_minimum_level" Type="Int32" />
+                </UpdateParameters>
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="search" PropertyName="Text" Name="product_name" Type="String"></asp:ControlParameter>
+                </SelectParameters>
             </asp:SqlDataSource>
 
             <asp:SqlDataSource ID="ACER" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT * FROM products" UpdateCommand="UPDATE products SET product_name = @product_name, minimum_level = @minimum_level 

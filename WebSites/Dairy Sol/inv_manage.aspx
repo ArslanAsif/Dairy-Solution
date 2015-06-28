@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <div id="page-wrapper">
+    <div id="page-wrapper" style="height:93vh">
 
             <div class="container-fluid">
 
@@ -19,9 +19,10 @@
                     <div class="col-md-4 col-md-offset-4">
 				        <div class="input-group" style="margin-top: 55px">
 					
-					        <input type="text" class="form-control control-height" placeholder="Search by Product Name or ID" name="srch-term" id="srch-term">
+					        <asp:TextBox runat="server" type="text" class="form-control control-height" placeholder="Search Product" ID="search"/>
 					        <div class="input-group-btn">
-						        <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                                <asp:Button runat="server" id="srch_btn" class="btn btn-default" type="submit" Text="Search" OnClick="srch_btn_Click"/>
+						        <!--<button id="srch_btn" class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>-->
 					        </div>
 				        </div>
                     </div>
@@ -65,13 +66,9 @@
 
                         </asp:GridView>
 
-                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" DeleteCommand="DELETE
-    FROM   inventory_products
-    WHERE inventory_products.batch_id = @batch_id" SelectCommand="SELECT products.product_id, products.product_name, inventory_products.quantity, inventory_products.discount, inventory_products.entry_date, inventory_products.expiry_date, inventory_products.price, inventory_products.batch_id
-    FROM products
-    INNER JOIN inventory_products
-    ON products.product_id = inventory_products.product_id;" UpdateCommand="UPDATE inventory_products SET price = @price, quantity = @quantity, discount = @discount, entry_date = @entry_date, expiry_date = @expiry_date
-WHERE (product_id = @product_id)">
+                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" DeleteCommand="DELETE FROM   inventory_products WHERE inventory_products.batch_id = @batch_id" 
+                            SelectCommand="SELECT products.product_id, products.product_name, inventory_products.quantity, inventory_products.discount, inventory_products.entry_date, inventory_products.expiry_date, inventory_products.price, inventory_products.batch_id FROM products INNER JOIN inventory_products ON products.product_id = inventory_products.product_id;" 
+                            UpdateCommand="UPDATE inventory_products SET price = @price, quantity = @quantity, discount = @discount, entry_date = @entry_date, expiry_date = @expiry_date WHERE (product_id = @product_id)">
                             <DeleteParameters>
                                 <asp:Parameter Name="batch_id" />
                             </DeleteParameters>
@@ -83,6 +80,25 @@ WHERE (product_id = @product_id)">
                                 <asp:Parameter Name="expiry_date" />
                                 <asp:Parameter Name="product_id" />
                             </UpdateParameters>
+                        </asp:SqlDataSource>
+
+                        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" DeleteCommand="DELETE FROM   inventory_products WHERE inventory_products.batch_id = @batch_id" 
+                            SelectCommand="SELECT products.product_id, products.product_name, inventory_products.quantity, inventory_products.discount, inventory_products.entry_date, inventory_products.expiry_date, inventory_products.price, inventory_products.batch_id FROM products INNER JOIN inventory_products ON products.product_id = inventory_products.product_id WHERE (product_name LIKE '%' + @name + '%')" 
+                            UpdateCommand="UPDATE inventory_products SET price = @price, quantity = @quantity, discount = @discount, entry_date = @entry_date, expiry_date = @expiry_date WHERE (product_id = @product_id)">
+                            <DeleteParameters>
+                                <asp:Parameter Name="batch_id" />
+                            </DeleteParameters>
+                            <UpdateParameters>
+                                <asp:Parameter Name="price" />
+                                <asp:Parameter Name="quantity" />
+                                <asp:Parameter Name="discount" />
+                                <asp:Parameter Name="entry_date" />
+                                <asp:Parameter Name="expiry_date" />
+                                <asp:Parameter Name="product_id" />
+                            </UpdateParameters>
+                            <SelectParameters>
+                                <asp:ControlParameter ControlID="search" PropertyName="Text" Name="name" Type="String"></asp:ControlParameter>
+                            </SelectParameters>
                         </asp:SqlDataSource>
                     </div>
 				</div>

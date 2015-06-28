@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 
-<div id="page-wrapper">
+<div id="page-wrapper" style="height:93vh">
 
             <div class="container-fluid">
 
@@ -17,7 +17,16 @@
                     </div>
                 </div>
                 
-				
+				<div class="alert alert-success alert-dismissible" role="alert" runat="server" visible="false" id="alert_success">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <p>Added Successfully!</p>
+                </div>
+
+                <div class="alert alert-danger alert-dismissible" role="alert" runat="server" visible="false" id="alert_fail">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <asp:Label runat="server" ID="error"></asp:Label>
+                </div>
+
 				<div class="row">
                  <div class="col-md-4 col-md-offset-4">                
                     <form class="form-group">

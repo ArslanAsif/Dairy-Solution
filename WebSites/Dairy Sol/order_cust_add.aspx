@@ -43,7 +43,7 @@
 				        </div>
 				    
 
-				        <label class = "col-md-2 control-label">Contact Number</label>
+				        <label class = "col-md-2 control-label">Contact #</label>
 				        <div class = "col-md-4">
 					        <asp:TextBox ID ="contact_num" runat="server" CssClass="form-control control-height"></asp:TextBox>
 				        </div>
@@ -54,7 +54,7 @@
                         
                         <!--<div class="col-md-12" style="padding-top: 30px; padding-bottom: 20px"><p style="width: 100%; height: 1px; background-color: grey;"></p></div>-->
 
-				        <label class = "col-md-2 control-label">Street Address</label>
+				        <label class = "col-md-2 control-label">Street Addr.</label>
 				        <div class = "col-md-4">
 					        <asp:TextBox ID ="street_add" runat="server" CssClass="form-control control-height"></asp:TextBox>
 				        </div>
@@ -67,7 +67,7 @@
 				        <div class = "col-md-4">
 					        <asp:TextBox ID ="prov_add" runat="server" CssClass="form-control control-height"></asp:TextBox>
 				        </div>
-                        <label class = "col-md-2 control-label">Postal Address</label>
+                        <label class = "col-md-2 control-label">Postal Addr.</label>
 				        <div class = "col-md-4">
 					        <asp:TextBox ID ="postal_add" runat="server" CssClass="form-control control-height"></asp:TextBox><br/>
 				        </div>
@@ -98,7 +98,7 @@
                     </div>
 
                     <div class="panel-body" >
-				        <label class = "col-md-2 control-label">Payment Method</label>
+				        <label class = "col-md-2 control-label">Pay Method</label>
 				        <div class = "col-md-4">
                             <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control control-height">
                                 <asp:ListItem>--Please Choose--</asp:ListItem>
@@ -107,7 +107,7 @@
                                 <asp:ListItem>Credit/Debit Card</asp:ListItem>
                             </asp:DropDownList>
 					    </div>
-				        <label class = "col-md-2 control-label">Amount Payable</label>
+				        <label class = "col-md-2 control-label">Amount</label>
 				        <div class = "col-md-4">
 					        <asp:TextBox ID ="total" runat="server" CssClass="form-control control-height"></asp:TextBox><br/>
 				        </div>

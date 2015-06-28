@@ -28,7 +28,7 @@
                         </HeaderTemplate>
 
                         <ItemTemplate>
-                            <li class="catAlign"><a href="#"><%# Eval("heading") %></a></li>
+                            <li class="catAlign"><a href="site_post_detail.aspx?id=<%# Eval("post_id") %>"><%# Eval("heading") %></a></li>
                         </ItemTemplate>
                   
                         <FooterTemplate>
@@ -36,7 +36,7 @@
                         </FooterTemplate>
                     </asp:Repeater>
 
-                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT heading FROM [posts] ORDER BY heading ASC"></asp:SqlDataSource>
+                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT post_id, heading FROM [posts] ORDER BY heading ASC"></asp:SqlDataSource>
 			    </div>	
 		    </div>
 		    <!--end of row-->	
