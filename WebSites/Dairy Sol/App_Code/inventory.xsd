@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="inventory" targetNamespace="http://tempuri.org/inventory.xsd" xmlns:mstns="http://tempuri.org/inventory.xsd" xmlns="http://tempuri.org/inventory.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="Dairy_SolutionConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="Dairy_SolutionConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.Dairy_SolutionConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTable1TableAdapter" GeneratorDataComponentClassName="DataTable1TableAdapter" Name="DataTable1" UserDataComponentName="DataTable1TableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="Dairy_SolutionConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        o.order_id,
+                             (SELECT        employee_name
+                               FROM            employee_info
+                               WHERE        (employee_id = o.employee_id)) AS Expr1,
+                             (SELECT        customer_name
+                               FROM            customer_info
+                               WHERE        (customer_id = o.customer_id)) AS Expr2, o.order_date,
+                             (SELECT        product_name
+                               FROM            products
+                               WHERE        (product_id = sop.product_id)) AS Expr3, sop.quantity
+FROM            orders AS o INNER JOIN
+                         services_or_products AS sop ON o.order_id = sop.order_id
+WHERE        (DATEDIFF(MONTH, GETDATE(), o.order_date) = 0)</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="order_id" DataSetColumn="order_id" />
+              <Mapping SourceColumn="Expr1" DataSetColumn="Expr1" />
+              <Mapping SourceColumn="Expr2" DataSetColumn="Expr2" />
+              <Mapping SourceColumn="order_date" DataSetColumn="order_date" />
+              <Mapping SourceColumn="Expr3" DataSetColumn="Expr3" />
+              <Mapping SourceColumn="quantity" DataSetColumn="quantity" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="inventory_inTableAdapter" GeneratorDataComponentClassName="inventory_inTableAdapter" Name="inventory_in" UserDataComponentName="inventory_inTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="Dairy_SolutionConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        i.product_id, i.entry_date, i.quantity, i.batch_id, i.expiry_date, p.product_name
+FROM            inventory_products AS i INNER JOIN
+                         products AS p ON i.product_id = p.product_id
+WHERE        (DATEDIFF(MONTH, GETDATE(), i.entry_date) between - 1 and 0)</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="product_id" DataSetColumn="product_id" />
+              <Mapping SourceColumn="entry_date" DataSetColumn="entry_date" />
+              <Mapping SourceColumn="quantity" DataSetColumn="quantity" />
+              <Mapping SourceColumn="batch_id" DataSetColumn="batch_id" />
+              <Mapping SourceColumn="expiry_date" DataSetColumn="expiry_date" />
+              <Mapping SourceColumn="product_name" DataSetColumn="product_name" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="inventory_outTableAdapter" GeneratorDataComponentClassName="inventory_outTableAdapter" Name="inventory_out" UserDataComponentName="inventory_outTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="Dairy_SolutionConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        o.order_id,
+                             (SELECT        employee_name
+                               FROM            employee_info
+                               WHERE        (employee_id = o.employee_id)) AS Expr1,
+                             (SELECT        customer_name
+                               FROM            customer_info
+                               WHERE        (customer_id = o.customer_id)) AS Expr2, o.order_date, sop.quantity,
+                             (SELECT        product_name
+                               FROM            products
+                               WHERE        (product_id = sop.product_id)) AS Expr3
+FROM            orders AS o INNER JOIN
+                         services_or_products AS sop ON o.order_id = sop.order_id
+WHERE        (DATEDIFF(MONTH, GETDATE(), o.order_date) between - 1 and 0)</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="order_id" DataSetColumn="order_id" />
+              <Mapping SourceColumn="Expr1" DataSetColumn="Expr1" />
+              <Mapping SourceColumn="Expr2" DataSetColumn="Expr2" />
+              <Mapping SourceColumn="order_date" DataSetColumn="order_date" />
+              <Mapping SourceColumn="quantity" DataSetColumn="quantity" />
+              <Mapping SourceColumn="Expr3" DataSetColumn="Expr3" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="products_leastSoldTableAdapter" GeneratorDataComponentClassName="products_leastSoldTableAdapter" Name="products_leastSold" UserDataComponentName="products_leastSoldTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="Dairy_SolutionConnectionString (Web.config)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        (SELECT        product_name
+                          FROM            products
+                          WHERE        (product_id = p.product_id)) AS Expr1,
+                             (SELECT        SUM(quantity) AS Expr1
+                               FROM            inventory_products
+                               WHERE        (product_id = p.product_id)) AS Expr2
+FROM            products AS p LEFT OUTER JOIN
+                             (SELECT        sop.product_id
+                               FROM            orders AS o INNER JOIN
+                                                         services_or_products AS sop ON o.order_id = sop.order_id
+                               WHERE        (DATEDIFF(MONTH, GETDATE(), o.order_date) BETWEEN - 3 AND 0) AND (sop.quantity &lt;= 3)
+                               GROUP BY sop.product_id) AS something ON something.product_id = p.product_id
+WHERE        (something.product_id IS NULL)</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Expr1" DataSetColumn="Expr1" />
+              <Mapping SourceColumn="Expr2" DataSetColumn="Expr2" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="inventory" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="inventory" msprop:Generator_UserDSName="inventory">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1" msprop:Generator_TableClassName="DataTable1DataTable" msprop:Generator_TableVarName="tableDataTable1" msprop:Generator_RowChangedName="DataTable1RowChanged" msprop:Generator_TablePropName="DataTable1" msprop:Generator_RowDeletingName="DataTable1RowDeleting" msprop:Generator_RowChangingName="DataTable1RowChanging" msprop:Generator_RowEvHandlerName="DataTable1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTable1RowDeleted" msprop:Generator_RowClassName="DataTable1Row" msprop:Generator_UserTableName="DataTable1" msprop:Generator_RowEvArgName="DataTable1RowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="order_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnorder_id" msprop:Generator_ColumnPropNameInRow="order_id" msprop:Generator_ColumnPropNameInTable="order_idColumn" msprop:Generator_UserColumnName="order_id" type="xs:long" />
+              <xs:element name="Expr1" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnExpr1" msprop:Generator_ColumnPropNameInRow="Expr1" msprop:Generator_ColumnPropNameInTable="Expr1Column" msprop:Generator_UserColumnName="Expr1" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Expr2" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnExpr2" msprop:Generator_ColumnPropNameInRow="Expr2" msprop:Generator_ColumnPropNameInTable="Expr2Column" msprop:Generator_UserColumnName="Expr2" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="order_date" msprop:Generator_ColumnVarNameInTable="columnorder_date" msprop:Generator_ColumnPropNameInRow="order_date" msprop:Generator_ColumnPropNameInTable="order_dateColumn" msprop:Generator_UserColumnName="order_date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Expr3" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnExpr3" msprop:Generator_ColumnPropNameInRow="Expr3" msprop:Generator_ColumnPropNameInTable="Expr3Column" msprop:Generator_UserColumnName="Expr3" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="quantity" msprop:Generator_ColumnVarNameInTable="columnquantity" msprop:Generator_ColumnPropNameInRow="quantity" msprop:Generator_ColumnPropNameInTable="quantityColumn" msprop:Generator_UserColumnName="quantity" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="inventory_in" msprop:Generator_TableClassName="inventory_inDataTable" msprop:Generator_TableVarName="tableinventory_in" msprop:Generator_TablePropName="inventory_in" msprop:Generator_RowDeletingName="inventory_inRowDeleting" msprop:Generator_RowChangingName="inventory_inRowChanging" msprop:Generator_RowEvHandlerName="inventory_inRowChangeEventHandler" msprop:Generator_RowDeletedName="inventory_inRowDeleted" msprop:Generator_UserTableName="inventory_in" msprop:Generator_RowChangedName="inventory_inRowChanged" msprop:Generator_RowEvArgName="inventory_inRowChangeEvent" msprop:Generator_RowClassName="inventory_inRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="product_id" msprop:Generator_ColumnVarNameInTable="columnproduct_id" msprop:Generator_ColumnPropNameInRow="product_id" msprop:Generator_ColumnPropNameInTable="product_idColumn" msprop:Generator_UserColumnName="product_id" type="xs:int" />
+              <xs:element name="entry_date" msprop:Generator_ColumnVarNameInTable="columnentry_date" msprop:Generator_ColumnPropNameInRow="entry_date" msprop:Generator_ColumnPropNameInTable="entry_dateColumn" msprop:Generator_UserColumnName="entry_date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="quantity" msprop:Generator_ColumnVarNameInTable="columnquantity" msprop:Generator_ColumnPropNameInRow="quantity" msprop:Generator_ColumnPropNameInTable="quantityColumn" msprop:Generator_UserColumnName="quantity" type="xs:int" minOccurs="0" />
+              <xs:element name="batch_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnbatch_id" msprop:Generator_ColumnPropNameInRow="batch_id" msprop:Generator_ColumnPropNameInTable="batch_idColumn" msprop:Generator_UserColumnName="batch_id" type="xs:int" />
+              <xs:element name="expiry_date" msprop:Generator_ColumnVarNameInTable="columnexpiry_date" msprop:Generator_ColumnPropNameInRow="expiry_date" msprop:Generator_ColumnPropNameInTable="expiry_dateColumn" msprop:Generator_UserColumnName="expiry_date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="product_name" msprop:Generator_ColumnVarNameInTable="columnproduct_name" msprop:Generator_ColumnPropNameInRow="product_name" msprop:Generator_ColumnPropNameInTable="product_nameColumn" msprop:Generator_UserColumnName="product_name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="inventory_out" msprop:Generator_TableClassName="inventory_outDataTable" msprop:Generator_TableVarName="tableinventory_out" msprop:Generator_TablePropName="inventory_out" msprop:Generator_RowDeletingName="inventory_outRowDeleting" msprop:Generator_RowChangingName="inventory_outRowChanging" msprop:Generator_RowEvHandlerName="inventory_outRowChangeEventHandler" msprop:Generator_RowDeletedName="inventory_outRowDeleted" msprop:Generator_UserTableName="inventory_out" msprop:Generator_RowChangedName="inventory_outRowChanged" msprop:Generator_RowEvArgName="inventory_outRowChangeEvent" msprop:Generator_RowClassName="inventory_outRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="order_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnorder_id" msprop:Generator_ColumnPropNameInRow="order_id" msprop:Generator_ColumnPropNameInTable="order_idColumn" msprop:Generator_UserColumnName="order_id" type="xs:long" />
+              <xs:element name="Expr1" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnExpr1" msprop:Generator_ColumnPropNameInRow="Expr1" msprop:Generator_ColumnPropNameInTable="Expr1Column" msprop:Generator_UserColumnName="Expr1" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Expr2" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnExpr2" msprop:Generator_ColumnPropNameInRow="Expr2" msprop:Generator_ColumnPropNameInTable="Expr2Column" msprop:Generator_UserColumnName="Expr2" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="order_date" msprop:Generator_ColumnVarNameInTable="columnorder_date" msprop:Generator_ColumnPropNameInRow="order_date" msprop:Generator_ColumnPropNameInTable="order_dateColumn" msprop:Generator_UserColumnName="order_date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="quantity" msprop:Generator_ColumnVarNameInTable="columnquantity" msprop:Generator_ColumnPropNameInRow="quantity" msprop:Generator_ColumnPropNameInTable="quantityColumn" msprop:Generator_UserColumnName="quantity" type="xs:int" minOccurs="0" />
+              <xs:element name="Expr3" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnExpr3" msprop:Generator_ColumnPropNameInRow="Expr3" msprop:Generator_ColumnPropNameInTable="Expr3Column" msprop:Generator_UserColumnName="Expr3" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="products_leastSold" msprop:Generator_TableClassName="products_leastSoldDataTable" msprop:Generator_TableVarName="tableproducts_leastSold" msprop:Generator_TablePropName="products_leastSold" msprop:Generator_RowDeletingName="products_leastSoldRowDeleting" msprop:Generator_RowChangingName="products_leastSoldRowChanging" msprop:Generator_RowEvHandlerName="products_leastSoldRowChangeEventHandler" msprop:Generator_RowDeletedName="products_leastSoldRowDeleted" msprop:Generator_UserTableName="products_leastSold" msprop:Generator_RowChangedName="products_leastSoldRowChanged" msprop:Generator_RowEvArgName="products_leastSoldRowChangeEvent" msprop:Generator_RowClassName="products_leastSoldRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Expr1" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnExpr1" msprop:Generator_ColumnPropNameInRow="Expr1" msprop:Generator_ColumnPropNameInTable="Expr1Column" msprop:Generator_UserColumnName="Expr1" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Expr2" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnExpr2" msprop:Generator_ColumnPropNameInRow="Expr2" msprop:Generator_ColumnPropNameInTable="Expr2Column" msprop:Generator_UserColumnName="Expr2" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:inventory_in" />
+      <xs:field xpath="mstns:batch_id" />
+    </xs:unique>
+    <xs:unique name="inventory_out_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:inventory_out" />
+      <xs:field xpath="mstns:order_id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
