@@ -37,9 +37,9 @@
                                 <asp:ListItem Value="inv_report">Inventory</asp:ListItem>
                                 <asp:ListItem Value="inv_minLevel_report">Inventory Min Level</asp:ListItem>
                                 <asp:ListItem Value="product_expiry_report">Product Expiry</asp:ListItem>
-                                <asp:ListItem>Unsold Products</asp:ListItem>
-                                <asp:ListItem>Inventory IN</asp:ListItem>
-                                <asp:ListItem>Inventory OUT</asp:ListItem>
+                                <asp:ListItem Value="products_leastSold" >Unsold Products</asp:ListItem>
+                                <asp:ListItem Value="inventory_in">Inventory IN</asp:ListItem>
+                                <asp:ListItem Value="inv_out_report">Inventory OUT</asp:ListItem>
                             </asp:DropDownList>
                             <div class="input-group-btn">
                                 <asp:Button runat="server" ID="select_report_btn" Text="Generate Report" class="btn btn-default" type="submit" OnClick="select_report_btn_Click"/>
