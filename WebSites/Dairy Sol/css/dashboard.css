@@ -4,6 +4,30 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+/*Pager buttons*/
+.GridPager a, .GridPager span
+{
+    display: block;
+    //height: 15px;
+    width: 25px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+}
+.GridPager a
+{
+    background-color: #f5f5f5;
+    color: #969696;
+    border: 1px solid white;
+}
+.GridPager span
+{
+    /*background-color: #A1DCF2;*/
+    color: white;
+    border: 1px solid white;
+}
+/*End Pager buttons*/
+
 .control-height {
     height: 100%;
 }

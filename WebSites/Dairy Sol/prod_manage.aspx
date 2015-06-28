@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+
     <div id="page-wrapper">
         <div class="container-fluid">
 
@@ -26,7 +27,7 @@
                 </div>
             </div>
 
-            <asp:GridView ID="product_GridView" runat="server" AutoGenerateColumns="False" DataKeyNames="product_id" DataSourceID="SqlDataSource1" AllowSorting="True" BackColor="White" OnSelectedIndexChanged="product_GridView1_SelectedIndexChanged" CssClass="table table-bordered table-hover table-striped">
+            <asp:GridView ID="product_GridView" runat="server" AutoGenerateColumns="False" AllowPaging="true" DataKeyNames="product_id" DataSourceID="SqlDataSource1" AllowSorting="True" BackColor="White" OnSelectedIndexChanged="product_GridView1_SelectedIndexChanged" CssClass="table table-bordered table-hover table-striped" PageSize="10">
                 <Columns>
                     <asp:BoundField DataField="product_id" HeaderText="Product ID" SortExpression="product_id" ReadOnly="True" InsertVisible="False" />
                     <asp:BoundField DataField="product_name" HeaderText="Product Name" SortExpression="product_name">
@@ -45,6 +46,16 @@
                 <SortedAscendingHeaderStyle BackColor="#007DBB" />
                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                 <SortedDescendingHeaderStyle BackColor="#00547E" />
+
+                <pagersettings mode="Numeric"
+                                  position="Bottom"           
+                                  pagebuttoncount="10"/>
+
+                <pagerstyle BackColor="#808080"
+                    height="30px"
+                    verticalalign="Bottom"
+                    horizontalalign="Center"
+                    CssClass = "GridPager"/>
             </asp:GridView>
 
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" DeleteCommand="DELETE FROM [products] WHERE [product_id] = @original_product_id AND (([product_name] = @original_product_name) OR ([product_name] IS NULL AND @original_product_name IS NULL)) AND (([minimum_level] = @original_minimum_level) OR ([minimum_level] IS NULL AND @original_minimum_level IS NULL))" InsertCommand="INSERT INTO [products] ([product_name], [minimum_level]) VALUES (@product_name, @minimum_level)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [product_name], [product_id], [minimum_level] FROM [products]" UpdateCommand="UPDATE [products] SET [product_name] = @product_name, [minimum_level] = @minimum_level WHERE [product_id] = @original_product_id AND (([product_name] = @original_product_name) OR ([product_name] IS NULL AND @original_product_name IS NULL)) AND (([minimum_level] = @original_minimum_level) OR ([minimum_level] IS NULL AND @original_minimum_level IS NULL))">

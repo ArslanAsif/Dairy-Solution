@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Net;
 
 public partial class _Default : System.Web.UI.Page
 {
@@ -95,8 +96,9 @@ public partial class _Default : System.Web.UI.Page
                     {
                         change_text = dr["password"].ToString();
                         pass_reveal.Text = "Your Password is: " + change_text;
-                        pass_reveal.EnableViewState = true;
-                        pass_reveal.Visible = true;
+                        SendMail();
+                        //pass_reveal.EnableViewState = true;
+                        //pass_reveal.Visible = true;
                         pass_reveal.ForeColor = System.Drawing.Color.Green;
                     }
                     else 
@@ -119,10 +121,10 @@ public partial class _Default : System.Web.UI.Page
             {
                 if (dr.HasRows)
                 {
-                    change_text = dr["customer_password"].ToString();
-                    pass_reveal.Text = "Your Password is: " + change_text;
-                    pass_reveal.EnableViewState = true;
-                    pass_reveal.Visible = true;
+                    pass_reveal.Text = dr["customer_password"].ToString();
+                    SendMail();
+                    //pass_reveal.EnableViewState = true;
+                    //pass_reveal.Visible = true;
                     pass_reveal.ForeColor = System.Drawing.Color.Green;
                 }
                 else
@@ -135,5 +137,32 @@ public partial class _Default : System.Web.UI.Page
             }
         }
         con.Close();
+    }
+
+    protected void SendMail()
+    {
+        // Gmail Address from where you send the mail
+        var fromAddress = "dairysolutionlahore.inquiry@gmail.com";
+        // any address where the email will be sending
+        var toAddress = email_id.Text;
+        //Password of your gmail address
+        const string fromPassword = "dairysolution";
+        // Passing the values and make a email formate to display
+        string subject = "Password Reset Request";
+
+        string body = "Your password of Dairy Solution account is: "+ pass_reveal.Text +"\n\n";
+
+        // smtp settings
+        var smtp = new System.Net.Mail.SmtpClient();
+        {
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 587;
+            smtp.EnableSsl = true;
+            smtp.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+            smtp.Credentials = new NetworkCredential(fromAddress, fromPassword);
+            smtp.Timeout = 20000;
+        }
+        // Passing values to smtp object
+        smtp.Send(fromAddress, toAddress, subject, body);
     }
 }

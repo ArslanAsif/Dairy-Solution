@@ -53,7 +53,19 @@
                             <SortedAscendingHeaderStyle BackColor="#007DBB" />
                             <SortedDescendingCellStyle BackColor="#CAC9C9" />
                             <SortedDescendingHeaderStyle BackColor="#00547E" />
+
+                            <pagersettings mode="Numeric"
+                                position="Bottom"           
+                                pagebuttoncount="10"/>
+
+                            <pagerstyle BackColor="#808080"
+                                height="30px"
+                                verticalalign="Bottom"
+                                horizontalalign="Center"
+                                CssClass = "GridPager"/>
+
                         </asp:GridView>
+
 				        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT l.req_id, e.employee_name, l.amount, l.req_date, l.span, l.status FROM [loan_request] AS l INNER JOIN [employee_info] AS e ON l.emp_id = e.employee_id" DeleteCommand="DELETE FROM loan_request WHERE req_id = @req_id">
                             <DeleteParameters>
                                 <asp:Parameter Name="req_id" />

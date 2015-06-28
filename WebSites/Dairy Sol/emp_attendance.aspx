@@ -31,7 +31,7 @@
 				<div class="row">	
 					<div class="col-lg-12">
                         
-                        <asp:GridView ID="emp_attendance_GridView" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True" BackColor="White" DataKeyNames="employee_id,date_time" CssClass="table table-bordered table-hover table-striped">
+                        <asp:GridView ID="emp_attendance_GridView" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" EmptyDataText="N.A." AllowPaging="True" AllowSorting="True" BackColor="White" DataKeyNames="employee_id,date_time" CssClass="table table-bordered table-hover table-striped">
                             <Columns>
                                 <asp:BoundField DataField="employee_id" HeaderText="Employee ID" SortExpression="employee_id" ReadOnly="True" />
                                 <asp:BoundField DataField="employee_name" HeaderText="Employee Name" SortExpression="employee_name" ReadOnly="True" />
@@ -49,6 +49,17 @@
                             <SortedAscendingHeaderStyle BackColor="#007DBB" />
                             <SortedDescendingCellStyle BackColor="#CAC9C9" />
                             <SortedDescendingHeaderStyle BackColor="#00547E" />
+
+                            <pagersettings mode="Numeric"
+                                position="Bottom"           
+                                pagebuttoncount="10"/>
+
+                            <pagerstyle BackColor="#808080"
+                                height="30px"
+                                verticalalign="Bottom"
+                                horizontalalign="Center"
+                                CssClass = "GridPager"/>
+
                         </asp:GridView>
 
                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" OldValuesParameterFormatString="original_{0}"

@@ -29,7 +29,7 @@
 
 				<div class="row">	
 					<div class="col-lg-12">
-                        <asp:GridView ID="GridView1" runat="server" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" CssClass="table table-bordered table-hover table-striped" GridLines="None"  DataKeyNames="employee_id" DataSourceID="SqlDataSource1">
+                        <asp:GridView ID="GridView1" runat="server" AllowSorting="True" AllowPaging="true" AutoGenerateColumns="False" BackColor="White" CssClass="table table-bordered table-hover table-striped" GridLines="None"  DataKeyNames="employee_id" DataSourceID="SqlDataSource1">
                             <Columns>
                                 <asp:BoundField DataField="employee_id" HeaderText="Id" InsertVisible="False" ReadOnly="True" SortExpression="employee_id" />
                                 <asp:ImageField ControlStyle-CssClass="padding: 50px" AccessibleHeaderText="Image" DataImageUrlField="employee_picture" HeaderText="Picture" NullImageUrl="~/images/profile_default.jpg">
@@ -51,7 +51,19 @@
                             <SortedAscendingHeaderStyle BackColor="#007DBB" />
                             <SortedDescendingCellStyle BackColor="#CAC9C9" />
                             <SortedDescendingHeaderStyle BackColor="#00547E" />
+
+                            <pagersettings mode="Numeric"
+                                position="Bottom"           
+                                pagebuttoncount="10"/>
+
+                            <pagerstyle BackColor="#808080"
+                                height="30px"
+                                verticalalign="Bottom"
+                                horizontalalign="Center"
+                                CssClass = "GridPager"/>
+
                         </asp:GridView>
+
 				        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" DeleteCommand="DELETE FROM [employee_info] WHERE [employee_id] = @original_employee_id AND (([employee_name] = @original_employee_name) OR ([employee_name] IS NULL AND @original_employee_name IS NULL)) AND (([gender] = @original_gender) OR ([gender] IS NULL AND @original_gender IS NULL)) AND [email_id] = @original_email_id AND (([employee_picture] = @original_employee_picture) OR ([employee_picture] IS NULL AND @original_employee_picture IS NULL)) AND (([mobile_number] = @original_mobile_number) OR ([mobile_number] IS NULL AND @original_mobile_number IS NULL))" InsertCommand="INSERT INTO [employee_info] ([employee_name], [gender], [email_id], [employee_picture], [mobile_number]) VALUES (@employee_name, @gender, @email_id, @employee_picture, @mobile_number)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [employee_id], [employee_name], [gender], [email_id], [employee_picture], [mobile_number] FROM [employee_info]" UpdateCommand="UPDATE [employee_info] SET [employee_name] = @employee_name, [gender] = @gender, [email_id] = @email_id, [employee_picture] = @employee_picture, [mobile_number] = @mobile_number WHERE [employee_id] = @original_employee_id">
                             <DeleteParameters>
                                 <asp:Parameter Name="original_employee_id" Type="Int32" />

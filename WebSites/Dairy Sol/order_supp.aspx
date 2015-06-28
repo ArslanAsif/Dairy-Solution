@@ -30,7 +30,7 @@
 				<div class="row">
 					<div class="col-md-12">
                         <div>
-                            <asp:GridView ID="order_customer_GridView" runat="server" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" DataSourceID="SqlDataSource1" CssClass="table table-bordered table-hover table-striped">
+                            <asp:GridView ID="order_customer_GridView" runat="server" AllowSorting="True" AllowPaging="true" AutoGenerateColumns="False" BackColor="White" DataSourceID="SqlDataSource1" CssClass="table table-bordered table-hover table-striped">
                                 <Columns>
                                     <asp:BoundField DataField="order_id" HeaderText="Order ID" SortExpression="order_id" />
                                     <asp:BoundField DataField="product_id" HeaderText="Product ID" SortExpression="product_id" />
@@ -59,7 +59,19 @@
                                 <SortedAscendingHeaderStyle BackColor="#007DBB" />
                                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                                 <SortedDescendingHeaderStyle BackColor="#00547E" />
+
+                                <pagersettings mode="Numeric"
+                                  position="Bottom"           
+                                  pagebuttoncount="10"/>
+
+                                <pagerstyle BackColor="#808080"
+                                    height="30px"
+                                    verticalalign="Bottom"
+                                    horizontalalign="Center"
+                                    CssClass = "GridPager"/>
+
                             </asp:GridView>
+
                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT ordered_products.order_id, (select product_name from products where products.product_id = ordered_products.product_id) as product_id, supplier_order.quantity, (select supplier_name from supplier_info where supplier_id = supplier_order.supplier_id) as supplier_id, supplier_order.order_date FROM ordered_products INNER JOIN supplier_order ON ordered_products.order_id = supplier_order.order_id" UpdateCommand="UPDATE supplier_order SET supplier_name = @supplier_name, order_date = @order_date, quantity = @quantity FROM supplier_order INNER JOIN ordered_products ON supplier_order.order_id = ordered_products.order_id WHERE (supplier_order.order_id = @order_id) AND (ordered_products.product_id = @product_id)">
                                 <UpdateParameters>
                                     <asp:Parameter Name="supplier_name" />

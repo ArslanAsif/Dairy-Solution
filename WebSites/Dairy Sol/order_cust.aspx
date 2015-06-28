@@ -33,7 +33,7 @@
 					<div class="col-md-12">
                         
 	                    <div>
-                            <asp:GridView ID="order_customer_GridView" runat="server" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" DataKeyNames="order_id" DataSourceID="SqlDataSource1"  CssClass="table table-bordered table-hover table-striped" OnRowDataBound="order_customer_GridView_RowDataBound">
+                            <asp:GridView ID="order_customer_GridView" runat="server" AllowSorting="True" AllowPaging="true" AutoGenerateColumns="False" BackColor="White" DataKeyNames="order_id" DataSourceID="SqlDataSource1"  CssClass="table table-bordered table-hover table-striped" OnRowDataBound="order_customer_GridView_RowDataBound">
                                 <Columns>
                                     <asp:BoundField DataField="order_id" HeaderText="order_id" ReadOnly="True" SortExpression="order_id" InsertVisible="False" />
                                     <asp:BoundField DataField="order_date" HeaderText="order_date" SortExpression="order_date" />
@@ -66,7 +66,19 @@
                                 <SortedAscendingHeaderStyle BackColor="#007DBB" />
                                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                                 <SortedDescendingHeaderStyle BackColor="#00547E" />
+
+                                <pagersettings mode="Numeric"
+                                  position="Bottom"           
+                                  pagebuttoncount="10"/>
+
+                                <pagerstyle BackColor="#808080"
+                                    height="30px"
+                                    verticalalign="Bottom"
+                                    horizontalalign="Center"
+                                    CssClass = "GridPager"/>
+
                             </asp:GridView>
+
                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" DeleteCommand="DELETE FROM [services_or_products] WHERE [order_id] = @order_id
 DELETE FROM [payment_info] WHERE [order_id] = @order_id
 DELETE FROM [orders] WHERE [order_id] = @order_id" InsertCommand="INSERT INTO [orders] ([order_id], [product_id], [employee_id], [customer_id], [order_date], [description]) VALUES (@order_id, @product_id, @employee_id, @customer_id, @order_date, @description)" SelectCommand="select o.order_id, o.order_date, (select e.employee_name from employee_info e where e.employee_id = o.employee_id) as EmployeeName, 

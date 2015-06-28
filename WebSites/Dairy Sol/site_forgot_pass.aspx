@@ -16,7 +16,7 @@
                                 <asp:TextBox ID="email_id" runat="server" type="text" class="form-control" placeholder="Email ID"></asp:TextBox><br />
                                 <asp:Label ID="secret_question" class="form-control" runat="server" Text="" Visible ="false" EnableViewState="False"></asp:Label>
                                 <br/>
-                                <asp:TextBox ID="secret_answer" class="form-control" runat="server" Text="" Visible ="false" EnableViewState="False"></asp:TextBox>
+                                <asp:TextBox ID="secret_answer" class="form-control" placeholder="Answer" runat="server" Text="" Visible ="false" EnableViewState="False"></asp:TextBox>
                                 <br/>
                                 <asp:Button ID="search_btn" runat="server" CssClass ="btn btn-primary pull-right" onclick="forgot_pass_btn_Click" Text="Search Email"/>
                                 <asp:RadioButtonList ID="radioOptions1" runat="server" RepeatLayout="Flow" class ="radio-inline">

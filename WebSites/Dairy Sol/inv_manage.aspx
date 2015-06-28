@@ -52,6 +52,17 @@
                             <SortedAscendingHeaderStyle BackColor="#007DBB" />
                             <SortedDescendingCellStyle BackColor="#CAC9C9" />
                             <SortedDescendingHeaderStyle BackColor="#00547E" />
+
+                            <pagersettings mode="Numeric"
+                                position="Bottom"           
+                                pagebuttoncount="10"/>
+
+                            <pagerstyle BackColor="#808080"
+                                height="30px"
+                                verticalalign="Bottom"
+                                horizontalalign="Center"
+                                CssClass = "GridPager"/>
+
                         </asp:GridView>
 
                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" DeleteCommand="DELETE

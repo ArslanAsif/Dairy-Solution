@@ -30,7 +30,7 @@
 				<div class="row">
                     <div class="col-lg-12">
 
-                        <asp:GridView ID="GridView1" runat="server" AllowSorting="True" AutoGenerateColumns="False" BackColor="White" CssClass="table table-bordered table-hover table-striped" GridLines="None"  DataKeyNames="post_id" DataSourceID="SqlDataSource1">
+                        <asp:GridView ID="GridView1" runat="server" AllowSorting="True" AllowPaging="true" AutoGenerateColumns="False" BackColor="White" CssClass="table table-bordered table-hover table-striped" GridLines="None"  DataKeyNames="post_id" DataSourceID="SqlDataSource1">
                             <Columns>
                                 <asp:BoundField DataField="post_id" HeaderText="Post Id" InsertVisible="False" ReadOnly="True" SortExpression="post_id" />
                                 <asp:BoundField DataField="heading" HeaderText="Heading" SortExpression="heading" />
@@ -51,6 +51,16 @@
                             <SortedAscendingHeaderStyle BackColor="#007DBB" />
                             <SortedDescendingCellStyle BackColor="#CAC9C9" />
                             <SortedDescendingHeaderStyle BackColor="#00547E" />
+
+                            <pagersettings mode="Numeric"
+                                  position="Bottom"           
+                                  pagebuttoncount="10"/>
+
+                            <pagerstyle BackColor="#808080"
+                                height="30px"
+                                verticalalign="Bottom"
+                                horizontalalign="Center"
+                                CssClass = "GridPager"/>
                         </asp:GridView>
 				        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConflictDetection="CompareAllValues" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" DeleteCommand="DELETE FROM [posts] WHERE [post_id] = @original_post_id" InsertCommand="INSERT INTO [posts] ([summary], [heading], [detail], [picture]) VALUES (@summary, @heading, @detail, @picture)" OldValuesParameterFormatString="original_{0}" SelectCommand="SELECT [post_id], [summary], [heading], [detail], [picture] FROM [posts]" UpdateCommand="UPDATE [posts] SET [summary] = @summary, [heading] = @heading, [detail] = @detail, [picture] = @picture WHERE [post_id] = @original_post_id">
                             <DeleteParameters>
