@@ -48,8 +48,8 @@
                 <SortedDescendingHeaderStyle BackColor="#00547E" />
 
                 <pagersettings mode="Numeric"
-                                  position="Bottom"           
-                                  pagebuttoncount="10"/>
+                    position="Bottom"           
+                    pagebuttoncount="10"/>
 
                 <pagerstyle BackColor="#808080"
                     height="30px"
