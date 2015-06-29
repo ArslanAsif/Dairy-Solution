@@ -13,58 +13,26 @@ public partial class _Default : System.Web.UI.Page
 {
     List<DropDownList> ddlArray = new List<DropDownList>();
     List<TextBox> tbArray = new List<TextBox>();
-
+    
     int count_tb = 0;
-    string supp_email;
+
+    string cust_email;
     int[] products;
 
     string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
 
-    protected void email_TextChanged(object sender, EventArgs e)
+    protected Boolean check_customer_email()
     {
-        string query = "SELECT supplier_id, supplier_name, supplier_phone, supplier_phone2, supplier_email, supplier_address, supplier_postal_address FROM supplier_info WHERE supplier_email = '" + email.Text + "'";
-
         SqlConnection con = new SqlConnection(constring);
+
+        String query = "SELECT customer_email_id FROM customer_info where customer_email_id = '"+ email.Text +"'";
 
         SqlCommand cmd = new SqlCommand(query, con);
         cmd.Connection = con;
         SqlDataReader dr;
-
+        
         con.Open();
-
-        dr = cmd.ExecuteReader();
-        if (dr.Read())
-        {
-            supplier_id.InnerText = dr["supplier_id"].ToString();
-            name.Text = dr["supplier_name"].ToString();
-            contact_num.Text = dr["supplier_phone"].ToString();
-            contact_num2.Text = dr["supplier_phone2"].ToString();
-            address.Text = dr["supplier_address"].ToString();
-        }
-
-        else
-        {
-            name.Text = "";
-            contact_num.Text = "";
-            contact_num2.Text = "";
-            address.Text = "";
-        }
-
-        con.Close();
-    }
-
-    protected Boolean check_supplier_email()
-    {
-        SqlConnection con = new SqlConnection(constring);
-
-        String query = "SELECT supplier_email FROM supplier_info where supplier_email = '" + email.Text + "'";
-
-        SqlCommand cmd = new SqlCommand(query, con);
-        cmd.Connection = con;
-        SqlDataReader dr;
-
-        con.Open();
-
+        
         dr = cmd.ExecuteReader();
         if (dr.Read())
         {
@@ -76,13 +44,15 @@ public partial class _Default : System.Web.UI.Page
             con.Close();
             return false;
         }
+        
+        
     }
 
-    protected String return_supplier_id(string x)
+    protected String return_customer_id(string x)
     {
         SqlConnection con = new SqlConnection(constring);
 
-        String query = "SELECT supplier_id FROM supplier_info where supplier_email = '" + x + "'";
+        String query = "SELECT customer_id FROM customer_info where customer_email_id = '" + x + "'";
 
         SqlCommand cmd = new SqlCommand(query, con);
         cmd.Connection = con;
@@ -93,7 +63,7 @@ public partial class _Default : System.Web.UI.Page
         dr = cmd.ExecuteReader();
         if (dr.Read())
         {
-            String id = dr["supplier_id"].ToString();
+            String id = dr["customer_id"].ToString();
             con.Close();
             return id;
         }
@@ -109,7 +79,7 @@ public partial class _Default : System.Web.UI.Page
     {
         SqlConnection con = new SqlConnection(constring);
 
-        String query = "SELECT TOP 1 order_id FROM supplier_order ORDER BY order_id DESC;";
+        String query = "SELECT TOP 1 order_id FROM orders where customer_id = '"+Session["userId"]+"' ORDER BY order_id DESC";
 
         SqlCommand cmd = new SqlCommand(query, con);
         cmd.Connection = con;
@@ -132,8 +102,50 @@ public partial class _Default : System.Web.UI.Page
         }
     }
 
+    protected void email_TextChanged(object sender, EventArgs e)
+    {
+        string query = "SELECT i.customer_id, i.customer_name, i.customer_phone_number, i.customer_email_id, a.permanent_address, a.city, a.country FROM customer_info AS i INNER JOIN customer_address AS a ON i.customer_id = a.customer_id where i.customer_email_id = '" + email.Text + "'";
+
+        string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
+        SqlConnection con = new SqlConnection(constring);
+
+        SqlCommand cmd = new SqlCommand(query, con);
+        cmd.Connection = con;
+        SqlDataReader dr;
+
+        con.Open();
+
+        dr = cmd.ExecuteReader();
+        if (dr.Read())
+        {
+            cust_id.InnerText = dr["customer_id"].ToString();
+            f_name.Text = dr["customer_name"].ToString();
+            contact_num.Text = dr["customer_phone_number"].ToString();
+            cnic.Text = "123456789";
+            street_add.Text = dr["permanent_address"].ToString();
+            city_add.Text = dr["city"].ToString();
+            prov_add.Text = dr["country"].ToString();
+            postal_add.Text = "1234";
+        }
+
+        else
+        {
+            f_name.Text = "";
+            contact_num.Text = "";
+            cnic.Text = "";
+            street_add.Text = "";
+            city_add.Text = "";
+            prov_add.Text = "";
+            postal_add.Text = "";
+        }
+
+        con.Close();
+    }
+
     protected void add_order_Click(object sender, EventArgs e)
     {
+        cust_email = email.Text;
+
         foreach (DropDownList ddl in prod.Controls.OfType<DropDownList>())
         {
             ddlArray.Add(ddl);
@@ -147,70 +159,87 @@ public partial class _Default : System.Web.UI.Page
 
         try
         {
-
-            if (check_supplier_email())
+            if (check_customer_email())
             {
                 SqlConnection con = new SqlConnection(constring);
-                String cust_info_update_query = "UPDATE supplier_info SET supplier_name = @name, supplier_phone = @contact_num, supplier_phone2 = @contact_num2, supplier_address = @address WHERE supplier_email = @email";
+                String cust_info_update_query = "UPDATE customer_info SET customer_name = @f_name, customer_phone_number = @contact_num WHERE customer_email_id = @email;" +
+                                                "UPDATE customer_address SET permanent_address = @street_add, city = @city_add, country = @prov_add WHERE customer_id = @id";
+
                 SqlCommand cmd = new SqlCommand(cust_info_update_query, con);
 
+                cmd.Parameters.AddWithValue("@id", cust_id.InnerText);
                 cmd.Parameters.AddWithValue("@email", email.Text);
-                cmd.Parameters.AddWithValue("@name", name.Text);
+                cmd.Parameters.AddWithValue("@f_name", f_name.Text);
                 cmd.Parameters.AddWithValue("@contact_num", contact_num.Text);
-                cmd.Parameters.AddWithValue("@contact_num2", contact_num2.Text);
-                cmd.Parameters.AddWithValue("@address", address.Text);
+                cmd.Parameters.AddWithValue("@cnic", cnic.Text);
+
+                cmd.Parameters.AddWithValue("@street_add", street_add.Text);
+                cmd.Parameters.AddWithValue("@city_add", city_add.Text);
+                cmd.Parameters.AddWithValue("@prov_add", prov_add.Text);
+                cmd.Parameters.AddWithValue("@postal_add", postal_add.Text);
 
                 cmd.Connection = con;
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
-
-                supp_email = email.Text;
             }
 
             else
             {
                 SqlConnection con = new SqlConnection(constring);
-                String cust_info_insert_query = "INSERT INTO supplier_info(supplier_email, supplier_name, supplier_phone, supplier_phone2, supplier_address) VALUES(@email, @name, @contact_num, @contact_num2, @address)";
+                String cust_info_insert_query = "INSERT INTO customer_info(customer_email_id, customer_name, customer_phone_number) VALUES(@email, @f_name, @contact_num)";
                 SqlCommand cmd = new SqlCommand(cust_info_insert_query, con);
 
                 cmd.Parameters.AddWithValue("@email", email.Text);
-                cmd.Parameters.AddWithValue("@name", name.Text);
+                cmd.Parameters.AddWithValue("@f_name", f_name.Text);
                 cmd.Parameters.AddWithValue("@contact_num", contact_num.Text);
-                cmd.Parameters.AddWithValue("@contact_num2", contact_num2.Text);
-                cmd.Parameters.AddWithValue("@address", address.Text);
+                cmd.Parameters.AddWithValue("@cnic", cnic.Text);
 
                 cmd.Connection = con;
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
 
-                supplier_id.InnerText = return_supplier_id(email.Text);
+                cust_id.InnerText = return_customer_id(email.Text);
+
+                SqlConnection con0 = new SqlConnection(constring);
+                string cust_addr_insert_query = "INSERT INTO customer_address(customer_id, permanent_address, city, country) VALUES(@id, @street_add, @city_add, @prov_add)";
+                SqlCommand cmd0 = new SqlCommand(cust_addr_insert_query, con0);
+
+                cmd0.Parameters.AddWithValue("@id", cust_id.InnerText);
+                cmd0.Parameters.AddWithValue("@street_add", street_add.Text);
+                cmd0.Parameters.AddWithValue("@city_add", city_add.Text);
+                cmd0.Parameters.AddWithValue("@prov_add", prov_add.Text);
+                cmd0.Parameters.AddWithValue("@postal_add", postal_add.Text);
+
+                cmd0.Connection = con0;
+                con0.Open();
+                cmd0.ExecuteNonQuery();
+                con0.Close();
             }
 
             SqlConnection con1 = new SqlConnection(constring);
-            String order_insert_query = " INSERT INTO supplier_order(supplier_id, order_date) VALUES(@supplier_id, @date)";
+            String order_insert_query = " INSERT INTO orders(employee_id, order_date, customer_id) VALUES(@employee_id, @date, @customer_id)";
 
             SqlCommand cmd1 = new SqlCommand(order_insert_query, con1);
 
-            cmd1.Parameters.AddWithValue("@supplier_id", supplier_id.InnerText);
+            cmd1.Parameters.AddWithValue("@employee_id", Session["userId"].ToString());
             cmd1.Parameters.AddWithValue("@date", DateTime.Now.ToString());
+            cmd1.Parameters.AddWithValue("@customer_id", cust_id.InnerText);
 
             cmd1.Connection = con1;
             con1.Open();
             cmd1.ExecuteNonQuery();
             con1.Close();
 
-
-            if (NumberOfControls != 0)
+            if (NumberOfControls != 0) 
             {
                 insert_product();
             }
 
-            //SendMail(); //send mail to supplier
-
             alert_success.Visible = true;
 
+            //SendMail(); //Send confirmation mail to customer
         }
         catch (Exception ex)
         {
@@ -219,7 +248,7 @@ public partial class _Default : System.Web.UI.Page
         }
     }
 
-    //Add product textboxes dynamically
+    //Dynamically create text boxes for products
     protected int NumberOfControls
     {
         get { return (int)ViewState["NumControls"]; }
@@ -303,24 +332,27 @@ public partial class _Default : System.Web.UI.Page
 
     protected void insert_product()
     {
+        String order_id = return_order_id();
+        int tb_count = 0; 
+
         products = new int[NumberOfControls]; //array of products
         for (int x = 0; x < NumberOfControls; x++)
         {
             products[x] = int.Parse(ddlArray[x].SelectedValue);
         }
 
-        String order_id = return_order_id();
-        int tb_count = 0;
+
 
         SqlConnection con2 = new SqlConnection(constring);
+
         for (int x = 0; x < NumberOfControls; x++)
         {
-            string order_prod_insert_query = "INSERT INTO ordered_products (product_id, quantity, add_details, order_id) VALUES(@ProdDropDownList, @quantity, @details, @order_id)";
+            string order_prod_insert_query = "INSERT INTO services_or_products (product_id, quantity, services, order_id) VALUES(@ProdDropDownList, @quantity, @services, @order_id)";
             SqlCommand cmd2 = new SqlCommand(order_prod_insert_query, con2);
 
             cmd2.Parameters.AddWithValue("@ProdDropDownList", int.Parse(ddlArray[x].SelectedValue));
             cmd2.Parameters.AddWithValue("@quantity", int.Parse(tbArray[tb_count].Text));
-            cmd2.Parameters.AddWithValue("@details", tbArray[tb_count + 1].Text);
+            cmd2.Parameters.AddWithValue("@services", tbArray[tb_count + 1].Text);
             cmd2.Parameters.AddWithValue("@order_id", int.Parse(order_id));
 
             cmd2.Connection = con2;
@@ -333,9 +365,10 @@ public partial class _Default : System.Web.UI.Page
         alert_success.Visible = true;
     }
 
+    //On click reset form
     protected void formReset_Click(object sender, EventArgs e)
     {
-        Response.Redirect("order_order_supp.aspx");
+        Response.Redirect("order_cust_add.aspx");
     }
 
     protected void SendMail()
@@ -349,7 +382,7 @@ public partial class _Default : System.Web.UI.Page
         // Gmail Address from where you send the mail
         var fromAddress = "dairysolutionlahore.inquiry@gmail.com";
         // any address where the email will be sending
-        var toAddress = supp_email;
+        var toAddress = cust_email;
         //Password of your gmail address
         const string fromPassword = "dairysolution";
         // Passing the values and make a email formate to display

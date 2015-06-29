@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage2.master" AutoEventWireup="true" CodeFile="prod_manage.aspx.cs" Inherits="_Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/inv_manager/MasterInv.master" AutoEventWireup="true" CodeFile="prod_manage.aspx.cs" Inherits="_Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
@@ -36,7 +36,7 @@
                     <asp:BoundField DataField="minimum_level" HeaderText="Minimum Level" SortExpression="minimum_level"/>
                     <asp:CommandField HeaderText="Delete" ShowDeleteButton="True" />
                     <asp:CommandField HeaderText="Update" ShowEditButton="True" />
-                    <asp:HyperLinkField Text="View" DataNavigateUrlFields="product_id" DataNavigateUrlFormatString="site_prod_detail.aspx?id={0}"/>
+                    <asp:HyperLinkField HeaderText="Details" NavigateUrl="~/site_products.aspx" Text="View" />
                 </Columns>
                 <FooterStyle BackColor="White" ForeColor="#000066" />
                 <HeaderStyle BackColor="#808080" Font-Bold="True" ForeColor="White" />

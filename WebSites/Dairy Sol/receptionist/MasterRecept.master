@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage2.master.cs" Inherits="MasterPage2" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterRecept.master.cs" Inherits="MasterPage2" %>
 
 <!DOCTYPE html>
 
@@ -14,16 +14,16 @@
 	<!-- Bootstrap Core CSS -->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <!-- Bootstrap Core CSS -->
-    <link href="css\bootstrap.min.css" rel="stylesheet">
+    <link href="~/css\bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css\dashboard.css" rel="stylesheet">
+    <link href="~/css\dashboard.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="css\plugins\morris.css" rel="stylesheet">
+    <link href="~/css\plugins\morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="font-awesome-4.3.0\css\font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="~/font-awesome-4.3.0\css\font-awesome.min.css" rel="stylesheet" type="text/css">
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -40,7 +40,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.aspx"><h2 style="color: white;"><strong>Dairy</strong> Solution</h2></a>
+                <a class="navbar-brand" href="~/index.aspx"><h2 style="color: white;"><strong>Dairy</strong> Solution</h2></a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -55,7 +55,7 @@
                                     <a href='messages.aspx?id=<%#Eval("source_id") %>'>
                                         <div class="media">
                                             <span class="pull-left">
-                                                <img class="media-object" src="<%#Eval("employee_picture") %>" width="50px" height="50px">
+                                                <img class="media-object" src="../<%#Eval("employee_picture") %>" width="50px" height="50px">
                                             </span>
                                             <div class="media-body">
                                                 <h5 class="media-heading"><strong><%#Eval("employee_name") %></strong></h5>
@@ -88,14 +88,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu alert-dropdown">
-						<li>
-                            <a id="notify" runat="server" href="#"></a>
-                        </li>
-                        
-                        <li>
-                            <a id="notify2" runat="server" href="#"></a>
-                        </li>
-                        
+						
                         <li>
                             <a runat="server" id="notify3" href="#"></a>
                         </li>
@@ -113,7 +106,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="site_signIn.aspx"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="../site_signIn.aspx"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -125,116 +118,28 @@
                         <a href="mng_dashboard.aspx"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
 					
-					
-					<li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-edit"></i> Orders <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo1" class="collapse">
-                            <li>
-                                <a href="order_cust_add.aspx"><i class="fa fa-fw fa-plus-square-o"></i> Add Customer Order</a>
-                            </li>
-                            <li runat="server" id="hide_this">
-                                <a href="order_order_supp.aspx"><i class="fa fa-fw fa-suitcase"></i> Order Supplier</a>
-                            </li>
-                            <li>
-                                <a href="order_cust.aspx"><i class="fa fa-fw fa-table"></i> Customer Orders</a>
-                            </li>
-                            <li>
-                                <a href="order_supp.aspx"><i class="fa fa-fw fa-table"></i> Supplier Orders</a>
-                            </li>
-							
-                        </ul>
-                    </li>
-					
-                    <li>
-                           <a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="fa fa-fw fa-cubes"></i> Inventory <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo2" class="collapse">
-                            <li>
-								<a href="inv_add.aspx"><i class="fa fa-fw fa-plus-square-o"></i> Add Inventory</a>
-							</li>
-                            <li>
-								<a href="inv_manage.aspx"><i class="fa fa-fw fa-table"></i> Manage Inventory</a>
-							</li>
-
-                        </ul>    
-                    </li>
-
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo3"><i class="fa fa-fw fa-diamond"></i> Products <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo3" class="collapse">
-                            <li>
-								<a href="prod_add.aspx"><i class="fa fa-fw fa-plus-square-o"></i> Add Products</a>
-							</li>
-                            <li>
-								<a href="prod_manage.aspx"><i class="fa fa-fw fa-table"></i> Manage Products</a>
-							</li>
-
-                        </ul>    
-                    </li>
 						
 					<li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo4"><i class="fa fa-fw fa-group"></i> Manage Employees <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo4"><i class="fa fa-fw fa-group"></i> Attendance <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo4" class="collapse">
                             <li>
-                                <a href="javascript:;" data-toggle="collapse" data-target="#demo6"><i class="fa fa-fw fa-check-square-o"></i> Attendance<i class="fa fa-fw fa-caret-down"></i></a>
-                                <ul id="demo6" class="collapse">
-                                    <li>
-								        <a href="emp_add_attendance.aspx"><i class="fa fa-fw fa-square-o"></i> Mark Attendance</a>
-							        </li>
-                                    <li>
-								        <a href="emp_attendance.aspx"><i class="fa fa-fw fa-table"></i> Manage Attendance</a>
-							        </li>
-                                    
-                                </ul>
-                            </li>
-
+								<a href="emp_add_attendance.aspx"><i class="fa fa-fw fa-square-o"></i> Mark Attendance</a>
+							</li>
                             <li>
-								<a href="loan_request.aspx"><i class="fa fa-fw fa-bar-chart-o"></i> Request Loan</a>
+								<a href="emp_attendance.aspx"><i class="fa fa-fw fa-table"></i> Manage Attendance</a>
 							</li>
 
-                            <li>
-								<a href="loan_manage.aspx"><i class="fa fa-fw fa-bar-chart-o"></i> Loan Requests</a>
-							</li>
-							
-							<li>
-								<a href="emp_list.aspx"><i class="fa fa-fw fa-file-text-o"></i> Edit Profiles</a>
-							</li>
-
-                            <li>
-								<a href="emp_signUp.aspx"><i class="fa fa-fw fa-table"></i> Add Employee</a>
-							</li>
                         </ul>
                     </li>
 
 					<li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo5"><i class="fa fa-fw fa-share-alt"></i> News & Updates <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo5" class="collapse">
-                            <li>
-								<a href="post_add.aspx"><i class="fa fa-fw fa-plus-square-o"></i> Add post</a>
-							</li>
-                            <li>
-								<a href="post_manage.aspx"><i class="fa fa-fw fa-table"></i> Manage Posts</a>
-							</li>
-							
-                        </ul>    
-                    </li>
+						<a href="loan_request.aspx"><i class="fa fa-fw fa-bar-chart-o"></i> Request Loan</a>
+					</li>
 
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo7"><i class="fa fa-fw fa-group"></i> Tasks <i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo7" class="collapse">
-                            <li>
-								<a href="tasks.aspx"><i class="fa fa-fw fa-table"></i> My Tasks</a>
-							</li>
+						<a href="tasks.aspx"><i class="fa fa-fw fa-table"></i> My Tasks</a>
+					</li>
 
-							
-							<li>
-                                <a href="tasks_all.aspx"><i class="fa fa-fw fa-table"></i> Employee's Tasks</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="reports.aspx"><i class="fa fa-fw fa-files-o"></i> Reports</a>
-                    </li>
 
                 </ul>
             </div>
@@ -255,7 +160,7 @@
                         <button class="close" data-dismiss="modal"><span>&times;</span></button>
 						<div class="row">
                             <div class="col-md-6 my_div">
-								<asp:Image runat="server" ID="usr_image" ImageUrl="images/profile_default.jpg" Width="280" Height="280" />
+								<asp:Image runat="server" ID="usr_image" ImageUrl="../images/profile_default.jpg" Width="280" Height="280" />
                             </div>
 								
 							<div class="col-md-6">
@@ -289,15 +194,11 @@
     <!-- /#wrapper -->
     
     <!-- jQuery -->
-    <script src="js\jquery.js"></script>
-    <script src="js\script.js" type="text/javascript"></script>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/script.js" type="text/javascript"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js\bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 
-    <!-- Morris Charts JavaScript -->
-    <script src="js\plugins\morris\raphael.min.js"></script>
-    <script src="js\plugins\morris\morris.min.js"></script>
-    <script src="js\plugins\morris\morris-data.js"></script>
 </body>
 </html>
