@@ -82,6 +82,11 @@ public partial class Default2 : System.Web.UI.Page
     {
         try
         {
+            int loan = 0;
+            int amount1 = Convert.ToInt32(amount.Text);
+            int span1 = Convert.ToInt32(loan_span.SelectedValue);
+            loan = amount1 / span1;
+
             SqlConnection con = new SqlConnection(constring);
 
             String query = "UPDATE loan_request SET amount = @amount, span = @span, status = @status WHERE req_id = @id";
@@ -99,6 +104,7 @@ public partial class Default2 : System.Web.UI.Page
             con.Close();
 
             alert_success.Visible = true;
+            select_loan(loan);
         }
         catch (Exception ex)
         {
@@ -106,6 +112,41 @@ public partial class Default2 : System.Web.UI.Page
             error.Text = "Error! " + ex.ToString();
         }
     }
+
+    protected void select_loan( int loan_add ) 
+    {
+        string user_id = Session["userId"].ToString();
+        string query = "SELECT loan_deduction from employee_net_salary where employee_id = '"+user_id+"'";
+
+        SqlConnection con = new SqlConnection(constring);
+        SqlCommand cmd = new SqlCommand();
+        cmd.Connection = con;
+        cmd.CommandText = query;
+
+        con.Open();
+        SqlDataReader dr = cmd.ExecuteReader();
+        while (dr.Read())
+        {
+            if (dr.HasRows)
+            {
+                int prev_loan = Convert.ToInt32(dr["loan_deduction"].ToString());
+                loan_add = loan_add + prev_loan;
+
+                SqlConnection con1 = new SqlConnection(constring);
+                String query1 = "UPDATE employee_net_salary SET loan_deduction = @loan_deduction WHERE employee_id = '"+user_id+"'";
+                SqlCommand cmd1 = new SqlCommand(query1, con1);
+
+                cmd1.Parameters.AddWithValue("@loan_deduction", loan_add);
+                
+                cmd1.Connection = con1;
+                con1.Open();
+                cmd1.ExecuteNonQuery();
+                con1.Close();
+            }
+        }
+        con.Close();
+    }
+
     protected void redirect_profile_Click(object sender, EventArgs e)
     {
         Response.Redirect("emp_profile.aspx?id="+emp_id.Text);
