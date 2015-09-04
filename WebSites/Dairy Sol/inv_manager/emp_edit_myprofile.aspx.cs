@@ -71,7 +71,7 @@ public partial class _Default : System.Web.UI.Page
                 //ScriptManager.RegisterStartupScript(this, this.GetType(), "popup", "alert('File Uploaded!');", true);
             }
         }
-        emp_img.ImageUrl = "../"+"images/employee_picture/" + empl_image.PostedFile.FileName.ToString();
+        emp_img.ImageUrl = "images/employee_picture/" + empl_image.PostedFile.FileName.ToString();
         picture = emp_img.ImageUrl;
     }
     protected void update_info_Click(object sender, EventArgs e)

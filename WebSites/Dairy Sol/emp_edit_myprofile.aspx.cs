@@ -11,7 +11,6 @@ using System.Web.UI.WebControls;
 public partial class _Default : System.Web.UI.Page
 {
     string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
-    string pass = null;
     string picture = "";
 
     protected void Page_Load(object sender, EventArgs e)
@@ -48,7 +47,7 @@ public partial class _Default : System.Web.UI.Page
             {
                 emp_img.ImageUrl = dr["employee_picture"].ToString();
                 emp_name.Text = dr["employee_name"].ToString();
-                pass = dr["password"].ToString();
+                set_pass.Text = dr["password"].ToString();
 
             }
         }
@@ -167,7 +166,7 @@ public partial class _Default : System.Web.UI.Page
             return 0;
         }
 
-        if (emp_pass.Text != pass)
+        if (emp_pass.Text != set_pass.Text)
         {
             alert_fail.Visible = true;
             error.Text = "Authentication Failed! Incorrect Password";

@@ -29,6 +29,7 @@
             <form role="form">
 				<div class = 'row'>
                     <div class="col-md-2 col-md-offset-2">
+                        <asp:Label runat="server" ID="set_pass" hidden="true"></asp:Label>
                         <h3>Change Picture</h3><hr />
                         <br/>
                         <asp:Image ID="emp_img" runat="server" width="250" Height="250"/><br/>

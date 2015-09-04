@@ -23,8 +23,8 @@
                                         <i class="fa fa-envelope fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">6</div>
-                                        <div>New Messages!</div>
+                                        <div class="huge"></div>
+                                        <div>Messages!</div>
                                     </div>
                                 </div>
                             </div>
@@ -45,8 +45,8 @@
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">12</div>
-                                        <div>New Tasks!</div>
+                                        <div class="huge"></div>
+                                        <div>Tasks!</div>
                                     </div>
                                 </div>
                             </div>

@@ -23,8 +23,8 @@
                                         <i class="fa fa-envelope fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">6</div>
-                                        <div>New Messages!</div>
+                                        <div class="huge"></div>
+                                        <div>Messages!</div>
                                     </div>
                                 </div>
                             </div>
@@ -45,8 +45,8 @@
                                         <i class="fa fa-tasks fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">12</div>
-                                        <div>New Tasks!</div>
+                                        <div class="huge"></div>
+                                        <div>Tasks!</div>
                                     </div>
                                 </div>
                             </div>
@@ -67,12 +67,12 @@
                                         <i class="fa fa-truck fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">124</div>
-                                        <div>New Orders!</div>
+                                        <div class="huge"></div>
+                                        <div>Orders!</div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="order_cust.aspx">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -89,12 +89,12 @@
                                         <i class="fa fa-cube fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">13</div>
-                                        <div>New Products!</div>
+                                        <div class="huge"></div>
+                                        <div>Products!</div>
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="inv_manage.aspx">
                                 <div class="panel-footer">
                                     <span class="pull-left">View Details</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

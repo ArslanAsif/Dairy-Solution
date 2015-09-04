@@ -39,6 +39,7 @@
 
 					<div class="col-md-5 col-md-offset-1">
 						<div>
+                            <asp:Label runat="server" ID="set_pass" hidden="hidden"></asp:Label>
 							<h3>Change Password</h3><hr />
 							<br/>
 							

@@ -11,9 +11,7 @@ using System.Web.UI.WebControls;
 public partial class _Default : System.Web.UI.Page
 {
     string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
-    string pass = null;
     string picture = "";
-
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["userId"] == null) { Response.Redirect("site_signIn.aspx"); }
@@ -34,7 +32,6 @@ public partial class _Default : System.Web.UI.Page
     {
         string emp_id = Session["userId"].ToString();
         string query = "SELECT employee_name, employee_picture, password FROM employee_info WHERE employee_id = '" + emp_id + "'";
-
         SqlConnection con = new SqlConnection(constring);
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = con;
@@ -48,7 +45,7 @@ public partial class _Default : System.Web.UI.Page
             {
                 emp_img.ImageUrl = "../"+dr["employee_picture"].ToString();
                 emp_name.Text = dr["employee_name"].ToString();
-                pass = dr["password"].ToString();
+                set_pass.Text = dr["password"].ToString();
 
             }
         }
@@ -94,9 +91,9 @@ public partial class _Default : System.Web.UI.Page
             }
 
             string emp_id = Session["userId"].ToString();
-            int x = check_pass();
+            Boolean x = check_pass();
 
-            if (x == 1)
+            if (x)
             {
                 string query = "UPDATE employee_info SET password=@password, employee_picture=@picture WHERE employee_id = '" + emp_id + "'";
                 SqlConnection con = new SqlConnection(constring);
@@ -127,31 +124,7 @@ public partial class _Default : System.Web.UI.Page
                 new_pass2.Text = "";
             }
 
-            else if(x == 0)
-            {
-                string query = "UPDATE employee_info SET employee_picture=@picture WHERE employee_id = '" + emp_id + "'";
-                SqlConnection con = new SqlConnection(constring);
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = con;
-                cmd.CommandText = query;
-
-                if (empl_image.PostedFile.FileName != "")
-                {
-                    cmd.Parameters.AddWithValue("@picture", "images/employee_picture/" + empl_image.PostedFile.FileName.ToString());
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@picture", emp_img.ImageUrl);
-                }
-
-                con.Open();
-                cmd.ExecuteNonQuery();
-                con.Close();
-
-                alert_success.Visible = true;
-                alert_fail.Visible = false;
-
-            }
+            
         }
         catch(Exception ex)
         {
@@ -160,19 +133,15 @@ public partial class _Default : System.Web.UI.Page
         }
     }
 
-    protected int check_pass()
+    protected Boolean check_pass()
     {
-        if((emp_pass.Text == "") && (new_pass1.Text == "") && (new_pass2.Text == ""))
-        {
-            return 0;
-        }
-
-        if (emp_pass.Text != pass)
+        
+        if (emp_pass.Text != set_pass.Text)
         {
             alert_fail.Visible = true;
             error.Text = "Authentication Failed! Incorrect Password";
 
-            return -1;
+            return false;
         }
 
         if (new_pass1.Text != new_pass2.Text)
@@ -180,9 +149,9 @@ public partial class _Default : System.Web.UI.Page
             alert_fail.Visible = true;
             error.Text ="Password missmatch.";
 
-            return -1;
+            return false;
         }
         
-        return 1;
+        return true;
     }
 }
