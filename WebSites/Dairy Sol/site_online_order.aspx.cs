@@ -17,7 +17,7 @@ public partial class _Default : System.Web.UI.Page
     
     protected void select_data() 
     {
-        string query = "select product_id, product_name, product_price, quantity, (select customer_name from customer_info where customer_id = '" + Session["userId"] + "') as customer_name from order_page_info where session_id = '" + Session["userId"] + "'";
+        string query = "select product_id, product_name, product_price, quantity, (select customer_name from customer_info where customer_id = '" + Session["cust_userId"] + "') as customer_name from order_page_info where session_id = '" + Session["cust_userId"] + "'";
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
         SqlConnection con = new SqlConnection(constring);
         SqlCommand cmd = new SqlCommand();
@@ -68,7 +68,7 @@ public partial class _Default : System.Web.UI.Page
 
         SqlCommand cmd = new SqlCommand(order_insert_query, con);
 
-        cmd.Parameters.AddWithValue("@customer_id", Session["userId"].ToString());
+        cmd.Parameters.AddWithValue("@customer_id", Session["cust_userId"].ToString());
         cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString());
         
         cmd.Connection = con;
@@ -81,7 +81,7 @@ public partial class _Default : System.Web.UI.Page
 
     protected void insert_services()
     {
-        string query = "SELECT TOP 1 order_id FROM orders where customer_id = '" + Session["userId"] + "' ORDER BY order_id DESC";
+        string query = "SELECT TOP 1 order_id FROM orders where customer_id = '" + Session["cust_userId"] + "' ORDER BY order_id DESC";
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
         SqlConnection con = new SqlConnection(constring);
         SqlCommand cmd = new SqlCommand();
@@ -118,7 +118,7 @@ public partial class _Default : System.Web.UI.Page
 
     protected void delete_cart()
     {
-        string cust_id = Session["userId"].ToString();
+        string cust_id = Session["cust_userId"].ToString();
         string query = "DELETE FROM order_page_info WHERE session_id = '" +cust_id+ "'";
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
         SqlConnection con = new SqlConnection(constring);

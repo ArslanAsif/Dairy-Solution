@@ -19,7 +19,7 @@ public partial class _Default : System.Web.UI.Page
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString; 
         SqlConnection con = new SqlConnection(constring);
 
-        String query = "insert into customer_info (customer_id, customer_name,customer_phone_number, customer_email_id, customer_password,secret_question,customer_picture,secret_answer) values (@customer_id, @customer_name, @customer_phone_number, @customer_email_id, @customer_password,@secret_question,@customer_picture,@secret_answer);";
+        String query = "insert into customer_info ( customer_name,customer_phone_number, customer_email_id, customer_password,secret_question,customer_picture,secret_answer) values ( @customer_name, @customer_phone_number, @customer_email_id, @customer_password,@secret_question,@customer_picture,@secret_answer);";
         SqlCommand cmd = new SqlCommand(query,con);
         
         cmd.Parameters.AddWithValue("@customer_name", cust_su_inputFirstName.Text);
@@ -37,7 +37,7 @@ public partial class _Default : System.Web.UI.Page
         cmd.ExecuteNonQuery();
         //for insert remove data reader and replace cmd.executenonquery()
         
-        Response.Redirect("signin.aspx");
+        Response.Redirect("site_signIn.aspx");
         
         con.Close();
     }

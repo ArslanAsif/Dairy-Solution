@@ -38,8 +38,8 @@
                                 <br/><br />
 								
 								<div>
-                                    <a href="site_cust_signup.aspx" class = "btn btn-lg btn-success  pull-left" style = "margin: 0px; width: 48%">Sign Up</a>
-                                    <asp:Button ID="signIn" runat="server" Text="Sign in" style="margin: 0px; width: 48%" type="submit" class="btn btn-lg btn-primary pull-right" name="signInBtn" OnClick="SignIn_Click"/>
+                                    <a href="site_cust_signup.aspx" class = "btn btn-lg btn-success pull-right" style = "margin: 0px; width: 48%">Sign Up</a>
+                                    <asp:Button ID="signIn" runat="server" Text="Sign in" style="margin: 0px; width: 48%" type="submit" class="btn btn-lg btn-primary pull-left" name="signInBtn" OnClick="SignIn_Click"/>
 								</div>
 
 							</form>

@@ -8,6 +8,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Net;
+using System.Net.Mail;
+using System.IO;
 
 public partial class _Default : System.Web.UI.Page
 {
@@ -41,6 +43,8 @@ public partial class _Default : System.Web.UI.Page
                     submit_btn.Visible = true;
                     secret_answer.EnableViewState = true;
                     secret_answer.Visible = true;
+                    search_btn.Visible = false;
+                    radioOptions1.Visible = false;
                     pass_reveal.ForeColor = System.Drawing.Color.Green;
                 }
                 
@@ -63,6 +67,8 @@ public partial class _Default : System.Web.UI.Page
                     submit_btn.Visible = true;
                     secret_answer.EnableViewState = true;
                     secret_answer.Visible = true;
+                    search_btn.Visible = false;
+                    radioOptions1.Visible = false;
                 }
                 
             }
@@ -142,12 +148,12 @@ public partial class _Default : System.Web.UI.Page
 
     protected void SendMail()
     {
-        // Gmail Address from where you send the mail
+        //// Gmail Address from where you send the mail
         var fromAddress = "dairysolutionlahore.inquiry@gmail.com";
         // any address where the email will be sending
         var toAddress = email_id.Text;
         //Password of your gmail address
-        const string fromPassword = "dairysolution";
+        const string fromPassword = "dairysolutions";
         // Passing the values and make a email formate to display
         string subject = "Password Reset Request";
 
@@ -165,5 +171,6 @@ public partial class _Default : System.Web.UI.Page
         }
         // Passing values to smtp object
         smtp.Send(fromAddress, toAddress, subject, body);
+
     }
 }

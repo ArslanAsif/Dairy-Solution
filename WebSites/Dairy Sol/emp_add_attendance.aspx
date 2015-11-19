@@ -37,12 +37,13 @@
                         <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT [employee_name], [employee_id] FROM [employee_info]"></asp:SqlDataSource>
                         <br/>
                         <asp:Label ID="Label1" runat="server" Text="Date and Time"></asp:Label>
+                        <asp:TextBox CssClass="form-control control-height" ID="CurrentDate" runat="server"></asp:TextBox><br/>
                         <asp:TextBox CssClass="form-control control-height" ID="CurrentTime" runat="server"></asp:TextBox>
                         <asp:Label ID="Label2" runat="server" Text="*Note Edit date/time if it is not correct"></asp:Label>
                         
 				        <br/>
                         <br/>
-                        <asp:Button ID="Button1" CssClass="btn btn-primary" runat="server" Text="Mark Attendance" OnClick ="mark_attendance_Click"/>
+                        <asp:Button ID="Button1" CssClass="btn btn-primary" runat="server" Text="Mark Attendance" OnClick="mark_attendance_Click" />
                         <br/>
                         <br/>
                         <asp:Label ID="attendance_marked" runat="server" EnableViewState="False" Visible="False"></asp:Label>

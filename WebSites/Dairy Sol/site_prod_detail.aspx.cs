@@ -62,7 +62,7 @@ public partial class _Default : System.Web.UI.Page
 
     protected void check_user(object sender, EventArgs e)
     {
-        if (Session["username"] == null)
+        if (Session["cust_username"] == null)
         {
             Response.Redirect("site_signin.aspx");
         }// if session not created
@@ -109,7 +109,7 @@ public partial class _Default : System.Web.UI.Page
         cmd.Parameters.AddWithValue("@product_price", price);
         cmd.Parameters.AddWithValue("@product_id", id);
         cmd.Parameters.AddWithValue("@quantity", "1");
-        cmd.Parameters.AddWithValue("@session_id", Session["userId"].ToString());
+        cmd.Parameters.AddWithValue("@session_id", Session["cust_userId"].ToString());
 
         cmd.Connection = con;
 
@@ -123,7 +123,7 @@ public partial class _Default : System.Web.UI.Page
     protected void check_data(int price, string name, string picture, string id)
     {
         bool found = false;
-        string query = "SELECT * FROM order_page_info WHERE session_id = '" + Session["userId"].ToString() + "'";
+        string query = "SELECT * FROM order_page_info WHERE session_id = '" + Session["cust_userId"].ToString() + "'";
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
         SqlConnection con = new SqlConnection(constring);
         SqlCommand cmd = new SqlCommand();

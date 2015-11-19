@@ -12,7 +12,8 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        CurrentTime.Text = DateTime.Now.ToString();
+        CurrentDate.Text = DateTime.Now.ToString("yyyy-M-dd");
+        CurrentTime.Text = DateTime.Now.ToString("hh:m:s tt");
     }
 
     protected void mark_attendance_Click(object sender, EventArgs e)
@@ -23,39 +24,34 @@ public partial class _Default : System.Web.UI.Page
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
         SqlConnection con = new SqlConnection(constring);
 
-        String query = "insert into employee_attendance (employee_id, date_time) values (@employee_id, @date_time);";
+        String query = "insert into employee_attendance (employee_id, date, time) values (@employee_id, @date, @time);";
         SqlCommand cmd = new SqlCommand(query, con);
 
         cmd.Parameters.AddWithValue("@employee_id", DropDownList1.SelectedValue);
-        cmd.Parameters.AddWithValue("@date_time", CurrentTime.Text);
-
+        cmd.Parameters.AddWithValue("@time", CurrentTime.Text);
+        cmd.Parameters.AddWithValue("@date", CurrentDate.Text);
         cmd.Connection = con;
 
         con.Open();
 
         if (cmd.ExecuteNonQuery() != null)
         {
-            attendance_marked.Text = "Attendance marked successfully!";
-            attendance_marked.EnableViewState = true;
-            attendance_marked.Visible = true;
-            attendance_marked.ForeColor = System.Drawing.Color.Green;
+            alert_fail.Visible = false;
+            alert_success.Visible = true;
         }
         else {
-            attendance_marked.Text = "Something Went wrong! Please Try again.";
-            attendance_marked.EnableViewState = true;
-            attendance_marked.Visible = true;
-            attendance_marked.ForeColor = System.Drawing.Color.Red;
+            throw new Exception("Something Went wrong! Please Try again.");
+            
         }
-
-        alert_success.Visible = true;
+        
         con.Close();
 
-        Response.Redirect("loan_request.aspx?success=1");
         }
         catch (Exception ex)
         {
+            alert_success.Visible = false;
             alert_fail.Visible = true;
-            error.Text = "Error! " + ex.ToString();
+            error.Text = "Error! : Cannot mark attendance twice a day";
         }
     }
 }

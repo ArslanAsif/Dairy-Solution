@@ -22,18 +22,18 @@
 
           <ItemTemplate>
           <tr>
-              <div class="col-md-4 boxDesign">
-						<h2 class = "h3"><%# Eval("product_name") %></h2><br>
-						<div class="pBox" style = "margin-top: -20px;height: 390px">
-							<img class="img_border" src="<%# Eval("picture") %>" alt="Image Not Available" width="100%" height="240px"></img>
-                            <br/><br/><asp:Label id="change_text" runat="server" class="boxAlign" style = "margin-top: 5px; text-align: center; position: absolute; padding-right: 10px" ></asp:Label>
-							<br/>
-                            <div class="btnAlign" style="margin-top:60px">
-								<button class = "btn btn-success pdBtn" formaction="site_prod_detail.aspx?id=<%# Eval("product_id") %>">&nbsp;View Details</button>
-								<asp:Button id = "order_btn" cssClass = "btn btn-primary pdBtn" runat="server" CommandArgument='<%# Eval("product_id") %>' onClick="check_user" Text="Order now"></asp:Button>
-							</div>
-						</div>
-			</div>
+            <div class="col-md-4 boxDesign">
+                <h2 class = "h3"><%# Eval("product_name") %></h2><br>
+                <div class="pBox" style = "margin-top: -20px;height: 390px">
+	                <img class="img_border" src="<%# Eval("picture") %>" alt="Image Not Available" width="100%" height="240px"></img>
+                    <br/><br/><asp:Label id="change_text" runat="server" class="boxAlign" style = "margin-top: 5px; text-align: center; position: absolute; padding-right: 10px" ></asp:Label>
+	                <br/>
+                    <div class="btnAlign" style="margin-top:60px">
+		                <button class = "btn btn-success pdBtn" formaction="site_prod_detail.aspx?id=<%# Eval("product_id") %>">&nbsp;View Details</button>
+		                <asp:Button id = "order_btn" cssClass = "btn btn-primary pdBtn" runat="server" CommandArgument='<%# Eval("product_id") %>' onClick="check_user" Text="Order now"></asp:Button>
+	                </div>
+                </div>
+            </div>
             
           </tr>
           </ItemTemplate>

@@ -12,7 +12,7 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["username"] == null)
+        if (Session["cust_username"] == null)
         {
             Response.Redirect("site_signIn.aspx");
         }
@@ -20,7 +20,7 @@ public partial class _Default : System.Web.UI.Page
 
     protected void clear_cart_Click(object sender, EventArgs e)
     {
-        string cust_id = Session["userId"].ToString();
+        string cust_id = Session["cust_userId"].ToString();
         string query = "DELETE FROM order_page_info WHERE session_id = '" +cust_id+ "'";
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
         SqlConnection con = new SqlConnection(constring);

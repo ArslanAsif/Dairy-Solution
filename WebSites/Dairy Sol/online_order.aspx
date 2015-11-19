@@ -38,7 +38,7 @@
             <asp:Parameter Name="quantity" Type="Int32" />
         </InsertParameters>
         <SelectParameters>
-            <asp:SessionParameter Name="session_id" SessionField="userId" Type="String" />
+            <asp:SessionParameter Name="session_id" SessionField="cust_userId" Type="String" />
         </SelectParameters>
         <UpdateParameters>
             <asp:Parameter Name="quantity" />

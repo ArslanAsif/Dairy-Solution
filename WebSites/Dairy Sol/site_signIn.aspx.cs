@@ -39,6 +39,7 @@ public partial class _Default : System.Web.UI.Page
                 {
                     Session["userId"] = dr["employee_id"];
                     Session["userName"] = dr["employee_name"];
+
                     Response.Redirect("mng_dashboard.aspx");
                     x = 1;
                 }
@@ -55,8 +56,8 @@ public partial class _Default : System.Web.UI.Page
                 //for insert remove data reader and replace cmd.executenonquery()
                 if (dr2.HasRows)
                 {
-                    Session["userId"] = dr2["customer_id"];
-                    Session["userName"] = dr2["customer_name"];
+                    Session["cust_userId"] = dr2["customer_id"];
+                    Session["cust_userName"] = dr2["customer_name"];
                     Response.Redirect("site_products.aspx");
                     x = 1;
                 }

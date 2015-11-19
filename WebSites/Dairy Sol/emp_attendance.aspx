@@ -69,7 +69,8 @@
                                            INNER JOIN employee_info AS i
                                            ON a.employee_id = i.employee_id
                                            INNER JOIN employee_company_info AS c
-                                           ON a.employee_id = c.employee_id" 
+                                           ON a.employee_id = c.employee_id
+                                           ORDER BY a.date_time DESC" 
                             
                             DeleteCommand="DELETE FROM [employee_attendance] WHERE [employee_id] = @employee_id AND [date_time] = @date_time" 
                             InsertCommand="INSERT INTO [employee_attendance] ([employee_id], [date_time]) VALUES (@employee_id, @date_time)" 

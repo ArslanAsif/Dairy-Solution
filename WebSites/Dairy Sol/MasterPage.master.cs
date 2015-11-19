@@ -9,7 +9,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if ( Session["username"] == null )
+        if ( Session["username"] == null &&  Session["cust_username"] == null )
         {
             login_status.Visible = false;
             link.Visible = true;
@@ -18,7 +18,13 @@ public partial class MasterPage : System.Web.UI.MasterPage
         {
             login_status.Visible = true;
             link.Visible = false;
-            login_status.InnerText = Session["username"].ToString();
+            if (Session["username"] != null)
+            {
+                login_status.InnerText = Session["username"].ToString();
+            }
+            else
+                login_status.InnerText = Session["cust_username"].ToString();
+            
         }
     }
 

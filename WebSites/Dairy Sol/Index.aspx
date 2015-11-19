@@ -99,7 +99,7 @@
                                         <div class="media-body">
                                             <h4 class="media-heading"><%# Eval("heading") %></h4>
                                             <p><%# Eval("date") %></p>
-                                            <p><%# Eval("detail") %></p>
+                                            <asp:Label id="change_text" runat="server"></asp:Label>
                                             <a href="site_post_detail.aspx?id=<%# Eval("post_id") %>" class="more">Read more...</a>
                                         </div>
                                     </div>
@@ -111,7 +111,7 @@
                                   </FooterTemplate>
                                 </asp:Repeater>
 
-                                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT TOP 2 * FROM [posts]"></asp:SqlDataSource>                        
+                                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT TOP 2 * FROM [posts] ORDER BY date DESC"></asp:SqlDataSource>                        
                             </div>
 						</div>
 					</div>
@@ -133,7 +133,7 @@
                                   </FooterTemplate>
                                 </asp:Repeater>
 
-                                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT product_name, product_id FROM [products] ORDER BY product_name ASC"></asp:SqlDataSource>
+                                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Dairy_SolutionConnectionString %>" SelectCommand="SELECT TOP 6 product_name, product_id FROM [products] ORDER BY product_name ASC"></asp:SqlDataSource>
 						</div>
 					</div>
 				</div>
