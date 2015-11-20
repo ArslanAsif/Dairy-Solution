@@ -13,7 +13,33 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(!Page.IsPostBack)
+        if (Session["userType"] != null)
+        {
+            switch (Session["userType"].ToString())
+            {
+                case "CEO":
+                    break;
+
+                case "Receptionist":
+                    Response.Redirect("mng_dashboard.aspx");
+                    break;
+
+                case "Sales Person":
+                    Response.Redirect("mng_dashboard.aspx");
+                    break;
+
+                case "Inventory Manager":
+                    Response.Redirect("mng_dashboard.aspx");
+                    break;
+
+                default:
+                    Response.Redirect("site_signIn.aspx");
+                    break;
+
+            }
+        }
+
+        if (!Page.IsPostBack)
         {
             retrieve_data();
         }

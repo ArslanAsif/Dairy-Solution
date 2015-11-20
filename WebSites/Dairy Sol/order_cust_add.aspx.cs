@@ -104,7 +104,7 @@ public partial class _Default : System.Web.UI.Page
 
     protected void email_TextChanged(object sender, EventArgs e)
     {
-        string query = "SELECT i.customer_id, i.customer_name, i.customer_phone_number, i.customer_email_id, a.permanent_address, a.city, a.country FROM customer_info AS i INNER JOIN customer_address AS a ON i.customer_id = a.customer_id where i.customer_email_id = '" + email.Text + "'";
+        string query = "SELECT i.customer_id, i.customer_name, i.customer_phone_number, i.customer_email_id, a.permanent_address, a.city, a.province FROM customer_info AS i INNER JOIN customer_address AS a ON i.customer_id = a.customer_id where i.customer_email_id = '" + email.Text + "'";
 
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
         SqlConnection con = new SqlConnection(constring);
@@ -124,8 +124,7 @@ public partial class _Default : System.Web.UI.Page
             cnic.Text = "123456789";
             street_add.Text = dr["permanent_address"].ToString();
             city_add.Text = dr["city"].ToString();
-            prov_add.Text = dr["country"].ToString();
-            postal_add.Text = "1234";
+            prov_add.Text = dr["province"].ToString();
         }
 
         else
@@ -136,7 +135,6 @@ public partial class _Default : System.Web.UI.Page
             street_add.Text = "";
             city_add.Text = "";
             prov_add.Text = "";
-            postal_add.Text = "";
         }
 
         con.Close();
@@ -163,7 +161,7 @@ public partial class _Default : System.Web.UI.Page
             {
                 SqlConnection con = new SqlConnection(constring);
                 String cust_info_update_query = "UPDATE customer_info SET customer_name = @f_name, customer_phone_number = @contact_num WHERE customer_email_id = @email;" +
-                                                "UPDATE customer_address SET permanent_address = @street_add, city = @city_add, country = @prov_add WHERE customer_id = @id";
+                                                "UPDATE customer_address SET permanent_address = @street_add, city = @city_add, province = @prov_add WHERE customer_id = @id";
 
                 SqlCommand cmd = new SqlCommand(cust_info_update_query, con);
 
@@ -176,7 +174,6 @@ public partial class _Default : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@street_add", street_add.Text);
                 cmd.Parameters.AddWithValue("@city_add", city_add.Text);
                 cmd.Parameters.AddWithValue("@prov_add", prov_add.Text);
-                cmd.Parameters.AddWithValue("@postal_add", postal_add.Text);
 
                 cmd.Connection = con;
                 con.Open();
@@ -203,14 +200,13 @@ public partial class _Default : System.Web.UI.Page
                 cust_id.InnerText = return_customer_id(email.Text);
 
                 SqlConnection con0 = new SqlConnection(constring);
-                string cust_addr_insert_query = "INSERT INTO customer_address(customer_id, permanent_address, city, country) VALUES(@id, @street_add, @city_add, @prov_add)";
+                string cust_addr_insert_query = "INSERT INTO customer_address(customer_id, permanent_address, city, province) VALUES(@id, @street_add, @city_add, @prov_add)";
                 SqlCommand cmd0 = new SqlCommand(cust_addr_insert_query, con0);
 
                 cmd0.Parameters.AddWithValue("@id", cust_id.InnerText);
                 cmd0.Parameters.AddWithValue("@street_add", street_add.Text);
                 cmd0.Parameters.AddWithValue("@city_add", city_add.Text);
                 cmd0.Parameters.AddWithValue("@prov_add", prov_add.Text);
-                cmd0.Parameters.AddWithValue("@postal_add", postal_add.Text);
 
                 cmd0.Connection = con0;
                 con0.Open();
@@ -257,6 +253,31 @@ public partial class _Default : System.Web.UI.Page
 
     private void Page_Load(object sender, System.EventArgs e)
     {
+        if (Session["userType"] != null)
+        {
+            switch (Session["userType"].ToString())
+            {
+                case "CEO":
+                    break;
+
+                case "Receptionist":
+                    Response.Redirect("mng_dashboard.aspx");
+                    break;
+
+                case "Sales Person":
+                    break;
+
+                case "Inventory Manager":
+                    Response.Redirect("mng_dashboard.aspx");
+                    break;
+
+                default:
+                    Response.Redirect("site_signIn.aspx");
+                    break;
+
+            }
+        }
+
         if (!Page.IsPostBack)
         {
             //Initiate the counter of dynamically added controls

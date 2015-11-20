@@ -19,7 +19,7 @@
                     <div class="col-md-4 col-md-offset-4">
 				        <div class="input-group" style="margin-top: 55px">
 					
-					        <asp:TextBox runat="server" type="text" class="form-control control-height" placeholder="Search Product" ID="search"/>
+					        <asp:TextBox runat="server" type="text" class="form-control control-height" placeholder="Search by employee or customer" ID="search"/>
 					        <div class="input-group-btn">
                                 <asp:Button runat="server" id="srch_btn" class="btn btn-default" type="submit" Text="Search" OnClick="srch_btn_Click"/>
 						        <!--<button id="srch_btn" class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>-->

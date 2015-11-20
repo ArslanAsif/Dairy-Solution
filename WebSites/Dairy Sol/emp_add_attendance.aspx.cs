@@ -12,6 +12,32 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["userType"] != null)
+        {
+            switch (Session["userType"].ToString())
+            {
+                case "CEO":
+                    break;
+
+                case "Receptionist":
+                    
+                    break;
+
+                case "Sales Person":
+                    Response.Redirect("mng_dashboard.aspx");
+                    break;
+
+                case "Inventory Manager":
+                    Response.Redirect("mng_dashboard.aspx");
+                    break;
+
+                default:
+                    Response.Redirect("site_signIn.aspx");
+                    break;
+
+            }
+        }
+
         CurrentDate.Text = DateTime.Now.ToString("yyyy-M-dd");
         CurrentTime.Text = DateTime.Now.ToString("hh:m:s tt");
     }

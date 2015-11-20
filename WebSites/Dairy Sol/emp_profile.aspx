@@ -111,14 +111,6 @@
                     <div class="col-md-8">
                     <asp:Label ID="add" runat="server">N.A.</asp:Label></div></div>
 
-                    <div class = 'row'>
-                    <div class="col-md-4">
-                    <label>Other Address: </label></div>
-
-                    <div class="col-md-8">
-                    <asp:Label ID="other_add" runat="server">N.A.</asp:Label></div></div>
-
-
                     <br />
                     <hr /><h3>Company Record</h3><hr />
                     <div class = 'row'>

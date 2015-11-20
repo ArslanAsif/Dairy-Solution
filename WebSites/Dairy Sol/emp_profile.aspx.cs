@@ -26,7 +26,7 @@ public partial class _Default : System.Web.UI.Page
                 emp_id = int.Parse(Session["userId"].ToString());
             }
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT e.[employee_name], e.[date_of_birth], e.[gender], e.[marital_status], e.[father_name], e.[cnic], e.[no_of_children], e.[phone_number], e.[mobile_number], e.[email_id], e.[employee_picture], ci.date_of_joining, ci.designation, ci.loan_gained, s.basic_salary, s.allowance, s.medical_allowance, s.loan_deduction, a.permanent_address, a.other_address, a.city FROM [employee_info] AS e INNER JOIN employee_company_info AS ci ON e.employee_id = ci.employee_id INNER JOIN employee_net_salary AS s ON e.employee_id = s.employee_id INNER JOIN employee_address AS a ON e.employee_id = a.employee_id WHERE e.employee_id = '" + emp_id + "'";
+            string query = "SELECT e.[employee_name], e.[date_of_birth], e.[gender], e.[marital_status], e.[father_name], e.[cnic], e.[no_of_children], e.[phone_number], e.[mobile_number], e.[email_id], e.[employee_picture], ci.date_of_joining, ci.designation, ci.loan_gained, s.basic_salary, s.allowance, s.medical_allowance, s.loan_deduction, a.permanent_address, a.city FROM [employee_info] AS e INNER JOIN employee_company_info AS ci ON e.employee_id = ci.employee_id INNER JOIN employee_net_salary AS s ON e.employee_id = s.employee_id INNER JOIN employee_address AS a ON e.employee_id = a.employee_id WHERE e.employee_id = '" + emp_id + "'";
             SqlCommand cmd = new SqlCommand(query, con);
 
             con.Open();
@@ -57,11 +57,7 @@ public partial class _Default : System.Web.UI.Page
                 {
                     add.Text = dr["permanent_address"].ToString() + ", " + dr["city"].ToString();
                 }
-
-                if (dr["other_address"].ToString() != "")
-                {
-                    other_add.Text = dr["other_address"].ToString() + ", " + dr["city"].ToString();
-                }
+                
             }
             else
             {

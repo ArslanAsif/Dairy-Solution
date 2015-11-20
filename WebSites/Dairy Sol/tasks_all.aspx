@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <h1 class="page-header">
-                            Employee's Tasks <small><a href="#" class="btn btn-sm btn-default" style="float: right; margin-right: 15px; margin-top: 5px" data-toggle="modal" data-target="#addTask_modal"><i class="fa fa-plus-square" style="color: grey"> Add Task</i></a></small>
+                            Employee's Tasks <small><a href="#" class="btn btn-sm btn-default" style="float: right; margin-right: -40px; margin-top: 5px" data-toggle="modal" data-target="#addTask_modal"><i class="fa fa-plus-square" style="color: grey"> Add Task</i></a></small>
                         </h1>
                         
                     </div>
@@ -20,7 +20,7 @@
                     <div class="col-md-4 col-md-offset-4">
 				        <div class="input-group" style="margin-top: 55px">
 					
-					        <asp:TextBox runat="server" type="text" class="form-control control-height" placeholder="Search Product" ID="search"/>
+					        <asp:TextBox runat="server" type="text" class="form-control control-height" placeholder="Search Task" ID="search"/>
 					        <div class="input-group-btn">
                                 <asp:Button runat="server" id="srch_btn" class="btn btn-default" type="submit" Text="Search" OnClick="srch_btn_Click"/>
 						        <!--<button id="srch_btn" class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>-->

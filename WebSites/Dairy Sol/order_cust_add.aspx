@@ -67,10 +67,7 @@
 				        <div class = "col-md-4">
 					        <asp:TextBox ID ="prov_add" runat="server" CssClass="form-control control-height"></asp:TextBox>
 				        </div>
-                        <label class = "col-md-2 control-label">Postal Addr.</label>
-				        <div class = "col-md-4">
-					        <asp:TextBox ID ="postal_add" runat="server" CssClass="form-control control-height"></asp:TextBox><br/>
-				        </div>
+                        
 				    </div>
                 </div>
 				

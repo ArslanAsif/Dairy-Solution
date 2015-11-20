@@ -36,15 +36,29 @@ public partial class _Default : System.Web.UI.Page
             {
                 //for insert remove data reader and replace cmd.executenonquery()
                 if (dr.HasRows)
-                {
+                {   
                     Session["userId"] = dr["employee_id"];
                     Session["userName"] = dr["employee_name"];
+                }
+            }
+            con.Close();
+
+            string emp_usertype_query = "SELECT designation FROM employee_company_info WHERE employee_id =" + Session["userId"];
+            cmd.CommandText = emp_usertype_query;
+
+            con.Open();
+            SqlDataReader dr3 = cmd.ExecuteReader();
+
+            while (dr3.Read())
+            {
+                if (dr3.HasRows)
+                {
+                    Session["userType"] = dr3["designation"];
 
                     Response.Redirect("mng_dashboard.aspx");
                     x = 1;
                 }
             }
-            con.Close();
 
             //Customer sign in
             cmd.CommandText = cus_query;

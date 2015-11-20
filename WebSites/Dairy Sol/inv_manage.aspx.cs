@@ -9,7 +9,29 @@ public partial class Default2 : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["userType"] != null)
+        {
+            switch (Session["userType"].ToString())
+            {
+                case "CEO":
+                    break;
 
+                case "Receptionist":
+                    Response.Redirect("mng_dashboard.aspx");
+                    break;
+
+                case "Sales Person":
+                    break;
+
+                case "Inventory Manager":
+                    break;
+
+                default:
+                    Response.Redirect("site_signIn.aspx");
+                    break;
+
+            }
+        }
     }
 
     protected void srch_btn_Click(object sender, EventArgs e)

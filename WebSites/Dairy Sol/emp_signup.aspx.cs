@@ -13,6 +13,32 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["userType"] != null)
+        {
+            switch (Session["userType"].ToString())
+            {
+                case "CEO":
+                    break;
+
+                case "Receptionist":
+                    Response.Redirect("mng_dashboard.aspx");
+                    break;
+
+                case "Sales Person":
+                    Response.Redirect("mng_dashboard.aspx");
+                    break;
+
+                case "Inventory Manager":
+                    Response.Redirect("mng_dashboard.aspx");
+                    break;
+
+                default:
+                    Response.Redirect("site_signIn.aspx");
+                    break;
+
+            }
+        }
+
         if (!Page.IsPostBack)
         {
             retrieve_data();
@@ -22,7 +48,7 @@ public partial class _Default : System.Web.UI.Page
     protected void retrieve_data()
     {
         string emp_id = Request.QueryString["id"];
-        string query = "SELECT ei.*, ea.city, ea.permanent_address, ea.other_address from employee_info ei inner join employee_address ea on ei.employee_id = ea.employee_id where ei.employee_id = '"+emp_id+"'";
+        string query = "SELECT ei.*, ea.permanent_address, ea.city, ea.province from employee_info ei inner join employee_address ea on ei.employee_id = ea.employee_id where ei.employee_id = '" + emp_id+"'";
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
         SqlConnection con = new SqlConnection(constring);
         SqlCommand cmd = new SqlCommand();
@@ -44,14 +70,10 @@ public partial class _Default : System.Web.UI.Page
                 empl_no_children.Text = dr["no_of_children"].ToString();
                 empl_no_siblings.Text = dr["siblings"].ToString();
                 empl_phone_number.Text = dr["phone_number"].ToString();
-                empl_Address.Text = dr["permanent_address"].ToString();
-
-                string other_address = dr["other_address"].ToString();
-                if( other_address != "" )
-                {
-                    empl_other_address.Text = other_address;
-                }
+                empl_mobile_number.Text = dr["mobile_number"].ToString();
+                empl_addr.Text = dr["permanent_address"].ToString();
                 empl_city.Text = dr["city"].ToString();
+                empl_province.Text = dr["province"].ToString();
                 empl_Dob.Text = dr["date_of_birth"].ToString();
             }
         }// while loop
@@ -77,8 +99,8 @@ public partial class _Default : System.Web.UI.Page
         }
         string emp_id = Request.QueryString["id"];
         string constring = ConfigurationManager.ConnectionStrings["Dairy_SolutionConnectionString"].ConnectionString;
-        string query = "UPDATE employee_info SET employee_name=@employee_name, email_id=@email_id, password=@password, cnic=@cnic, marital_status=@marital_status, no_of_children=@no_of_children, siblings=@siblings, phone_number=@phone_number, date_of_birth=@date_of_birth, employee_picture=@picture WHERE employee_id = '" + emp_id + "'" +
-            "UPDATE employee_address SET permanent_address=@permanent_address, other_address=@other_address, city=@city WHERE employee_id='"+emp_id+"'";
+        string query = "UPDATE employee_info SET employee_name=@employee_name, email_id=@email_id, password=@password, cnic=@cnic, marital_status=@marital_status, no_of_children=@no_of_children, siblings=@siblings, phone_number=@phone_number, mobile_number=@mobile_number, date_of_birth=@date_of_birth, employee_picture=@picture WHERE employee_id = '" + emp_id + "'" +
+            "UPDATE employee_address SET permanent_address=@permanent_address, city=@city, province=@province WHERE employee_id='" + emp_id+"'";
         SqlConnection con = new SqlConnection(constring);
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = con;
@@ -92,10 +114,11 @@ public partial class _Default : System.Web.UI.Page
         cmd.Parameters.AddWithValue("@no_of_children", empl_no_children.Text);
         cmd.Parameters.AddWithValue("@siblings", empl_no_siblings.Text);
         cmd.Parameters.AddWithValue("@phone_number", empl_phone_number.Text);
+        cmd.Parameters.AddWithValue("@mobile_number", empl_mobile_number.Text);
         cmd.Parameters.AddWithValue("@date_of_birth", empl_Dob.Text);
-        cmd.Parameters.AddWithValue("@permanent_address", empl_Address.Text);
-        cmd.Parameters.AddWithValue("@other_address", empl_other_address.Text);
+        cmd.Parameters.AddWithValue("@permanent_address", empl_addr.Text);
         cmd.Parameters.AddWithValue("@city", empl_city.Text);
+        cmd.Parameters.AddWithValue("@province", empl_province.Text);
 
         if (empl_image.PostedFile.FileName != "")
         {

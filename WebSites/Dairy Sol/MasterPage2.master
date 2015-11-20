@@ -126,55 +126,55 @@
                     </li>
 					
 					
-					<li>
+					<li id="orders_visibility" runat="server">
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-edit"></i> Orders <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo1" class="collapse">
-                            <li>
+                            <li id="add_cust_orders_visibility" runat="server">
                                 <a href="order_cust_add.aspx"><i class="fa fa-fw fa-plus-square-o"></i> Add Customer Order</a>
                             </li>
-                            <li runat="server" id="hide_this">
+                            <li id="order_order_supp_visibility" runat="server">
                                 <a href="order_order_supp.aspx"><i class="fa fa-fw fa-suitcase"></i> Order Supplier</a>
                             </li>
-                            <li>
+                            <li id="cust_order_visibility" runat="server">
                                 <a href="order_cust.aspx"><i class="fa fa-fw fa-table"></i> Customer Orders</a>
                             </li>
-                            <li>
+                            <li id="order_supp_visibility" runat="server">
                                 <a href="order_supp.aspx"><i class="fa fa-fw fa-table"></i> Supplier Orders</a>
                             </li>
 							
                         </ul>
                     </li>
 					
-                    <li>
+                    <li id="inventory_visibility" runat="server">
                            <a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="fa fa-fw fa-cubes"></i> Inventory <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo2" class="collapse">
-                            <li>
+                            <li id="add_inv_visibility" runat="server">
 								<a href="inv_add.aspx"><i class="fa fa-fw fa-plus-square-o"></i> Add Inventory</a>
 							</li>
-                            <li>
+                            <li id="manage_inv_visibility" runat="server">
 								<a href="inv_manage.aspx"><i class="fa fa-fw fa-table"></i> Manage Inventory</a>
 							</li>
 
                         </ul>    
                     </li>
 
-                    <li>
+                    <li id="products_visibility" runat="server">
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo3"><i class="fa fa-fw fa-diamond"></i> Products <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo3" class="collapse">
-                            <li>
+                            <li id="add_prod_visibility" runat="server">
 								<a href="prod_add.aspx"><i class="fa fa-fw fa-plus-square-o"></i> Add Products</a>
 							</li>
-                            <li>
+                            <li id="manage_prod_visibility" runat="server">
 								<a href="prod_manage.aspx"><i class="fa fa-fw fa-table"></i> Manage Products</a>
 							</li>
 
                         </ul>    
                     </li>
 						
-					<li>
+					<li id="manage_employee_visibility" runat="server">
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo4"><i class="fa fa-fw fa-group"></i> Manage Employees <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo4" class="collapse">
-                            <li>
+                            <li id="emp_attendance_visibility" runat="server">
                                 <a href="javascript:;" data-toggle="collapse" data-target="#demo6"><i class="fa fa-fw fa-check-square-o"></i> Attendance<i class="fa fa-fw fa-caret-down"></i></a>
                                 <ul id="demo6" class="collapse">
                                     <li>
@@ -187,21 +187,24 @@
                                 </ul>
                             </li>
 
-                            <li>
+                            <li id="emp_req_loan_visibility" runat="server">
 								<a href="loan_request.aspx"><i class="fa fa-fw fa-bar-chart-o"></i> Request Loan</a>
 							</li>
 
-                            <li>
+                            <li id="emp_loan_req_visibility" runat="server">
 								<a href="loan_manage.aspx"><i class="fa fa-fw fa-bar-chart-o"></i> Loan Requests</a>
 							</li>
 							
-							<li>
+							<li id="emp_edit_visibility" runat="server">
 								<a href="emp_list.aspx"><i class="fa fa-fw fa-file-text-o"></i> Edit Profiles</a>
+							</li>
+                            <li id="emp_add" runat="server">
+								<a href="emp_signup.aspx"><i class="fa fa-fw fa-file-text-o"></i> Add Employee</a>
 							</li>
                         </ul>
                     </li>
 
-					<li>
+					<li id="post_visibility" runat="server">
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo5"><i class="fa fa-fw fa-share-alt"></i> News & Updates <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo5" class="collapse">
                             <li>
@@ -214,7 +217,7 @@
                         </ul>    
                     </li>
 
-                    <li>
+                    <li id="tasks_visibility" runat="server">
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo7"><i class="fa fa-fw fa-group"></i> Tasks <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo7" class="collapse">
                             <li>
@@ -222,14 +225,16 @@
 							</li>
 
 							
-							<li>
+							<li id="task_emp_visibility" runat="server">
                                 <a href="tasks_all.aspx"><i class="fa fa-fw fa-table"></i> Employee's Tasks</a>
                             </li>
                         </ul>
                     </li>
 
-                    <li>
+                    <li id="report_visibility" runat="server">
                         <a href="reports.aspx"><i class="fa fa-fw fa-files-o"></i> Reports</a>
+
+                        <asp:Label runat="server" ID="var"></asp:Label>
                     </li>
 
                 </ul>

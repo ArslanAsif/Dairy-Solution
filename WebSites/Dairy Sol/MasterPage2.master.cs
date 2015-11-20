@@ -23,6 +23,59 @@ public partial class MasterPage2 : System.Web.UI.MasterPage
         {
             user_name.Text = Session["username"].ToString();
         }
+
+        if (Session["userType"] != null)
+        {
+            switch(Session["userType"].ToString())
+            {
+                case "CEO":
+                    emp_req_loan_visibility.Visible = false;
+                    break;
+
+                case "Receptionist":
+                    orders_visibility.Visible = false;
+                    inventory_visibility.Visible = false;
+                    products_visibility.Visible = false;
+                    report_visibility.Visible = false;
+                    post_visibility.Visible = false;
+                    emp_loan_req_visibility.Visible = false;
+                    emp_add.Visible = false;
+                    emp_edit_visibility.Visible = false;
+                    task_emp_visibility.Visible = false;
+                    //emp_attendance_visibility.Visible = true;
+                    //emp_req_loan_visibility.Visible = true;
+                    //tasks_visibility.Visible = true;
+                    break;
+
+                case "Sales Person":
+                    emp_attendance_visibility.Visible = false;
+                    order_order_supp_visibility.Visible = false;
+                    order_supp_visibility.Visible = false;
+                    products_visibility.Visible = false;
+                    report_visibility.Visible = false;
+                    post_visibility.Visible = false;
+                    emp_loan_req_visibility.Visible = false;
+                    emp_add.Visible = false;
+                    emp_edit_visibility.Visible = false;
+                    task_emp_visibility.Visible = false;
+                    manage_inv_visibility.Visible = false;
+                    break;
+
+                case "Inventory Manager":
+                    cust_order_visibility.Visible = false;
+                    add_cust_orders_visibility.Visible = false;
+                    post_visibility.Visible = false;
+                    emp_attendance_visibility.Visible = false;
+                    emp_edit_visibility.Visible = false;
+                    emp_loan_req_visibility.Visible = false;
+                    break;
+
+                default:
+                    Response.Redirect("site_signIn.aspx");
+                    break;
+            }
+        }
+        
         select_minInv_notifications();
         select_exp_notifications();
         select_task_notifications();
